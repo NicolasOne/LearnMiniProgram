@@ -1,0 +1,15 @@
+/* pages/home/childCpns/w-shareList.wxss */
+.shareList {
+  margin-top: 40rpx
+}
+
+.share-item view {
+    font-size: 28rpx;
+    margin-bottom: 20rpx;
+    color: #333   
+}
+
+.share-item image {
+  height: 50rpx;
+  width: 100%
+}

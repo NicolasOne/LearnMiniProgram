@@ -1,0 +1,42 @@
+/* components/w-swiper/w-swiper.wxss */
+.swiper-item view {
+  color: #333
+}
+.swiper-item image {
+  width: 96%;
+  text-align: center;
+  margin: 0 15rpx;
+  border-radius: 15rpx;
+}
+
+.swiper {
+  margin-top: 3rpx
+}
+.horizontal {
+  display: inline;
+  padding-top: 18rpx;
+  padding-bottom: 10rpx;
+  text-align: left;
+}
+
+.horizontal .tag {
+  display: inline-block;
+  background: #eee;
+  color: #666;
+  font-size: 28rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  margin-right: 10rpx;
+}
+
+.horizontal .recommend {
+  border-radius: 10rpx;
+  border: 3rpx solid #3688ff;
+  background: #118fff;
+  color: #fff;
+  font-size: 23rpx;
+  margin-left: 10rpx;
+  margin-right: 20rpx;
+  padding: 3rpx 10rpx;
+  line-height: 1rem;
+}

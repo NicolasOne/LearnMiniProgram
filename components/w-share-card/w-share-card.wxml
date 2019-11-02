@@ -1,0 +1,29 @@
+<template name="m-trip">
+  <view class="m-trip"  data-id="{{ trip.id }}" data-name="{{ trip.name }}" wx:if="true">              
+    <image class="cover" src="{{trip.cardImg[0]}}" mode="aspectFill"></image>
+    <view class="info">
+      <text class="h2">{{trip.eatStreetName}}</text>
+      <view class="detail">
+        <view><text>12</text><text>{{trip.ctime}}发布</text><text wx:if="true">{{trip.collectCount}}收藏</text></view>
+        <view class="place" wx:if="true">44</view>
+      </view>
+      <view class="bottom-display">
+      <view class="user" wx:if="false">
+        <image class="avatar" src="{{trip.shareUserIcon}}"></image>
+        <view class="name">{{trip.shareUserName}}</view>
+      </view>
+      <view class="bottom" wx:if="true">{{trip.eatDetail}}</view>
+      </view>
+      
+    </view>
+  </view>
+  <!-- <view class="m-trip-s"  data-id="12" data-name="{{ trip.name }}"  wx:if="true">
+    <view class="mask"></view>
+    <image class="cover" src="../../assets/other/fm.jpg" mode="aspectFill"></image>
+    <view class="info">
+      <view class="title">小王</view>
+      <view class="detail"><view><text>时代峻峰里的世界</text></view><view><text>00天</text></view></view>
+    </view>
+    <view class="stat"><view><text>哪里</text>足迹</view><view><text>疯狂所经历的</text>收藏</view></view>
+  </view> -->
+</template>

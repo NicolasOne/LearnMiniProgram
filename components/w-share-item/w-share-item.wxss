@@ -1,0 +1,152 @@
+/* components/w-share-item/w-share-item.wxss */
+.block{
+   /*下面三行代码实现了图片换行*/
+ display: flex;
+ flex-flow: row wrap;  
+ align-content: space-around;
+}
+.image {
+  width: 31%;
+  margin-left: 15rpx;
+}
+.info-all {
+  display: flex;
+  flex-direction: row;
+}
+.info-item {
+  display: flex;
+  margin-left: 20rpx;
+  flex-direction: column;
+  font-size: 27rpx;
+  padding-top: 15rpx;
+}
+.shareContent {
+  margin-top: 5px;
+  font-family: SimSuncss;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  letter-spacing:5rpx;
+  color: #8a8a8a;
+  margin-bottom: 10rpx;
+  /* 超出行数显示。。。 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:3;
+  overflow: hidden;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.shareId {
+  margin-left: 15rpx;
+}
+.thumbUp {
+  margin-left: 15rpx;
+  font-size: 30rpx;
+  font-weight: true;
+  margin-top: 25rpx;
+}
+.detailBottom {
+  flex-direction: row;
+  display: flex; 
+}
+.zan {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 13%;
+  display: block;
+}
+.img_length {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.line {
+  width: 100%;
+  margin-top: 5rpx;
+  border-top:5px #e6e6e6 solid;
+}
+.linemid {
+  width: 100%;
+  margin-bottom: 5rpx;
+  border-top:0.3rpx #e6e6e6 solid;
+}
+.line-head {
+  width: 100%;
+  border-top:1px #e6e6e6 solid;
+}
+.icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+  border-radius: 50rpx;
+  vertical-align: bottom;
+}
+.userName {
+  margin-left: 10rpx;
+  /* align-items: center;
+  justify-content: center; */
+  margin-top: 0rpx;
+  color: #575757;
+  font-size: 24rpx;
+}
+.zantext {
+  margin-left: 5rpx;
+  color: #C6C6C6
+}
+.star {
+  font-size: 25rpx;
+  margin-left: 100rpx;
+  border-color:  brown;
+  border-collapse: unset;
+  margin-bottom: 0rpx;
+}
+.shebei {
+  font-size: 25rpx;
+}
+.topic_answerImg{
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+.topic_answer_itemImg{
+  width: 230rpx;
+  height: 230rpx; 
+  margin-left: 15rpx;
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+}
+.topic_answer_itemImg:nth-of-type(3n){
+  margin-right: 0;
+}
+.find-hot-content{
+  margin-top: 5px;
+  font-family: SimSuncss;
+  font-size: 30rpx;
+  margin-left: 30rpx;
+  letter-spacing:5rpx;
+  margin-bottom: 5rpx;
+  /* 超出行数显示。。。 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:3;
+  overflow: hidden;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #333;
+  line-height: 1.2;
+}
+.find-show-all{
+  color: #1E8AE8;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+}
+.shareTime {
+  font: KaiTi;
+  font-size: 19rpx;
+  margin-left: 10rpx;
+  margin-bottom: 0rpx;
+}

@@ -1,0 +1,9 @@
+<!--pages/share/share.wxml-->
+<view>
+  <text>{{userName}}</text>
+  <textarea class="content-text" auto-focus="true" value="{{content}}" placeholder="发布新鲜事。。。">
+  
+  </textarea>
+</view>
+
+

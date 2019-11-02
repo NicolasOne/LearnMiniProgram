@@ -1,0 +1,12 @@
+<import src="../../components/w-share-card/w-share-card.wxml"/>
+<view>
+
+</view>
+<scroll-view class="list" style="height: {{ windowHeight }}px; width: {{ windowWidth }}px;" scroll-y="true"  bindscrolltolower="_getCardListDataInfo" lower-threshold="800">
+  <block wx:for="{{ shares }}" wx:for-item="trip" wx:key="trip.id">
+    <template is="m-trip" data="{{trip: trip, mode: 1}}" />
+  </block>
+  <view class="loading">
+    正在加载...
+  </view>
+</scroll-view>

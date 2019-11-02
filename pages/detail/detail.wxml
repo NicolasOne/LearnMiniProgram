@@ -1,0 +1,76 @@
+<!--pages/detail/detail.wxml-->
+<!-- <navigator open-type="navigateBack" delta="2">back</navigator> -->
+<view class="info-all">
+  <view>
+    <image class="icon" src="/assets/other/icon.png" />
+  </view>
+  <view class="info-item">
+    <text class="userName">{{userName}}</text>
+    <text class="userName">{{createTime}}</text>
+  </view>
+</view>
+<view>
+  <!-- 内容部分 -->
+  <view class="shareContent">{{shareContent}}</view>
+  <view class="topic_answerImg">
+    <block class="content-item" wx:for="{{imgList}}" wx:for-item="list" wx:key="index">
+      <image bindtap='topic_preview' data-id='{{item.shareId}}' data-url='{{list}}' data-item='{{imgList}}' class='topic_answer_itemImg' src="{{list}}" mode="aspectFill" />
+    </block>
+  </view>
+
+  <!-- 标签部分 -->
+  <view class="tagall">
+    <image class="zanpic" src="/assets/other/tag.png" />
+    <block wx:for="{{tagList}}" wx:for-item="list" wx:key="index">
+      <text class="tag" space="emsp" decode="{{true}}">&emsp;{{list}}</text>
+    </block>
+  </view>
+  <view class='line'></view>
+  <!-- 评论部分 -->
+  <view class="commentall">
+    <block wx:for="{{commentList}}" wx:for-item="list" wx:key="index">
+      <view class="commentStyle">
+        <view class="info-all">
+          <image class="icon" src="/assets/other/icon.png" />
+        </view>
+        <view class="commentContent">
+          <view class="info-item">
+            <text class="userName">{{userName}}</text>
+            <text>{{list.comment}}</text>
+          </view>
+          <view class="comentBottom">
+            <text class="createTime"> {{list.createTime}}</text>
+            <view class="zan">
+              <image class="zanpic" src="/assets/other/zan.png">
+              </image>
+              <text>{{thumbsUp}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='line'></view>
+    </block>
+  </view>
+</view>
+<!-- 底部评论框 -->
+
+<form bindsubmit="sendMeg">
+  <view class="release" >
+    <textarea 
+          class="text" 
+          bindblur="bindTextAreaBlur" 
+          releaseFocus="false" 
+          placeholder-class="input_null" 
+          fixed="true" 
+          maxlength="-1" 
+          show-confirm-bar="false" 
+          cursor-spacing="15" 
+          auto-height="true" 
+          auto-focus="false" 
+          focus="{{releaseFocus}}" 
+          placeholder="评论{{userName}}"
+          value="{{inputVal}}">
+          </textarea>
+    <button class="submit" form-type="submit" data-shareId="{{shareId}} ">发送</button>
+</view>
+</form>

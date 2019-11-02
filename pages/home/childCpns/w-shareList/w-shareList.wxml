@@ -1,0 +1,9 @@
+<!--pages/home/childCpns/w-shareList.wxml-->
+<view class="shareList">
+<block wx:for="{{shareList}}" wx:key="{{index}}">
+  <view class="share-item">
+    <image src="{{item.shareImg[0]}}" mode="widthFix"></image>
+    <view>{{item.shareContent}}</view>
+  </view>
+</block>
+</view>

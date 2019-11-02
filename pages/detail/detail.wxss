@@ -1,0 +1,160 @@
+/* pages/detail/detail.wxss */
+.block{
+   /*下面三行代码实现了图片换行*/
+ display: flex;
+ flex-flow: row wrap;  
+ align-content: space-around;
+}
+.image {
+  width: 31%;
+  margin-left: 15rpx;
+}
+.info-all {
+  display: flex;
+  flex-direction: row;
+}
+.info-item {
+  display: flex;
+  margin-left: 20rpx;
+  flex-direction: column;
+  font-size: 27rpx;
+  padding-top: 15rpx;
+}
+.shareContent {
+  margin-top: 5px;
+  font-family: SimSuncss;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  letter-spacing:5rpx;
+  color: #8a8a8a;
+  margin-bottom: 5rpx;
+}
+.shareId {
+  margin-left: 15rpx;
+}
+.thumbUp {
+  margin-left: 15rpx;
+  font-size: 30rpx;
+  font-weight: true;
+  margin-top: 25rpx;
+}
+.zanpic {
+  width: 30rpx;
+  height: 30rpx;
+}
+.zan {
+  margin-left: 250rpx;
+}
+.thubUpButton {
+  width: 30rpx;
+  height: 30rpx;
+  background-color: transparent;
+  border: none;
+}
+.line{
+width: 100%;
+margin-top: 20rpx;
+border-top:1px #e6e6e6 solid;
+}
+.icon {
+  width: 70rpx;
+  height: 70rpx;
+  margin-left: 20rpx;
+  margin-top: 15rpx;
+}
+.userName {
+  margin-left: 10rpx;
+  align-items: center;
+  justify-content: center;
+}
+.star {
+  font-size: 25rpx;
+  margin-left: 200rpx;
+  border-color:  brown;
+  border-collapse: unset;
+}
+.topic_answerImg{
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+.topic_answer_itemImg{
+  width: 230rpx;
+  height: 230rpx; 
+  margin-left: 15rpx;
+  margin-bottom: 20rpx;
+}
+.topic_answer_itemImg:nth-of-type(3n){
+  margin-right: 0;
+}
+.commentStyle {
+  flex-direction: row;
+  display: flex; 
+}
+.commentContent {
+  flex-direction: row-reverse
+}
+.createTime {
+  font-size: 25rpx;
+}
+.comentBottom {
+  flex-direction: row;
+  display: flex; 
+  margin-top: 15rpx;
+  margin-left: 20rpx;
+}
+.tag {
+  height: 20rpx;
+    padding: 10rpx 10rpx;
+    border-radius: 10rpx;
+    margin: 0 10rpx;
+    background: #EEF5F8;
+    color: #2186E0;
+    font-size: 20rpx;
+    vertical-align: middle;
+}
+.tagall {
+  margin-left: 15rpx;
+}
+/* 评论部分 */
+.input_null{
+    color: #C9C9C9;
+}
+.release{
+    display: flex;
+    align-items: flex-end; /*底部对齐*/
+    justify-content: space-between; /*两端对齐*/
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 18rpx 0 18rpx 30rpx;
+    background-color: #F7F8F7;
+    font-size: 28rpx;
+    z-index: 999;
+}
+.release .text{
+    width: 604rpx;
+    min-height: 34rpx;
+    max-height: 102rpx; /*最多显示三行*/
+    border-width: 15rpx 20rpx; /*使用padding与预期留白不一致，故使用border*/
+    border-style: solid;
+    border-color:  #ffffff;
+    line-height: 34rpx;
+    font-size: 28rpx;
+    background-color: #ffffff;
+    border-radius: 4rpx;
+}
+.release .submit{
+    width: 116rpx;
+    height: 64rpx;
+    line-height: 64rpx;
+    text-align: center;
+    font-size: 25rpx;
+    color: rgb(204, 82, 0);
+}
+.commentall {
+  margin-bottom: 80rpx;
+}

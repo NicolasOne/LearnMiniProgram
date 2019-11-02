@@ -1,14 +1,56 @@
 {
-  "pages": [
+  "pages": [ 
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/about/about"
+    "pages/home/home",
+    "pages/profile/profile",
+    "pages/category/category",
+    "pages/square/square",
+    "pages/detail/detail",
+    "pages/login/login",
+    "pages/share/share"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#ff5777",
+    "navigationBarTitleText": "我的",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#ffffff",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "selectedColor": "#707070",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/assets/tabbar/index.png",
+        "selectedIconPath": "/assets/tabbar/index_active.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "活动",
+        "iconPath": "/assets/tabbar/category.png",
+        "selectedIconPath": "/assets/tabbar/category_active.png"
+      },
+      {
+        "pagePath": "pages/square/square",
+        "text": "广场",
+        "iconPath": "/assets/tabbar/search.png",
+        "selectedIconPath": "/assets/tabbar/search_active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "/assets/tabbar/home.png",
+        "selectedIconPath": "/assets/tabbar/home_active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "小程序将获取你的位置信息，提供更好的服务！"
+    }
   },
   "sitemapLocation": "sitemap.json"
 }

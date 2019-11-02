@@ -1,0 +1,5 @@
+/* pages/share/share.wxss */
+.content-text {
+  line-height: 5rpx;
+  margin: 10rpx 10rpx 10rpx 10rpx;
+}
