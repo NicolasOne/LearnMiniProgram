@@ -1,4 +1,10 @@
 /* components/w-share-item/w-share-item.wxss */
+.item-content {
+  width: 100%;
+  background: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
 .block{
    /*下面三行代码实现了图片换行*/
  display: flex;
@@ -11,9 +17,12 @@
 }
 .info-all {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  padding: 15rpx 30rpx;
+  position: relative;
 }
 .info-item {
+  width: 100%;
   display: flex;
   margin-left: 20rpx;
   flex-direction: column;
@@ -48,6 +57,12 @@
 .detailBottom {
   flex-direction: row;
   display: flex; 
+  align-items: center;
+  justify-content: space-between;
+  height: 80rpx;
+  border-top: 2px solid #f1f1f1;
+  margin-top: 20rpx;
+  font-size: 30rpx;
 }
 .zan {
   width: 40rpx;
@@ -62,25 +77,27 @@
   align-items: center;
   justify-content: center;
 }
-.line {
+button .img_length{
   width: 100%;
-  margin-top: 5rpx;
-  border-top:5px #e6e6e6 solid;
 }
-.linemid {
-  width: 100%;
-  margin-bottom: 5rpx;
-  border-top:0.3rpx #e6e6e6 solid;
+button::after {
+  border: none;
 }
-.line-head {
-  width: 100%;
-  border-top:1px #e6e6e6 solid;
+button {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 35%;
+
 }
+button:hover {
+  background-color:transparent;
+}
+  
 .icon {
   width: 80rpx;
   height: 80rpx;
-  margin-left: 30rpx;
-  margin-top: 15rpx;
   border-radius: 50rpx;
   vertical-align: bottom;
 }
@@ -93,42 +110,60 @@
   font-size: 24rpx;
 }
 .zantext {
-  margin-left: 5rpx;
+  margin-left: 10rpx;
   color: #C6C6C6
 }
-.star {
+.go_detail_btn {
   font-size: 25rpx;
-  margin-left: 100rpx;
-  border-color:  brown;
-  border-collapse: unset;
-  margin-bottom: 0rpx;
+  font-weight: 600;
+  background: red;
+  color: #fff;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  position: absolute;
+  bottom: 25rpx;
+  right: 30rpx;
 }
 .shebei {
   font-size: 25rpx;
+  margin-left: 10rpx;
 }
 .topic_answerImg{
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
+  display: flex;
   flex-wrap: wrap;
+  padding: 0 20rpx;
+}
+.topic_answerImg_only_one{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .topic_answer_itemImg{
-  width: 230rpx;
+  width: 32%;
   height: 230rpx; 
-  margin-left: 15rpx;
-  margin-bottom: 20rpx;
-  border-radius: 10rpx;
+  margin-right: 12rpx;
+  margin-top: 20rpx;
+}
+.topic_answer_itemImg_only_one {
+  width: 95%;
+  height: 400rpx;
+  margin-top: 20rpx;
+}
+.topic_answer_itemImg:nth-child(3){
+  margin-right: 0rpx;
+}
+.topic_answer_itemImg:nth-child(6){
+  margin-right: 0rpx;
 }
 .topic_answer_itemImg:nth-of-type(3n){
   margin-right: 0;
 }
 .find-hot-content{
-  margin-top: 5px;
+  padding: 20rpx 20rpx 0 20rpx;
   font-family: SimSuncss;
   font-size: 30rpx;
-  margin-left: 30rpx;
   letter-spacing:5rpx;
-  margin-bottom: 5rpx;
   /* 超出行数显示。。。 */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -139,14 +174,33 @@
   color: #333;
   line-height: 1.2;
 }
+.text-overflow {
+  padding: 20rpx 20rpx 0 20rpx;
+  font-family: SimSuncss;
+  font-size: 30rpx;
+  letter-spacing:5rpx;
+  color: #333;
+  line-height: 1.2;
+}
 .find-show-all{
   color: #1E8AE8;
   font-size: 30rpx;
   margin-left: 20rpx;
 }
 .shareTime {
+  width: 100%;
   font: KaiTi;
   font-size: 19rpx;
   margin-left: 10rpx;
   margin-bottom: 0rpx;
+  position: relative;
+  margin-top: 10rpx;
 }
+.like_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height:100%;
+}
+  

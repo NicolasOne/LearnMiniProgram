@@ -1,2 +1,5 @@
 <!--pages/square/square.wxml-->
-<text>pages/square/square.wxml</text>
+<view class="square_page">
+  <nonePage></nonePage>
+</view>
+                                                                    

@@ -4,25 +4,24 @@
 
 <!-- 分享数据主体显示 -->
 <w-shareList shareList="{{shareList}}" />
+<view class="{{handleHomePage?'w-tab-control':''}}">
+  <w-tab-control titles="{{titles}}" bind:tabclick="handleTabClick" />
+</view>
 
-<w-tab-control titles="{{titles}}" bind:tabclick="handleTabClick" />
+
+
 
 <!-- 5展示分享数据 -->
-<scroll-view>
+<scroll-view bindscroll="handleScroll" wx:if="{{share&&share[currentType].list.length!==0}}">
 <view class="share">
   <block wx:for="{{share[currentType].list}}" wx:key="index">
-    <w-share-item item="{{item}}" data-index="{{index}}" />
+    <w-share-item item="{{item}}" showDetailBtn="true"/>
   </block>
 </view>
 </scroll-view>
+<nodata wx:else></nodata>
 
 <view class="page-add-data" wx:if="{{isBottom==true}}">
     <text class="bottomText">{{pageTottomText}}</text>
 </view>
 
-<!-- 底部悬浮按钮 -->
-
-<cover-view class="buttom"> 
-  <cover-image style="opacity:{{0.5}}" bindtap="bindShareComent" src="/assets/other/fx.png"/>
-  <button>分享</button>
-</cover-view>

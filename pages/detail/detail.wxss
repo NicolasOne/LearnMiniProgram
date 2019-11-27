@@ -11,61 +11,52 @@
 }
 .info-all {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  padding: 15rpx 30rpx;
 }
 .info-item {
+  width: 100%;
   display: flex;
   margin-left: 20rpx;
   flex-direction: column;
-  font-size: 27rpx;
-  padding-top: 15rpx;
+  color: #575757;
+  font-size: 24rpx;
+}
+.shareTime {
+  width: 100%;
+  font: KaiTi;
+  font-size: 19rpx;
+  margin-top: 10rpx;
 }
 .shareContent {
-  margin-top: 5px;
+  padding: 20rpx 20rpx 0 20rpx;
   font-family: SimSuncss;
   font-size: 30rpx;
-  margin-left: 20rpx;
   letter-spacing:5rpx;
-  color: #8a8a8a;
-  margin-bottom: 5rpx;
+  color: #333;
+  line-height: 1.2;
 }
 .shareId {
   margin-left: 15rpx;
 }
-.thumbUp {
-  margin-left: 15rpx;
-  font-size: 30rpx;
-  font-weight: true;
-  margin-top: 25rpx;
-}
 .zanpic {
   width: 30rpx;
   height: 30rpx;
+  margin-right: 10rpx;
 }
-.zan {
-  margin-left: 250rpx;
+.back {
+  font-size: 25rpx;
+  color: #C9C9C9;
 }
-.thubUpButton {
-  width: 30rpx;
-  height: 30rpx;
-  background-color: transparent;
-  border: none;
-}
-.line{
-width: 100%;
-margin-top: 20rpx;
-border-top:1px #e6e6e6 solid;
+.zan-box {
+  display: flex;
+  align-items: center;
 }
 .icon {
   width: 70rpx;
   height: 70rpx;
-  margin-left: 20rpx;
-  margin-top: 15rpx;
-}
-.userName {
-  margin-left: 10rpx;
-  align-items: center;
-  justify-content: center;
+  margin-right: 10rpx;
+  border-radius: 50%;
 }
 .star {
   font-size: 25rpx;
@@ -75,47 +66,111 @@ border-top:1px #e6e6e6 solid;
 }
 .topic_answerImg{
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
+  display: flex;
   flex-wrap: wrap;
+  padding: 0 20rpx;
+}
+.topic_answerImg_only_one{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .topic_answer_itemImg{
-  width: 230rpx;
+  width: 32%;
   height: 230rpx; 
-  margin-left: 15rpx;
-  margin-bottom: 20rpx;
+  margin-right: 12rpx;
+  margin-top: 20rpx;
+}
+.topic_answer_itemImg_only_one {
+  width: 95%;
+  height: 400rpx;
+  margin-top: 20rpx;
+}
+.topic_answer_itemImg:nth-child(3){
+  margin-right: 0rpx;
+}
+.topic_answer_itemImg:nth-child(6){
+  margin-right: 0rpx;
 }
 .topic_answer_itemImg:nth-of-type(3n){
   margin-right: 0;
 }
-.commentStyle {
-  flex-direction: row;
-  display: flex; 
+.news-content {
+  margin-bottom: 150rpx;
 }
-.commentContent {
-  flex-direction: row-reverse
+.commentall {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.createTime {
-  font-size: 25rpx;
+.comment-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top: 3rpx solid #ccc;
+  padding: 30rpx 20rpx 10rpx 20rpx;
+  box-sizing: border-box;
 }
-.comentBottom {
-  flex-direction: row;
-  display: flex; 
-  margin-top: 15rpx;
+.comment-item:last-child{
+  border-bottom: 3rpx solid #ccc;
+}
+.commen-user-info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #575757;
+  font-size: 24rpx;
   margin-left: 20rpx;
 }
+.createTime {
+  width: 100%;
+  font: KaiTi;
+  font-size: 19rpx;
+  margin-top: 10rpx;
+}
+.commentContent {
+  padding: 20rpx 20rpx 20rpx 0rpx;
+  box-sizing: border-box;
+  font-family: SimSuncss;
+  font-size: 30rpx;
+  letter-spacing: 5rpx;
+  color: #333;
+  line-height: 1.2;
+  margin-top: 10rpx;
+}
+.zan {
+  display: flex;
+  width: 95%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
 .tag {
-  height: 20rpx;
     padding: 10rpx 10rpx;
     border-radius: 10rpx;
-    margin: 0 10rpx;
+    margin: 10rpx 10rpx 0 0;
     background: #EEF5F8;
     color: #2186E0;
     font-size: 20rpx;
     vertical-align: middle;
+    text-align: center;
 }
 .tagall {
-  margin-left: 15rpx;
+  padding: 15rpx;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20rpx;
 }
 /* 评论部分 */
 .input_null{
@@ -123,7 +178,7 @@ border-top:1px #e6e6e6 solid;
 }
 .release{
     display: flex;
-    align-items: flex-end; /*底部对齐*/
+    align-items: center; /*底部对齐*/
     justify-content: space-between; /*两端对齐*/
     box-sizing: border-box;
     position: fixed;
@@ -154,7 +209,4 @@ border-top:1px #e6e6e6 solid;
     text-align: center;
     font-size: 25rpx;
     color: rgb(204, 82, 0);
-}
-.commentall {
-  margin-bottom: 80rpx;
 }

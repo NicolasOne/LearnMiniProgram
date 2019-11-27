@@ -1,0 +1,7 @@
+<!--pages/nonePage/nonepage.wxml-->
+<view class="nonepage">
+  <image src="../../assets/other/noc.png"></image>
+  <view class="none-text-big">更多精彩内容</view>
+  <view class="none-text">即将上线</view>
+</view>
+  

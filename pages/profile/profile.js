@@ -1,74 +1,53 @@
 // pages/profile/profile.js
-const app = getApp()
-
-Page({
+import {
+  getBrowseCountAndLikeCount
+} from '../../service/user.js'
+Component({
 
   /**
    * 页面的初始数据
    */
   data: {
-    motto: '吃货联盟',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    avatarUrl:'',
+    nickName: '',
+    isAuthorization: '',
+    likeCount: '',
+    browseCount: ''
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    console.log("---------------")
-    console.log(app.globalData.userInfo)
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+  methods:{
+    //事件处理函数
+    goAuthorization(){
+      wx.redirectTo({
+        url: '../login/login'
       })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+    },
+    // 跳转卡片收藏页
+    toCollectdCards(){
+      wx.navigateTo({
+        url: '../collectdCards/collectdCards',
+      })
+    },
+    // 跳转分享列表
+    toMyShare(){
+      wx.navigateTo({
+        url: '../myShare/myShare',
       })
     }
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  ready(){
+    let that = this
+    getBrowseCountAndLikeCount().then(res => {
+      let likeCount = res.data.data.likeCount
+      let browseCount = res.data.data.browseCount
+      that.setData({
+        avatarUrl: wx.getStorageSync('avatarUrl'),
+        nickName: wx.getStorageSync('nickName'),
+        isAuthorization: wx.getStorageSync('isAuthorization'),
+        likeCount,
+        browseCount
+      })
     })
-  },
-  bindGetUserInfo(e) {
-    console.log("==================")
-    app.globalData.userInfo = e.detail.userInfo
-    console.log("==================")
-  },
-  getUserInfoHandle() {
-    wx.getUserInfo({
-      success: function (res) {
-        consolog
-      }
-    })
+    
   }
+  
 })

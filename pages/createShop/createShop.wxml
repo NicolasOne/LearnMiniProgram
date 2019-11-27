@@ -1,0 +1,24 @@
+<!--pages/createShop/createShop.wxml-->
+<view class='create_shop_page'>
+  <view class='title'>
+    <image src='../../assets/other/tip.png' style='width: 40rpx;height: 40rpx'></image>
+    <view class='title_content'>没有匹配到相似店铺，请补充信息~</view>
+  </view>
+  <view class='create_content'>
+    <view class='word'>商家介绍:</view>
+    <textarea class="content-text" auto-focus="true" maxlength="-1" bindinput = "changeShareContent" value="{{content}}" placeholder="请填写商家介绍"></textarea>
+    <view class='word'>商家图片:</view>
+    <view class="count">{{count}}/9</view>
+    <view class="upload-img">
+      <block wx:for="{{imgList}}" wx:key="{{index}}">
+        <view class="img-item">
+          <image src="{{item}}" />
+        </view>
+      </block>
+      <view wx:if="{{imgList.length<9}}" bindtap = "chooseimage" class="add-img">
+        <image src="../../assets/other/add.png" />
+      </view>
+    </view>
+  </view>
+  <view class='next' bindtap="createCard">确定</view>
+</view>

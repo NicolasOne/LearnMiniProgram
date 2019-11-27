@@ -1,0 +1,10 @@
+<!--pages/myShare/myShare.wxml-->
+<block wx:if="{{share&&share.length!==0}}" >
+  <view class="share" wx:for="{{share}}" wx:key="index">
+    <w-share-item item="{{item}}"/>
+  </view>
+</block>
+<view class="share" wx:else>
+    <nodata></nodata>
+</view>
+

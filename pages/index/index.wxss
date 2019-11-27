@@ -1,10 +1,7 @@
-/**index.wxss**/
-.imgsize {
- display:flex;
- height: 100%;
- justify-content: center;
- align-items:center;
+/* pages/index/index.wxss */
+page{
+  background-color: #fff;
 }
-page {
-  height: 100%
+.index-page {
+  background-color: #fff;
 }

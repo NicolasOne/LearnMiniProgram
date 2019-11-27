@@ -1,41 +1,25 @@
-//index.js
-//获取应用实例
-const app = getApp()
-
-// Page({
-//   data: {
-    
-//   },
-//   onLoad:function(options) {
-//     this.timeLazyLoading()
-//   },
-//   timeLazyLoading() {
-//     setTimeout(function () {
-//       wx.switchTab({
-//         url: '../../pages/home/home',
-//       })
-//     }, 2000)
-//   }
-// })
-
+// pages/index/index.js
+let app = getApp()
 
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    time: 3
   },
-  onLoad: function () {
-    var count = setInterval(() => {
-      this.setData({
-        time: this.data.time - 1
-      });
-      if (this.data.time == 0) {
-        wx.switchTab({
-          url: '../../pages/home/home',
-          complete: function (res) {
-          }
-        })
-        clearInterval(count);
-      }
-    }, 1000);
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    app.login(this.handlerAfterAuthorize);
+  },
+  handlerAfterAuthorize() {
+    // 登录成功后跳转首页
+    wx.redirectTo({
+      url: '../main/main'
+    })
   }
 })
+ 

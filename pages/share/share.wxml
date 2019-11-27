@@ -1,9 +1,29 @@
 <!--pages/share/share.wxml-->
-<view>
-  <text>{{userName}}</text>
-  <textarea class="content-text" auto-focus="true" value="{{content}}" placeholder="发布新鲜事。。。">
-  
-  </textarea>
+<view class="share-page">
+  <view class="share-btn" bindtap = "toIssue">发 布</view>
+  <textarea class="content-text" auto-focus="true" maxlength="-1" bindinput = "changeShareContent" value="{{content}}" placeholder="发布新鲜事。。。"></textarea>
+  <view class="count">{{count}}/9</view>
+  <view class="upload-img">
+    <block wx:for="{{imgList}}" wx:key="{{index}}">
+      <view class="img-item">
+        <image src="{{item}}" />
+      </view>
+    </block>
+    <view wx:if="{{imgList.length<9}}" bindtap = "chooseimage" class="add-img">
+      <image src="../../assets/other/add.png" />
+    </view>
+  </view>
+  <view class="tag-list">
+    <image class="zanpic" src="/assets/other/tag.png" />
+    <view class="tag-item" bindtap = "chooseTag" data-id="{{item.tagId}}" wx:for="{{tagList}}" wx:key="{{item.tagId}}">
+      {{item.tagName}}
+      <image wx:if="{{item.show}}" src="../../assets/other/right.png" />
+    </view>
+  </view>
+  <view class="show-map" bindtap = "toMapPage">
+    <image src="../../assets/other/map.png" />
+    <view>{{shopName||'选择商家位置'}}</view>
+  </view>
 </view>
 
 

@@ -1,0 +1,46 @@
+<!--pages/cardDetail/cardDetail.wxml-->
+<view class="card_detail_page">
+  <view class="user_info">
+    <view class="avt">
+      <image src="{{cardDetail.shareUserIcon}}" style="width:100%;height:100%;border-radius: 50%;"/>
+    </view>
+    <view class="name">{{cardDetail.shareUserName}}</view>
+    <view class="create_time">{{cardDetail.ctime}}</view>
+    <view class="nav_box" bindtap="showMap">
+      <view class="nav">
+        <image src="../../assets/other/map.png" style="width:100%;height:100%"/>
+      </view>
+      <view class="nav_text">去这里</view>
+    </view>
+  </view>
+  <view class="card_info">
+    <swiper
+      autoplay="true" interval="3000" class="swiper">
+      <block wx:for="{{cardDetail.cardImg}}" wx:key="item">
+        <swiper-item>
+          <image src="{{item}}" style="width:100%;height:100%"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="shop_word">
+      {{cardDetail.eatDetail}}
+    </view>
+    <view class="collect-btn" catchtap="clickCollect" data-id="{{ cardDetail.id }}">
+      <image src="{{collectList[cardDetail.id]?'../../assets/other/collect.png':'../../assets/other/uncollect.png'}}" style="width:100%;height:100%;"></image>
+    </view>
+  </view>
+  <view class="history">
+    <view class="change_type">
+      <view class="type_item {{chooseType=='share'?'pink':''}}" bindtap="chooseType" data-id="share">相关分享</view>
+      <view class="type_item {{chooseType=='clockIn'?'pink':''}}" bindtap="chooseType" data-id="clockIn">打卡记录</view>
+    </view>
+    <view class="share_list" wx:if="{{chooseType=='share'}}">
+      <view class="list_item" wx:for="{{shareList}}" wx:key="index">
+        <w-share-item item="{{item}}"></w-share-item>
+      </view>
+    </view>
+    <view class="clock_in_list" wx:else>
+      <nodata></nodata>
+    </view>
+  </view>
+</view>

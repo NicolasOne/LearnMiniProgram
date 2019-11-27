@@ -1,7 +1,6 @@
 /* components/w-tab-control/w-tab-control.wxss */
 .tab-control {
   display: flex;
-  margin-bottom: 10rpx;
   background: #fff;
   padding-bottom: 5rpx;
 }
@@ -9,8 +8,8 @@
 .tab-item {
   flex: 1;
   text-align: center;
-  height: 50rpx;
-  line-height: 50rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   font-size: 32rpx;
 }
 
@@ -26,6 +25,5 @@
   width: 250rpx;
   position:relative;
   left: 60rpx;
-  bottom: 1rpx;
-  border-bottom: 4rpx solid #323233;
+  border-bottom: 2rpx solid #323233;
 }

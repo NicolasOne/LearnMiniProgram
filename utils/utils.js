@@ -59,34 +59,53 @@ function formatDateTime(date, withMs = false) {
   }
   return ret
 }
-
+// 给时间个位数前加0
+function changeTime(date){
+  if(date>10){
+    return date
+  }else {
+    return '0'+date
+  }
+}
 function formatDateTimes(date, withMs = false) {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
+  const year = new Date(date).getFullYear()
+  const month = new Date(date).getMonth() + 1
+  const day = new Date(date).getDate()
+  const hour = new Date(date).getHours()
+  const minute = new Date(date).getMinutes()
+  const second = new Date(date).getSeconds()
   const now = new Date();
   const nowYear = now.getFullYear()
   const nowMonth = now.getMonth() + 1
   const nowDay = now.getDate()
   const nowHour = now.getHours()
   const nowMinute = now.getMinutes()
+  const nowSecond = now.getSeconds()
   if (year == nowYear) {
     if(month==nowMonth) {
       //当月的同一天
       if(day==nowDay) {
         if(hour==nowHour) {
-          return (nowMinute-minute)+"分钟前"
+          if(minute==nowMinute){
+            return "刚刚"
+          }else {
+            return (nowMinute-minute)+"分钟前"
+          }
         }else {
           return (nowHour - hour) + "小时前"
         } 
       } else {
-        return (nowDay - day) + "天前"
+        if((nowDay - day) > 3){
+          return year + "年" + month + "月" + day + "日 " + changeTime(hour) + ':' + changeTime(minute) + ':' +changeTime(second)
+        }else{
+          return (nowDay - day) + "天前"
+        }
       }
-    } 
+    }else {
+      return year + "年" + month + "月" + day + "日 " + changeTime(hour) + ':' + changeTime(minute) + ':' +changeTime(second)
+    }
   } else {
-    return year + "年" + month + "月"
+    return year + "年" + month + "月" + day + "日 " + changeTime(hour) + ':' + changeTime(minute) + ':' +changeTime(second)
   }
 }
 

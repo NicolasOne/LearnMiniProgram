@@ -5,6 +5,7 @@ page{
   background-color: #f6f6f6;
 }
 .list{
+  margin-bottom: 150rpx;
 }
 .m-trip{
   margin: 20rpx;
@@ -21,4 +22,96 @@ page{
   width: 220rpx;
   height: 42rpx;
   vertical-align: bottom;
+}
+.city-box {
+  width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 100rpx;
+  left: 0;
+  z-index: 1000;
+}
+.searchContent {
+  width: 100%;
+  height: 100rpx;
+  background: #FE4F70;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.now-city {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 30rpx;
+  min-width: 180rpx;
+}
+.now-city image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 15rpx;
+}
+.search-input{
+  background: #fff;
+  border-radius: 20rpx;
+  width: 80%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+} 
+.search-input input {
+  padding: 20rpx 15rpx;
+  font-size: 25rpx;
+  color: #b0b0b0;
+}
+.list-city {
+  width: 100%;
+  background: #fff;
+  color: #333;
+  position: relative;
+}
+.fullname,.py {
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+}
+.py {
+  background: #F1F1F1;
+  color: #999999;
+  font-size: 25rpx;
+}
+.hot-city {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-top: 15rpx;
+  padding-bottom: 30rpx;
+
+}
+.hot-city-item {
+  font-size: 30rpx;
+  border: 2rpx solid #f1f1f1;
+  box-shadow:0px 1px 1px 0px rgba(149,149,149,0.3);
+  padding: 15rpx 20rpx;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+}
+.city-item {
+  border-bottom: 2rpx solid #f1f1f1;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.city-py {
+  position: fixed;
+  right: 20rpx;
+  top: 300rpx;
+  font-size: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 800rpx;
+  font-weight: 600;
+  color: #333;
 }

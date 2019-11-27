@@ -1,0 +1,56 @@
+<!--pages/commentDetail/commentDetail.wxml-->
+<view class="info-all">
+  <view>
+    <image class="icon" src="{{itemDetail.userIcon}}" />
+  </view>
+  <view class="info-item">
+    <text class="userName">{{itemDetail.userName}}</text>
+    <text class="shareTime">{{itemDetail.createTime}}</text>
+  </view>
+</view>
+<view class="news-content">
+  <!-- 内容部分 -->
+  <view class="shareContent">{{itemDetail.comment}}</view>
+</view>
+<!-- 评论部分 -->
+<view class="commentall">
+    <view class="comment-item" wx:for="{{commentList}}" wx:for-item="list" wx:key="index">
+        <view class="commen-user-info">
+        <image class="icon" src="{{list.userIcon}}" />
+        <view class="user-info">
+            <view class="userName">{{list.userName}}</view>
+            <view class="createTime"> {{list.createTime}}</view>
+        </view>
+        </view>
+        <view class="commentContent">{{list.comment}}</view>
+        <view class="zan">
+        <view class="back"></view>
+        <view class="zan-box" bindtap= "likeComment" data-id="{{list.id}}">
+            <image class="zanpic" src="{{CommentLikedList[list.id]?'/assets/other/zan_like.png':'/assets/other/zan.png'}}"></image>
+            <view>{{CommentLikedList['zanNum'+list.id]}}</view>
+        </view>
+    </view>
+</view>
+</view>
+<!-- 底部评论框 -->
+
+<form bindsubmit="sendMeg">
+  <view class="release" >
+    <textarea 
+          class="text" 
+          bindblur="bindTextAreaBlur" 
+          releaseFocus="false" 
+          placeholder-class="input_null" 
+          fixed="true" 
+          maxlength="-1" 
+          show-confirm-bar="false" 
+          cursor-spacing="15" 
+          auto-height="true" 
+          focus="false" 
+          focus="{{releaseFocus}}" 
+          placeholder="评论{{itemDetail.userName}}"
+          value="{{inputVal}}">
+          </textarea>
+    <button class="submit" form-type="submit" data-shareId="{{itemDetail.id}} ">发送</button>
+</view>
+</form>

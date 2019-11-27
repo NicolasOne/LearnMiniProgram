@@ -6,10 +6,14 @@
     <view class='content'>
         <view>申请获取以下权限</view>
         <text>获得你的公开信息(昵称，头像等)</text>
+        <text>获得你的手机号信息</text>
     </view>
  
-    <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
-        授权登录
+    <button wx:if="{{!getPhoneNumber}}" class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+        获取昵称头像
+    </button>
+    <button wx:else class='bottom' type='primary' open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="bindGetPhoneNumber">
+        获取手机号
     </button>
 </view>
  

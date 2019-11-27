@@ -1,29 +1,36 @@
-<view class="container" hidden="{{!hasUserInfo}}">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+<view class="profile_page">
+  <view class="profile_page_bg">
+    <image src="../../assets/other/square.png"/>
+  </view>
+  <view class="profile_page_info">
+    <view class="info_img">
+      <image src="{{avatarUrl?avatarUrl:'../../assets/other/pic.jpg'}}"/>
+    </view>
+    <block wx:if="{{isAuthorization}}">
+      <view class="info_name">{{nickName||' '}}</view>
+      <view class="info_content">
+        <view class="content_item">被点赞次数：<text>{{likeCount}}</text></view>
+        <view class="content_item">被浏览次数：<text>{{browseCount}}</text></view>
+      </view>
+    </block>
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <view class="info_name_no_authorization">授权后体验更多功能哦~</view>
+      <view class="goAuthorization" bindtap = "goAuthorization">去授权</view>
     </block>
   </view>
-  <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
-<view wx:else>请升级微信版本</view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view>
-<view class='amountBg'>
-  <view class='img'>
-    <open-data type="userAvatarUrl"></open-data>
-  </view>
-  <view class='account'>
-    <view class='nick-name'>
-      <open-data type="userNickName" lang="zh_CN"></open-data>
+  <view wx:if="{{isAuthorization}}" class="profile_page_list">
+    <view class="list_item" bindtap = "toMyShare">
+      <image src="../../assets/other/list.png"/>
+      <view class="item_text">我的分享</view>
     </view>
-    <view class='address'>
-      <open-data type="userCountry" lang="zh_CN"></open-data>·
-      <open-data type="userProvince" lang="zh_CN"></open-data>·
-      <open-data type="userCity" lang="zh_CN"></open-data>
+    <view class="list_item" bindtap = "toCollectdCards">
+      <image src="../../assets/other/like.png"/>
+      <view class="item_text">我的卡片</view>
+    </view>
+    <view class="list_item">
+      <image src="../../assets/other/talk.png"/>
+      <view class="item_text">我的消息</view>
+      <view class='news'></view>
     </view>
   </view>
 </view>

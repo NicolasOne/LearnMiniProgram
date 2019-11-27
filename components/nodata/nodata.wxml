@@ -1,0 +1,5 @@
+<!--components/nodata/nodata.wxml-->
+<view class="no_data">
+  <image src="../../assets/other/nodata.png" />
+  <view>暂无内容</view>
+</view>

@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "吃货联盟",
+  "navigationBarBackgroundColor": "#FE4F70",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+      "homePage": "../home/home",
+      "categoryPage": "../category/category",
+      "squarePage": "../square/square",
+      "profilePage": "../profile/profile",
+      "tabbar": "/components/tabbar/tabbar"
+  },
+  "enablePullDownRefresh": false
+}

@@ -1,0 +1,125 @@
+/* pages/cardDetail/cardDetail.wxss */
+page {
+  background: #f1f1f1;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.card_detail_page {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.user_info {
+  background: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 20rpx;
+  box-sizing: border-box;
+  border-radius: 20rpx;
+}
+.avt{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  display: flex;
+  align-items: center;
+}
+.name {
+  font-size: 24rpx;
+  margin-right: 200rpx;
+}
+.create_time {
+  font-size: 19rpx;
+  position: absolute;
+  right: 140rpx;
+}
+.nav_box {
+  position: absolute;
+  right: 20rpx;
+  display: flex;
+  align-items: center;
+  height:100rpx;
+}
+.nav {
+  width: 30rpx;
+  height: 30rpx;
+  display: flex;
+  align-items: center;
+  margin-right: 10rpx
+}
+.nav_text {
+  font-size: 20rpx;
+}
+.card_info {
+  width: 100%;
+  position: relative;
+  font-size: 16rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.swiper {
+  height: 350rpx;
+  border-radius: 20rpx;
+}
+.swiper image {
+  border-radius: 20rpx;
+}
+.shop_word {
+  position: absolute;
+  top: 30rpx;
+  left: 30rpx;
+}
+.collect-btn {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+.history {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  margin-top: 50rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.change_type {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 2rpx solid #f1f1f1;
+  color: #ccc
+}
+.type_item {
+  height: 60rpx;
+  width: 50%;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+.type_item:first-child{
+  border-right: 2rpx solid #f1f1f1;
+}
+.share_list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.list_item {
+  width: 95%;
+  border: 2rpx solid #f1f1f1;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+}
+.pink {
+  color: rgb(252, 113, 139)
+}

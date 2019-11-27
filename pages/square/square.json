@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "nonePage": "../nonePage/nonepage"
+  },
   "navigationBarTitleText": "广场"
 }

@@ -1,12 +1,49 @@
 <import src="../../components/w-share-card/w-share-card.wxml"/>
-<view>
+<view class="category-page">
+  <view class="searchContent">
+      <view class="now-city" bindtap = "isShowCity">
+        <view class="name">{{nowCity}}</view>
+        <image src="{{isShowCity?'../../assets/other/show.png':'../../assets/other/hidden.png'}}" />
+      </view>
+      <view class="search-input">
+        <input placeholder-style="font-size: 25rpx" value="{{searchValue}}" bindblur = "handleSearch" class="search-city" placeholder="请输入搜索关键字"/>
+      </view>
+    </view>
+  <view class="city-box" wx:if="{{isShowCity}}">
+    <view class='list-city'>
+      <scroll-view scroll-y="true" style="height:100vh;"  scroll-into-view="{{scrollTopId}}" scroll-with-animation="true" enable-back-to-top="true">
+        <view class='item'>
+          <view class='fullname' id="now">当前定位城市：{{locationCity}}</view>
+        </view>
+        <!-- 热门城市 -->
+        <view class='item'>
+          <view class='py'>热门城市</view>
+          <view class="fullname hot-city"><view class="hot-city-item" wx:for="{{hotCityData}}" wx:key="key" data-id="{{item.id}}" data-fullname="{{item.fullname}}" bindtap='selectCity'>{{item.fullname}}</view>
+          </view>
+        </view>
 
-</view>
-<scroll-view class="list" style="height: {{ windowHeight }}px; width: {{ windowWidth }}px;" scroll-y="true"  bindscrolltolower="_getCardListDataInfo" lower-threshold="800">
-  <block wx:for="{{ shares }}" wx:for-item="trip" wx:key="trip.id">
-    <template is="m-trip" data="{{trip: trip, mode: 1}}" />
-  </block>
-  <view class="loading">
-    正在加载...
+        <!-- 全部 -->
+        <view class='item' wx:for="{{sortKeyArrLow}}" wx:for-index="idx" wx:for-item="group" wx:key="key">
+          <view class='py' id="{{group}}">{{keyArr[idx]}}</view>
+          <view class="fullname city-item" wx:for="{{cityData[group]}}" wx:key="key" data-id="{{item.id}}" data-fullname="{{item.fullname}}" bindtap='selectCity'>{{item.fullname}}
+          </view>
+        </view>
+
+      </scroll-view>
+
+      <!-- 首字母 -->
+      <view class='city-py' bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
+        <view wx:for="{{rightList}}" wx:key="key" bindtouchstart="getPy" bindtouchend="setPy" id="{{item.id}}">{{item.name}}
+        </view>
+      </view>
+    </view>
   </view>
-</scroll-view>
+  <scroll-view wx:if="{{shares&&shares.length!==0}}" class="list" style="height: {{ windowHeight }}px; width: {{ windowWidth }}px;" scroll-y="true"  bindscrolltolower="_getCardListDataInfo" lower-threshold="800">
+    <block wx:for="{{ shares }}" wx:for-item="trip" wx:key="trip.id">
+      <template is="m-trip" data="{{trip: trip,collectList:collectList, mode: 1}}" />
+    </block>
+  </scroll-view>
+  <nodata wx:else></nodata>
+</view>
+
+

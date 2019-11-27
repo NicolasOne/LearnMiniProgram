@@ -1,17 +1,13 @@
 /* components/w-swiper/w-swiper.wxss */
 .swiper-item view {
-  color: #333
+  color: #333;
+
 }
 .swiper-item image {
-  width: 96%;
+  width: 100%;
   text-align: center;
-  margin: 0 15rpx;
-  border-radius: 15rpx;
 }
 
-.swiper {
-  margin-top: 3rpx
-}
 .horizontal {
   display: inline;
   padding-top: 18rpx;

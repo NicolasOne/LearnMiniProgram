@@ -1,0 +1,26 @@
+/* pages/nonePage/nonepage.wxss */
+.nonepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.nonepage image {
+  width: 400rpx;
+  height: 390rpx;
+  margin-bottom: 20rpx;
+}
+.none-text-big {
+  font-size: 34rpx;
+  font-family:PingFangSC-Light;
+  font-weight:300;
+  color:rgba(109,129,156,1);
+  margin-bottom: 10rpx;
+}
+.none-text {
+  font-size: 48rpx;
+  font-family:PingFangSC-Light;
+  font-weight:300;
+  color:rgba(109,129,156,1);
+}

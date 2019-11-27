@@ -42,7 +42,8 @@
   -webkit-line-clamp: 2;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  margin-top: 30rpx;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
 }
 .m-trip .detail{
   margin-top: 10rpx;
@@ -73,14 +74,6 @@
   left: 4rpx;
   top: 2rpx;
 }
-.m-trip .user{
-  position: absolute;
-  width: 100%;
-  left: 30rpx;
-  bottom: 30rpx;
-  line-height: 50rpx;
-  font-size: 18rpx;
-}
 .m-trip .avatar{
   width: 50rpx;
   height: 50rpx;
@@ -90,16 +83,18 @@
   vertical-align: bottom;
 }
 .m-trip .bottom{
-  position: absolute;
-  bottom: 24rpx;
   font-size: 20rpx;
-  margin-left: 50%;
-
+  margin-left: 30rpx;
 }
 .m-trip .bottom-display{
   display: flex;
-  flex-direction: column;
+  align-items: center;
   line-height:50rpx;
+  position: absolute;
+  width: 100%;
+  left: 30rpx;
+  bottom: 30rpx;
+  font-size: 18rpx;
 }
 .m-trip-s{
   color: #fff;
@@ -202,4 +197,12 @@
 }
 .m-trip-s .stat text{
   font-weight: bold;
+}
+.collect-btn {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  z-index: 100;
+  top: 20rpx;
+  right: 20rpx;
 }

@@ -1,1 +1,5 @@
 /* pages/square/square.wxss */
+.square_page {
+  width:100%;
+  height:100%;
+}

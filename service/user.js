@@ -13,15 +13,17 @@ export function saveUser(userNiceName, userPhone, cityCode, headSculpture) {
   })
 }
 
-export function saveUserInfo(token, encryptedData, iv) {
+export function getMyShare(currPage) {
   return request({
-    url: "/wx/user/getUserInfo",
+    url: "/wx/user/getMyShare",
     data: {
-      encryptedData,
-      iv
+      currPage
     },
-    header: {
-      token
-    },
+  })
+}
+
+export function getBrowseCountAndLikeCount() {
+  return request({
+    url: "/wx/user/getBrowseCountAndLikeCount"
   })
 }

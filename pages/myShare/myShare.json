@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "w-share-item": "/components/w-share-item/w-share-item",
+    "nodata": "/components/nodata/nodata"
+  },
+  "navigationBarTitleText": "我的分享"
+}

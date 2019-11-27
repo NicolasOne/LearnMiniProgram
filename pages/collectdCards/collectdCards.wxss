@@ -1,0 +1,119 @@
+/* pages/collectdCards/collectdCards.wxss */
+@import "../../components/w-share-card/w-share-card.wxss";
+.my_card_page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.collect_box {
+  width: 100%;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.search {
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+.search_bar {
+  width: 100%;
+  height: 60rpx;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+  border: 2rpx solid #f1f1f1;
+  border-radius: 5rpx;
+}
+.collectdCards_page {
+  width: 100%;
+  height: 100%;
+}
+.issue_box {
+  width: 100%;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 20rpx;
+}
+.issue_cards_page {
+  width: 92%;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 60rpx;
+  padding-bottom: 40rpx;
+  border-left: 5rpx solid rgb(252, 113, 139);
+}
+.issue_cards_item {
+  width: 92%;
+}
+.issue_time {
+  position: absolute;
+  top: -15rpx;
+  left: 50rpx;
+}
+.piont {
+  position: absolute;
+  left: -10rpx;
+  top: -10rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border: 6rpx solid rgb(252, 113, 139);
+  background: #fff;
+  border-radius: 50%;
+  z-index: 10;
+}
+.btn_box {
+  width: 92%;
+  height: 55rpx;
+  background:rgba(241,241,241,1);
+  border-radius: 24rpx;
+  color: #999999;
+  margin-bottom: 20rpx;
+  margin-top: 30rpx;
+}
+.btn_bg {
+  height: 55rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.bg_item {
+  flex: 1;
+  text-align: center;
+}
+.chooes_btn {
+  position: absolute;
+  height: 100%;
+  width: 55%;
+  border-radius: 24rpx;
+  background-color: #FFFFFF;
+  line-height: 55rpx;
+  text-align: center;
+  color: rgb(252, 113, 139);
+  box-shadow:0rpx 0rpx 6rpx 0rpx rgba(8,1,3,0.3);
+}
+.move_to_right {
+  -webkit-animation: to-right 0.3s linear 0s 1 normal forwards;
+  animation: to-right 0.3s linear 0s 1 normal forwards;
+}
+
+@keyframes to-right{
+  0%  {transform: translateX(-1%)}
+  100%{transform: translateX(82%)}
+}
+.move_to_left {
+  -webkit-animation: to-left 0.3s linear 0s 1 normal forwards;
+  animation: to-left 0.3s linear 0s 1 normal forwards;
+}
+
+@keyframes to-left{
+  0%  {transform: translateX(82%)}
+  100%{transform: rotate(-1%)}
+}

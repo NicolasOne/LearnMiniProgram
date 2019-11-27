@@ -1,51 +1,28 @@
 {
-  "pages": [ 
+  "pages": [
     "pages/index/index",
-    "pages/home/home",
-    "pages/profile/profile",
+    "pages/myNotification/myNotification",
+    "pages/cardDetail/cardDetail",
+    "pages/navPage/navPage",
     "pages/category/category",
-    "pages/square/square",
-    "pages/detail/detail",
+    "pages/mapPage/mapPage",
     "pages/login/login",
-    "pages/share/share"
-    
+    "pages/collectdCards/collectdCards",
+    "pages/myShare/myShare",
+    "pages/main/main",
+    "pages/detail/detail",
+    "pages/shopList/shopList",
+    "pages/createShop/createShop",
+    "pages/commentDetail/commentDetail",
+    "pages/transitionPage/transitionPage"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ff5777",
-    "navigationBarTitleText": "我的",
+    "navigationBarBackgroundColor": "#FE4F70",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#ffffff",
     "enablePullDownRefresh": false
-  },
-  "tabBar": {
-    "selectedColor": "#707070",
-    "list": [
-      {
-        "pagePath": "pages/home/home",
-        "text": "首页",
-        "iconPath": "/assets/tabbar/index.png",
-        "selectedIconPath": "/assets/tabbar/index_active.png"
-      },
-      {
-        "pagePath": "pages/category/category",
-        "text": "活动",
-        "iconPath": "/assets/tabbar/category.png",
-        "selectedIconPath": "/assets/tabbar/category_active.png"
-      },
-      {
-        "pagePath": "pages/square/square",
-        "text": "广场",
-        "iconPath": "/assets/tabbar/search.png",
-        "selectedIconPath": "/assets/tabbar/search_active.png"
-      },
-      {
-        "pagePath": "pages/profile/profile",
-        "text": "我的",
-        "iconPath": "/assets/tabbar/home.png",
-        "selectedIconPath": "/assets/tabbar/home_active.png"
-      }
-    ]
   },
   "permission": {
     "scope.userLocation": {

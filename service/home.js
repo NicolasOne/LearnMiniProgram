@@ -16,7 +16,7 @@ export function getShareListData(type, currPage) {
     }
   })
 }
-// 点赞
+// 分享点赞
 export function thumbUp(commentId) {
   return request({
     url: "/share/giveLike",
@@ -26,16 +26,50 @@ export function thumbUp(commentId) {
   })
 }
 // 添加分享
-export function addShare(file, level, cityCode, locationIndex, shareContent, tagId) {
+export function addShare(cityCode, locationIndex, shareContent, tagId, imgList) {
   return request({
     url: "/share/share",
+    method: 'POST',
     data: {
-      file,
-      level,
       cityCode,
       locationIndex,
       shareContent,
-      tagId
+      tagId,
+      imgPath:imgList
     }
+  })
+}
+// 获取标签列表
+export function getTagList() {
+  return request({
+    url: "/tag/getTagInfo",
+    data: {}
+  })
+}
+// 获取相似卡片
+export function getSameCard(name, cityCode, center) {
+  return request({
+    url: "/card/getSameCard",
+    data: {
+      name,
+      cityCode,
+      center
+    },
+    method: 'POST',
+  })
+}
+// 生成卡片
+export function generate(shareId, name, detail, center, cityCode, imgs) {
+  return request({
+    url: "/card/generate",
+    data: {
+      shareId,
+      name,
+      detail,
+      center,
+      cityCode,
+      imgs
+    },
+    method: 'POST',
   })
 }

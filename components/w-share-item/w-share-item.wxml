@@ -1,52 +1,54 @@
 <!--components/w-share-item/w-share-item.wxml-->
 <!-- 展示用户头像部分信息 -->
-
-<view class='line-head'></view>
-<view class="info-all">
+<view class="item-content">
+  <view class="info-all">
+    <view>
+      <image class="icon" src="{{item.icon}}" />
+    </view>
+    <view class="info-item">
+      <text class="userName">{{item.userName}}</text>
+      <view class="shareTime">{{item.shareTime}}</view>
+    </view>
+    <view wx:if="{{showDetailBtn}}" class="go_detail_btn" catchtap="toCardDetail" data-id="{{item.cardId}}">上街</view>
+  </view>
   <view>
-    <image class="icon" src="{{item.icon}}" />
-  </view>
-  <view class="info-item">
-    <text class="userName">{{item.userName}}</text>
-    <text class="shareTime">{{item.shareTime}} <text class="shebei">{{model}}</text><text class="star">+关注</text></text>
-  </view>
-
-</view>
-<view>
-  <!-- 内容部分 -->
-    <!-- <view class="shareContent">{{item.shareContent}}</view> -->
-    <navigator url="/pages/detail/detail?shareId={{item.shareId}}">
-    <view class="find-hot-content {{!showIndex[index] ? 'text-overflow' : ''}}">{{item.shareContent}}</view>
-    </navigator>
-    <view wx:if="{{!showIndex[index]}}" class="find-show-all" data-index="{{index}}" bindtap="toggleShow">展开全文</view>
-    <view wx:if="{{showIndex[index]}}" class="find-show-all" data-index="{{index}}" bindtap="toggleShow">收起全文</view>
+    <!-- 内容部分 -->
+      <!-- <view class="shareContent">{{item.shareContent}}</view> -->
+      <view class="news-content" bindtap="toNewsDetail" data-id="{{item.shareId}}">
+        <view class="{{showIndex[item.shareId] ? 'text-overflow' : 'find-hot-content'}}">{{item.shareContent}}</view>
+        <view wx:if="{{!showIndex[item.shareId]&&item.shareContent.length>110}}" class="find-show-all" data-index="{{item.shareId}}" data-flag="true" catchtap="toggleShow">展开全文</view>
+        <view wx:if="{{showIndex[item.shareId]&&item.shareContent.length>110}}" class="find-show-all" data-index="{{item.shareId}}" data-flag="" catchtap="toggleShow">收起全文</view>
   
+        <view class="{{item.shareImg.length>1?'topic_answerImg':'topic_answerImg_only_one'}}">
+            <view wx:for="{{item.shareImg}}" wx:for-item="list" wx:key="index" catchtap='topic_preview' data-id='{{item.shareId}}' data-url='{{list}}' data-item='{{item.shareImg}}' class="{{item.shareImg.length>1?'topic_answer_itemImg':'topic_answer_itemImg_only_one'}}" >
+              <image src="{{list}}" mode="aspectFill" style="width:100%;height:100%;border-radius:10rpx"/>
+            </view>
+            
+        </view>
+      </view>
+    <!-- 评论点赞部分 -->
+    <view class="detailBottom" wx:if="{{item.shareId}}">
+      <view class="img_length" bindtap="thumbsup" data-id="{{item.shareId}}" data-liked="{{item.liked}}" data-num="{{item.thumbsUp}}">
+        <view class="like_btn" wx:if="{{changeLike[item.shareId]}}">
+          <image class="zan" src="{{likeList[item.shareId]?like:unlike}}"></image>
+          <view class="zantext">{{num}}</view>
+        </view>
+        <view class="like_btn" wx:else>
+          <image class="zan" src="{{item.liked?like:unlike}}"></image>
+          <view class="zantext">{{item.thumbsUp}}</view>
+        </view>
+      </view>
 
-  <view class="topic_answerImg">
-    <block class="content-item" wx:for="{{item.shareImg}}" wx:for-item="list" wx:key="index">
-      <image bindtap='topic_preview' data-id='{{item.shareId}}' data-url='{{list}}' data-item='{{item.shareImg}}' class='topic_answer_itemImg' src="{{list}}" mode="aspectFill" />
-    </block>
-  </view>
-  <view class='linemid'></view>
-  <!-- 评论点赞部分 -->
-  <view class="detailBottom">
-    <cover-view class="img_length" bindtap="thumbsup" data-id="{{item.shareId}}" data-liked="{{item.liked}}" data-num="{{item.thumbsUp}}">
-      <cover-image class="zan" wx:if="{{item.liked}}" src="{{isTrue && item.liked?like:unlike}}"></cover-image>
-      <cover-image class="zan" wx:else src="{{!isTrue && !item.liked?like:unlike}}"></cover-image>
-      <!-- <text class="zantext"> {{item.thumbsUp}}</text> -->
-      <cover-view class="zantext">{{isTrue?item.thumbsUp:num}}</cover-view>
-    </cover-view>
-
-    <view class="img_length">
-      <image class="zan" src="/assets/other/pl.png" />
-      <text class="zantext"> {{item.commentCount}}</text>
-    </view>
-    
-    <view class="img_length">
-      <image class="zan" src="/assets/other/zf.png" />
-      <text class="zantext"> 1</text>
+      <view class="img_length" bindtap= "toNewsDetail" data-id="{{item.shareId}}">
+        <image class="zan" src="/assets/other/pl.png" />
+        <text class="zantext"> {{item.commentCount}}</text>
+      </view>
+      <button open-type="{{isShare}}" bindtap="toShare" data-item="{{item}}" data-type="share">
+          <view class="img_length">
+            <image class="zan" src="/assets/other/zf.png" />
+            <text class="zantext"> 1</text>
+          </view>
+      </button>
     </view>
   </view>
 </view>
-
-<view class='line'></view>

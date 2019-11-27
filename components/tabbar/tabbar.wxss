@@ -1,0 +1,64 @@
+@import "/app.wxss";
+
+.tabbar-wrapper{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: space-around;  
+  flex-direction: row;  
+  align-items: center;
+  width: 100%;
+  background: #fff;
+  /* border-top: 1px solid #ccc; */
+  box-shadow:0px -2px 8px 0px rgba(173, 169, 167, 0.13);
+}
+.tab-item{
+  height: 118rpx;
+  font-size: 22rpx;
+  width: 150rpx;
+  display: flex;  
+  flex-direction: column;  
+  justify-content: center;  
+  align-items: center;  
+  position: relative;
+}
+.tab-item image{
+  display: block;
+  width: 56rpx;
+  height: 56rpx;
+  margin-bottom: 4rpx;
+}
+.add-news{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -25rpx;
+}
+.add-news-btn {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tabbar_nav {
+  position: relative;
+}
+.news {
+  width: 15rpx;
+  height: 15rpx;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10;
+  top: 15rpx;
+  right: 35rpx;
+}

@@ -1,0 +1,5 @@
+<!--pages/transitionPage/transitionPage.wxml-->
+<!--过渡图片展示页-->
+<view class="imgsize">
+  <image class="in-image" src="/assets/other/m.png" mode="widthFix"></image>
+</view>

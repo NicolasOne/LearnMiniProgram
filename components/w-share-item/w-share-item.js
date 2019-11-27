@@ -14,6 +14,10 @@ Component({
     item: {
       type: Object,
       value: {},
+    },
+    showDetailBtn: {
+      type: Boolean,
+      value: '',
     }
   },
 
@@ -25,13 +29,28 @@ Component({
     unlike:"/assets/other/zan.png",
     isTrue:true,
     num:0,
-    model: App.globalData.model
+    model: App.globalData.model,
+    changeLike: {},
+    likeList:{},
+    isShare: '',
+    showDetailBtn: false
   },
-
+  ready(){
+    if(wx.getStorageSync('isAuthorization')){
+      this.setData({
+        isShare: 'share'
+      })
+    }
+  },
   /**
    * 组件的方法列表
    */
   methods: {
+    toCardDetail(e){
+      wx.navigateTo({
+        url: '../cardDetail/cardDetail?id='+e.currentTarget.dataset.id,
+      })
+    },
     //预览图片
     topic_preview(e) {
       var that = this;
@@ -47,72 +66,42 @@ Component({
       })
     },
     toggleShow: function (e) {
-      console.log(e)
+      console.log(e,'0000')
       var that = this,
       index = e.currentTarget.dataset.index;
-      this.data.showIndex[index] = !this.data.showIndex[index];
+      let showIndex = {...this.data.showIndex}
+      showIndex[index] = e.currentTarget.dataset.flag
       this.setData({
-        showIndex: this.data.showIndex
-      })
+        showIndex
+      },console.log(this.data.showIndex,'show'))
     },
     
     //------------ --------------点赞功能 点赞函数  获取对应id-----------------------------
     thumbsup: function (e) {
       console.log(e)
-      var shareId = e.currentTarget.dataset.id; 
-      var liked = e.currentTarget.dataset.liked;
-      var thumbsUp = e.currentTarget.dataset.num;
-      var src = e.currentTarget.dataset.src;
-      this.zan(shareId,liked);
-      //wx.setStorageSync(shareId, true)
+      if(wx.getStorageSync('isAuthorization')){
+        var shareId = e.currentTarget.dataset.id; 
+        var liked = e.currentTarget.dataset.liked;
+        var thumbsUp = e.currentTarget.dataset.num;
+        var src = e.currentTarget.dataset.src;
+        this.zan(shareId,this.data.likeList[shareId]);
+      }else {
+        App.globalData.toAuthorization()
+      }
     },
     //点赞处理函数    
     zan: function (shareId,liked) {
       var that = this;
-      that.setData({
-        isTrue: true
-      })
       if(liked==true){
-        if (liked && that.data.isTrue) {
-          that.setData({
-            like: "/assets/other/zan.png",
-            isTrue: false
-          })
-          wx.showToast({
-            title: "取消点赞",
-            icon: 'cancel'
-          })
-        } else {
-          that.setData({
-            like: "/assets/other/zan_like.png",
-            isTrue: true
-          })
-          wx.showToast({
-            title: "点赞成功",
-            icon: 'sucess'
-          })
-        }
+        wx.showToast({
+          title: "取消点赞",
+          icon: 'cancel'
+        })
       }else {
-        console.log(that.data.isTrue)
-        if (!liked && that.data.isTrue) {
-          that.setData({
-            like: "/assets/other/zan_like.png",
-            isTrue: false
-          })
-          wx.showToast({
-            title: "点赞成功",
-            icon: 'cancel'
-          })
-        } else {
-          that.setData({
-            like: "/assets/other/zan.png",
-            isTrue: true
-          })
-          wx.showToast({
-            title: "点赞失败",
-            icon: 'sucess'
-          })
-        }
+        wx.showToast({
+          title: "点赞成功",
+          icon: 'cancel'
+        })
       }
       //和后台交互，后台数据要同步
         that._thumpUp(shareId)
@@ -121,10 +110,18 @@ Component({
     _thumpUp(commentId) {
       thumbUp(commentId).then(res => {
         this.setData({
-          commentId
-        })
+          changeLike:{
+            ...this.data.changeLike,
+            [commentId]: true
+          },
+          likeList:{
+            ...this.data.likeList,
+            [commentId]:res.data.data
+          }
+        },() => console.log(this.data.changeLike))
       })
     },
+
     _getDetailData(shareId) {
       getDetailData(shareId).then(res => {
         console.log(res)
@@ -136,6 +133,23 @@ Component({
         })
       })
     },
+    // 跳转内容详情页
+    toNewsDetail:(e) => {
+      if(wx.getStorageSync('isAuthorization')){
+        console.log(e)
+        wx.navigateTo({
+          url: '/pages/detail/detail?shareId='+e.currentTarget.dataset.id,
+        })
+      }else {
+        App.globalData.toAuthorization()
+      }
+    },
+    // 转发判断授权状态
+    toShare(){
+      if(!this.data.isShare){
+        App.globalData.toAuthorization()
+      }
+    }
   }
 
 })

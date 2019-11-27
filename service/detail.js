@@ -19,13 +19,31 @@ export function saveCommentData(shareId,comment) {
     }
   })
 }
-// 获取点赞数
+// 获取分享点赞数
 export function getLikeCount(shareId) {
   return request({
     url: "/share/getLikeCount",
     method: 'post',
     data: {
       shareId
+    }
+  })
+}
+// 评论点赞
+export function giveLike(commentId) {
+  return request({
+    url: "/comment/giveLike",
+    data: {
+      commentId
+    }
+  })
+}
+// 获取评论的回复
+export function getReply(commentId) {
+  return request({
+    url: "/comment/getReply",
+    data: {
+      commentId
     }
   })
 }

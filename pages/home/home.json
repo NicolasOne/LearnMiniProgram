@@ -3,7 +3,8 @@
     "w-swiper": "/components/w-swiper/w-swiper",
     "w-shareList": "./childCpns/w-shareList/w-shareList",
     "w-tab-control": "/components/w-tab-control/w-tab-control",
-    "w-share-item": "/components/w-share-item/w-share-item"
+    "w-share-item": "/components/w-share-item/w-share-item",
+    "nodata": "/components/nodata/nodata"
   },
   "navigationBarTitleText": "小吃街",
   "enablePullDownRefresh": true

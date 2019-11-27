@@ -1,6 +1,2 @@
-<!--index.wxml-->
-
-<!-- <button size="mini" bindtap="handleShowLoading">Toast</button> -->
-<view class="imgsize">
-<image class="in-image" src="/assets/other/m.png" mode="widthFix"></image>
-</view>
+<!--pages/index/index.wxml-->
+<view class="index-page"></view>

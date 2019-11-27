@@ -1,0 +1,102 @@
+/* pages/myNotification/myNotification.wxss */
+page {
+    background: #f1f1f1;
+}
+.myNotification_page {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20rpx 20rpx 0 20rpx;
+    box-sizing: border-box;
+}
+.notification_item {
+    width: 100%;
+    background: #fff;
+    border-radius: 15rpx;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20rpx;
+    color: #333;
+    font-size: 26rpx;
+    padding: 20rpx;
+    box-sizing: border-box;
+}
+.user_detail {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.user_img {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+.user_img image {
+    border-radius: 50%;
+}
+.user_comment {
+    width: 48%;
+    /* 超出行数显示。。。 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:1;
+  overflow: hidden;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.user_active {
+    color: #ccc;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+}
+.notification_content {
+    width: 100%;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+}
+.share_detail {
+    display: flex;
+    width: 100%;
+    border: 2rpx solid #f1f1f1;
+    padding: 10rpx;
+    box-sizing: border-box;
+}
+.share_img {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 20rpx;
+}
+.share_content {
+    width: 100%;
+    /* 超出行数显示。。。 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:3;
+  overflow: hidden;
+  word-break: break-all;
+  word-wrap: break-word;
+  height: 100rpx;
+}
+.card_detail {
+    width: 100%;
+    height: 300rpx;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-size: 100% 100%;
+    border:  2rpx solid #f1f1f1;
+    border-radius: 10rpx;
+    background-position: center center;
+    padding-left: 20rpx;
+    padding-top: 20rpx;
+    box-sizing: border-box;
+}
+.card_ctime {
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+}
+.notification_time {
+    font-size: 20rpx;
+}

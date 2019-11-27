@@ -2,55 +2,50 @@
 <!-- <navigator open-type="navigateBack" delta="2">back</navigator> -->
 <view class="info-all">
   <view>
-    <image class="icon" src="/assets/other/icon.png" />
+    <image class="icon" src="{{headPortrait}}" />
   </view>
   <view class="info-item">
     <text class="userName">{{userName}}</text>
-    <text class="userName">{{createTime}}</text>
+    <text class="shareTime">{{createTime}}</text>
   </view>
 </view>
-<view>
+<view class="news-content">
   <!-- 内容部分 -->
   <view class="shareContent">{{shareContent}}</view>
-  <view class="topic_answerImg">
-    <block class="content-item" wx:for="{{imgList}}" wx:for-item="list" wx:key="index">
-      <image bindtap='topic_preview' data-id='{{item.shareId}}' data-url='{{list}}' data-item='{{imgList}}' class='topic_answer_itemImg' src="{{list}}" mode="aspectFill" />
-    </block>
+  <view class="{{imgList.length>1?'topic_answerImg':'topic_answerImg_only_one'}}">
+      <view wx:for="{{imgList}}" wx:for-item="list" wx:key="index" catchtap='topic_preview' data-id='{{id}}' data-url='{{list}}' data-item='{{imgList}}' class="{{imgList.length>1?'topic_answer_itemImg':'topic_answer_itemImg_only_one'}}" >
+        <image src="{{list}}" mode="aspectFill" style="width:100%;height:100%;border-radius:10rpx"/>
+      </view>
+      
   </view>
 
   <!-- 标签部分 -->
   <view class="tagall">
     <image class="zanpic" src="/assets/other/tag.png" />
     <block wx:for="{{tagList}}" wx:for-item="list" wx:key="index">
-      <text class="tag" space="emsp" decode="{{true}}">&emsp;{{list}}</text>
+      <view class="tag" space="emsp" decode="{{true}}">{{list}}</view>
     </block>
   </view>
-  <view class='line'></view>
   <!-- 评论部分 -->
   <view class="commentall">
-    <block wx:for="{{commentList}}" wx:for-item="list" wx:key="index">
-      <view class="commentStyle">
-        <view class="info-all">
-          <image class="icon" src="/assets/other/icon.png" />
-        </view>
-        <view class="commentContent">
-          <view class="info-item">
-            <text class="userName">{{userName}}</text>
-            <text>{{list.comment}}</text>
-          </view>
-          <view class="comentBottom">
-            <text class="createTime"> {{list.createTime}}</text>
-            <view class="zan">
-              <image class="zanpic" src="/assets/other/zan.png">
-              </image>
-              <text>{{thumbsUp}}</text>
-            </view>
-          </view>
+    <view class="comment-item" wx:for="{{commentList}}" wx:for-item="list" wx:key="index">
+      <view class="commen-user-info">
+        <image class="icon" src="{{list.userIcon}}" />
+        <view class="user-info">
+          <view class="userName">{{list.userName}}</view>
+          <view class="createTime"> {{list.createTime}}</view>
         </view>
       </view>
-      <view class='line'></view>
-    </block>
+      <view class="commentContent">{{list.comment}}</view>
+      <view class="zan">
+        <view class="back" bindtap="toCommentDetail" data-shareId="{{shareId}}" data-item="{{list}}">查看回复</view>
+        <view class="zan-box" bindtap= "likeComment" data-id="{{list.id}}">
+          <image class="zanpic" src="{{CommentLikedList[list.id]?'/assets/other/zan_like.png':'/assets/other/zan.png'}}"></image>
+          <view>{{CommentLikedList['zanNum'+list.id]}}</view>
+        </view>
+    </view>
   </view>
+</view>
 </view>
 <!-- 底部评论框 -->
 
@@ -66,7 +61,7 @@
           show-confirm-bar="false" 
           cursor-spacing="15" 
           auto-height="true" 
-          auto-focus="false" 
+          focus="false" 
           focus="{{releaseFocus}}" 
           placeholder="评论{{userName}}"
           value="{{inputVal}}">

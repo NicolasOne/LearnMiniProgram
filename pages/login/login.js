@@ -1,107 +1,91 @@
+import { baseURL } from '../../service/config'
 Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    getPhoneNumber: false,
+    encryptedData: '',
+    iv: ''
+    // encryptedDataPhone: null,
+    // ivPhone: null
   },
-  pz: function () {
-    wx.login({
-      sucess(res) {
-        console.log(res)
-      }
-    })
-  },
-  onLoad: function () {
-    var that = this;
-    console.log("xianzhixing")
-    // 查看是否授权
-    wx.getSetting({
-      success: function (res) {
-        console.log(res)
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: function (res) {
-              console.log(res.userInfo)
-              //从数据库获取用户信息
-              that.queryUsreInfo();
-              //用户已经授权过
-              wx.switchTab({
-                url: ''
-              })
-            }
-          });
-        }
-      }
-    })
-  },
-  bindGetUserInfo: function (e) {
-    console.log(e)
+  bindGetUserInfo(e) {
+    let that = this
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
-      var that = this;
-      //插入登录的用户的相关信息到数据库
-      wx.request({
-        url: getApp().globalData.urlPath + 'hstc_interface/insert_user',
-        data: {
-          openid: getApp().globalData.openid,
-          nickName: e.detail.userInfo.nickName,
-          avatarUrl: e.detail.userInfo.avatarUrl,
-          province: e.detail.userInfo.province,
-          city: e.detail.userInfo.city
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          //从数据库获取用户信息
-          that.queryUsreInfo();
-          console.log("插入小程序登录用户信息成功！");
+      this.setData({
+        // getPhoneNumber: true,
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv
+      },() => {
+        let data = {
+          encryptedData: that.data.encryptedData,
+          iv: that.data.iv
         }
-      });
-      //授权成功后，跳转进入小程序首页
-      wx.switchTab({
-        url: ''
+        wx.request({
+          url: baseURL+'/wx/user/getUserInfo',
+          data,
+          header: {'content-type':'application/json','token':wx.getStorageSync('token')},
+          method: 'GET',
+          dataType: 'json',
+          responseType: 'text',
+          success: (res)=>{
+            console.log(res.data.data,'resres')
+            wx.setStorageSync('city', res.data.data.city)
+            wx.setStorageSync('province', res.data.data.province)
+            wx.setStorageSync('country', res.data.data.country)
+            wx.setStorageSync('nickName', res.data.data.nickName)
+            wx.setStorageSync('avatarUrl', res.data.data.avatarUrl)
+            wx.setStorageSync('isAuthorization', true)
+            wx.redirectTo({
+              url: '../index/index'
+            })
+          },
+        })
       })
     } else {
       //用户按了拒绝按钮
       wx.showModal({
-        title: '警告',
-        content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+        title: '提示',
+        content: '获取头像昵称失败',
         showCancel: false,
-        confirmText: '返回授权',
+        confirmText: '返回首页',
         success: function (res) {
           if (res.confirm) {
-            console.log('用户点击了“返回授权”')
+            wx.redirectTo({
+              url: '../index/index'
+            })
           }
         }
       })
     }
   },
-  //获取用户信息接口
-  queryUsreInfo: function () {
-    wx.request({
-      url: getApp().globalData.urlPath + 'hstc_interface/queryByOpenid',
-      data: {
-        openid: getApp().globalData.openid
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        console.log(res.data);
-        getApp().globalData.userInfo = res.data;
-      }
-    })
-  },
-
-  getUserInfo: function() {
-    wx.getUserInfo({
-      success: function (res) {
-        var userInfo = res.userInfo
-        userInfoSetInSQL(userInfo)
-      },
-      fail: function () {
-        userAccess()
-      }
-    })
+  bindGetPhoneNumber: (e) => {
+    console.log(e)
+    if (e.detail.userInfo) {
+      //用户按了允许授权按钮
+      this.setData({
+        encryptedDataPhone: e.detail.encryptedData,
+        ivPhone: e.detail.iv
+      },() => saveUserInfo(...this.data))
+      wx.redirectTo({
+        url: '../index/index'
+      })
+    } else {
+      //用户按了拒绝按钮
+      wx.showModal({
+        title: '提示',
+        content: '获取手机号失败',
+        showCancel: false,
+        confirmText: '返回首页',
+        success: function (res) {
+          if (res.confirm) {
+            wx.redirectTo({
+              url: '../index/index'
+            })
+          }
+        }
+      })
+    }
   }
 })
