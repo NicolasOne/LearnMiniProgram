@@ -125,12 +125,8 @@ Page({
           that.reconnect()
         })
         wx.onSocketClose((res) => {
-          if (that.isClose){
-            console.log('关闭页面 WebSocket 已关闭！')
-          }else {
-            console.log('WebSocket 已关闭！')
-            that.reconnect()
-          }
+          console.log('WebSocket 已关闭！')
+          that.reconnect()
         })
         var ws = {
           send: sendSocketMessage,
@@ -213,8 +209,6 @@ Page({
    */
  
   onHide:function() {
-    this.isClose =  true
-    wx.closeSocket()
   },
  
   /**
@@ -224,8 +218,6 @@ Page({
    */
  
   onUnload:function() {
-    this.isClose = true
-    wx.closeSocket()
   },
     /**
    * 页面上拉触底事件的处理函数
