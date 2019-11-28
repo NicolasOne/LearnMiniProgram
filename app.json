@@ -29,5 +29,9 @@
       "desc": "小程序将获取你的位置信息，提供更好的服务！"
     }
   },
+  "networkTimeout": {
+    "request": 10000000000,
+    "downloadFile": 10000000000
+  },
   "sitemapLocation": "sitemap.json"
 }

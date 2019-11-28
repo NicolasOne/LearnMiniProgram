@@ -12,6 +12,30 @@ function sendSocketMessage(msg) {
         socketMsgQueue.push(msg)
     }
 }
+let heartCheck = {
+  timeout: 10000,
+  timeoutObj: null,
+  serverTimeoutObj: null,
+  reset: function () {
+    clearTimeout(this.timeoutObj);
+    clearTimeout(this.serverTimeoutObj);
+    return this;
+  },
+  start: function () {
+    this.timeoutObj = setTimeout(() => {
+      console.log("发送ping");
+      wx.sendSocketMessage({
+        data: "ping",
+        // success(){
+        //  console.log("发送ping成功");
+        // }
+      });
+      this.serverTimeoutObj = setTimeout(() => {
+        wx.closeSocket();
+      }, this.timeout);
+    }, this.timeout);
+  }
+};
 Page({
 
     /**
@@ -20,7 +44,8 @@ Page({
     data: {
         tabbarID: TabbarList.home,
         tabbarList: TabbarList,
-        handleHomePage: false
+        handleHomePage: false,
+        limit:1
     },
     onPageScroll: function (ev) {    
         if(ev.scrollTop>300){
@@ -59,10 +84,86 @@ Page({
         let curtabbar = this.selectComponent('#tab-bar');
         curtabbar.setTabbarSel(e.detail.id);
     },
+  reconnect() {
+    if (this.lockReconnect) return;
+    this.lockReconnect = true;
+    clearTimeout(this.timer)
+    this.timer = setTimeout(() => {
+      this.linkSocket();
+      this.lockReconnect = false;
+    }, 5000)
+  },
+  linkSocket(){
+    let that = this
+    wx.connectSocket({
+      url: "wss://www.jikedd.com/eatStreets/socket?token=" + wx.getStorageSync('token'),
+      success() {
+        console.log('连接成功')
+        wx.onSocketOpen(function (res) {
+          console.log('WebSocket连接已打开！')
+          heartCheck.reset().start()
+          socketOpen = true
+          for (var i = 0; i < socketMsgQueue.length; i++) {
+            sendSocketMessage(socketMsgQueue[i])
+          }
+          socketMsgQueue = []
+
+          ws.onopen && ws.onopen()
+        })
+
+        wx.onSocketMessage(function (res) {
+          //收到消息
+          if (res.data == "pong") {
+            heartCheck.reset().start()
+          } else {
+          }
+          console.log('收到onmessage事件:', res)
+          ws.onmessage && ws.onmessage(res)
+        })
+        wx.onSocketError((res) => {
+          console.log('WebSocket连接打开失败')
+          that.reconnect()
+        })
+        wx.onSocketClose((res) => {
+          if (that.isClose){
+            console.log('关闭页面 WebSocket 已关闭！')
+          }else {
+            console.log('WebSocket 已关闭！')
+            that.reconnect()
+          }
+        })
+        var ws = {
+          send: sendSocketMessage,
+          onopen: null,
+          onmessage: null
+        }
+        var Stomp = require('../../utils/stomp.js').Stomp;
+        Stomp.setInterval = function (interval, f) {
+          return setInterval(f, interval);
+        };
+        Stomp.clearInterval = function (id) {
+          return clearInterval(id);
+        };
+        var client = Stomp.over(ws);
+
+        var destination = '/user/topic/websocket';
+        client.connect('user', 'pass', function (sessionId) {
+          console.log('sessionId', sessionId)
+          client.subscribe(destination, function (body, headers) {
+            console.log('From MQ:', body);
+            // 存储推送过来的消息
+            wx.setStorageSync('news', JSON.stringify(body.body))
+          });
+          client.send(destination, { priority: 9 }, 'hello workyun.com !');
+        })
+      }
+    })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      
         wx.getLocation({
             type: 'wgs84',
             success(res) {
@@ -71,49 +172,6 @@ Page({
               const longitude = res.longitude
             }
           })
-          wx.connectSocket({
-            url: "wss://www.jikedd.com/eatStreets/socket?token="+wx.getStorageSync('token')
-        })
-        wx.onSocketOpen(function (res) {
-            console.log('WebSocket连接已打开！')
-        
-            socketOpen = true
-            for (var i = 0; i < socketMsgQueue.length; i++) {
-                sendSocketMessage(socketMsgQueue[i])
-            }
-            socketMsgQueue = []
-        
-            ws.onopen && ws.onopen()
-        })
-        
-        wx.onSocketMessage(function (res) {
-            console.log('收到onmessage事件:', res)
-            ws.onmessage && ws.onmessage(res)
-        })
-          var ws = {
-            send: sendSocketMessage,
-            onopen: null,
-            onmessage: null
-        }
-          var Stomp = require('../../utils/stomp.js').Stomp;
-          Stomp.setInterval = function (interval, f) {
-            return setInterval(f, interval);
-          };
-          Stomp.clearInterval = function (id) {
-            return clearInterval(id);
-          };
-          var client = Stomp.over(ws);
-    
-          var destination = '/user/topic/websocket';
-          client.connect('user', 'pass', function (sessionId) {
-              console.log('sessionId', sessionId)
-              client.subscribe(destination, function (body, headers) {
-                  console.log('From MQ:', body);
-                  // 存储推送过来的消息
-                  wx.setStorageSync('news', JSON.stringify(body.body))
-              });
-              client.send(destination, { priority: 9 }, 'hello workyun.com !');
-          })
     },
     
 
@@ -121,7 +179,9 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+      onShow: function () {
+        this.isClose = false
+        this.linkSocket() 
         let { tabbarID, tabbarList } = this.data
         // if (tabbarID == tabbarList.home) {
         //     let homePage = this.selectComponent('#home-page');
@@ -153,7 +213,8 @@ Page({
    */
  
   onHide:function() {
-
+    this.isClose =  true
+    wx.closeSocket()
   },
  
   /**
@@ -163,8 +224,8 @@ Page({
    */
  
   onUnload:function() {
-
- 
+    this.isClose = true
+    wx.closeSocket()
   },
     /**
    * 页面上拉触底事件的处理函数
