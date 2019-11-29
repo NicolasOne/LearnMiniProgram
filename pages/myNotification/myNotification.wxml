@@ -1,42 +1,42 @@
 <!--pages/myNotification/myNotification.wxml-->
 <view class="myNotification_page">
-    <view class="notification_item" wx:for="{{msg}}" wx:key="{{index}}">
+    <view class="notification_item" wx:for="{{msgs}}" wx:key="{{index}}" bindtap = "toDetail" data-msgid = "{{item.msgId}}" data-type="{{item.type}}" data-shareid = "{{item.shareDetail.id||null}}" data-carddetail = "{{item.cardDetail||null}}" data-commentdetail="{{item.commentDetail||null}}">
         <view class="user_detail">
             <view class="user_img">
-                <image src="{{item.userImg}}" style="width: 100%;height: 100%"/>
+                <image src="{{item.userIcon}}" style="width: 100%;height: 100%"/>
             </view>
             <view class="user_name">{{item.userName}}</view>
             <view class="user_active">{{active[item.type]}}</view>
             <view wx:if="{{item.type!=2&&item.type!=5}}" class="user_comment">
-                {{item.type==1||item.type==4?item.comment:item.type==3?item.shopName:item.detail.shopName}}
+                {{item.type==1||item.type==4?item.content:item.type==3?item.cardDetail.eatStreetName:item.cardDetail.eatStreetName}}
             </view>
         </view>
         <view class="notification_content">
             <view wx:if="{{item.type==1||item.type==2||item.type==3}}" class="share_detail">
                 <view class="share_img">
-                    <image src="{{item.shareImg}}" style="width: 100%;height: 100%"/>
+                    <image src="{{item.shareDetail.imgList[0]}}" style="width: 100%;height: 100%"/>
                 </view>
                 <view class="share_content">
-                    {{item.shareContent}}
+                    {{item.shareDetail.shareContent}}
                 </view>
             </view>
             <view wx:if="{{item.type==4||item.type==5}}" class="comment_detail">
-                {{item.comment}}
+                {{item.commentDetail.comment}}
             </view>
-            <view wx:if="{{item.type==6}}" style="background-image: url({{item.detail.shopImg}})" class="card_detail">
+            <view wx:if="{{item.type==6}}" style="background-image: url({{item.cardDetail.cardImg[0]}})" class="card_detail">
                 <view class="card_name">
-                    {{item.detail.shopName}}
+                    {{item.cardDetail.eatStreetName}}
                 </view>
                 <view class="card_ctime">
-                    {{item.detail.createTime}}
+                    {{item.cardDetail.ctime}}
                     <text> 发布</text>
                 </view>
                 <view class="card_content">
                     <text>商家介绍： </text>
-                    {{item.detail.shopContent}}
+                    {{item.cardDetail.center}}
                 </view>
             </view>
         </view>
-        <view class="notification_time">{{item.createTime}}</view>
+        <view class="notification_time">{{item.pushDate}}</view>
     </view>
 </view>

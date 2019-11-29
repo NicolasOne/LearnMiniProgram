@@ -9,6 +9,10 @@ Component({
     tabbarID: {
       type: Number,
       value: 1
+    },
+    showNews:{
+      type: Boolean,
+      value: ''
     }
   },
 

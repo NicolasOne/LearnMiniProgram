@@ -135,26 +135,28 @@ onReachBottom:function() {
   })
 },
   _addCommentData(shareId, commentId, reply1) {
-    let that = this
-    reply(shareId, commentId, reply1).then(res1 => {
-      getReply(that.data.itemDetail.id).then(res => {
-        console.log(res.data.data, 'res')
-        let CommentLikedList = {}
-        let commentList = res.data.data.map(item => {
-          item.createTime = formatDateTimes(item.createTime)
-          CommentLikedList[item.id] = item.liked
-          CommentLikedList['zanNum' + item.id] = item.thumbsUp
-          return item
-        });
+    if(shareId){
+      let that = this
+      reply(shareId, commentId, reply1).then(res1 => {
+        getReply(that.data.itemDetail.id).then(res => {
+          console.log(res.data.data, 'res')
+          let CommentLikedList = {}
+          let commentList = res.data.data.map(item => {
+            item.createTime = formatDateTimes(item.createTime)
+            CommentLikedList[item.id] = item.liked
+            CommentLikedList['zanNum' + item.id] = item.thumbsUp
+            return item
+          });
+          that.setData({
+            commentList,
+            CommentLikedList
+          })
+        })
         that.setData({
-          commentList,
-          CommentLikedList
+          inputVal: ''
         })
       })
-      that.setData({
-        inputVal: ''
-      })
-  })
+    }
 },
   /**
    * 生命周期函数--监听页面初次渲染完成

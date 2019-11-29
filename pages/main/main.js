@@ -45,7 +45,8 @@ Page({
         tabbarID: TabbarList.home,
         tabbarList: TabbarList,
         handleHomePage: false,
-        limit:1
+        limit:1,
+        showNews: false
     },
     onPageScroll: function (ev) {    
         if(ev.scrollTop>300){
@@ -146,9 +147,30 @@ Page({
         client.connect('user', 'pass', function (sessionId) {
           console.log('sessionId', sessionId)
           client.subscribe(destination, function (body, headers) {
-            console.log('From MQ:', body);
+            console.log('From MQ:', body.body);
+            let news = wx.getStorageSync('news')||''
+            let newsArr = []
+            if(news){
+              if(!Array.isArray(JSON.parse(news))){
+                newsArr.push(JSON.parse(news))
+              }else{
+                newsArr = JSON.parse(news)
+              }
+            }
+            console.log(newsArr,'newsArr')
+            if(news.indexOf(body.body)==-1){
+              newsArr.push(JSON.parse(body.body))
+            }
             // 存储推送过来的消息
-            wx.setStorageSync('news', JSON.stringify(body.body))
+            wx.setStorageSync('news', JSON.stringify(newsArr))
+            let showNews = null
+            console.log(newsArr.length,'newsArr.length')
+            if(!newsArr.length==0){
+              showNews = true
+            }
+            that.setData({
+              showNews
+            })
           });
           client.send(destination, { priority: 9 }, 'hello workyun.com !');
         })
@@ -179,6 +201,23 @@ Page({
         this.isClose = false
         this.linkSocket() 
         let { tabbarID, tabbarList } = this.data
+        let news = wx.getStorageSync('news')||''
+        let newsArr = []
+        if(news){
+          if(!Array.isArray(JSON.parse(news))){
+            newsArr.push(JSON.parse(news))
+          }else{
+            newsArr = JSON.parse(news)
+          }
+        }
+        let showNews = null
+        console.log(newsArr.length,'newsArr.length')
+        if(newsArr.length==0){
+          showNews = false
+          this.setData({
+            showNews
+          })
+        }
         // if (tabbarID == tabbarList.home) {
         //     let homePage = this.selectComponent('#home-page');
         //     homePage.onshow();

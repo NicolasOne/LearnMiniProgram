@@ -27,10 +27,10 @@
       <image src="../../assets/other/like.png"/>
       <view class="item_text">我的卡片</view>
     </view>
-    <view class="list_item">
+    <view class="list_item" bindtap = "toMyNotification">
       <image src="../../assets/other/talk.png"/>
       <view class="item_text">我的消息</view>
-      <view class='news'></view>
+      <view class='news' wx:if="{{showNews}}"></view>
     </view>
   </view>
 </view>

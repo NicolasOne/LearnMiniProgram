@@ -27,3 +27,13 @@ export function getBrowseCountAndLikeCount() {
     url: "/wx/user/getBrowseCountAndLikeCount"
   })
 }
+export function readMsg(msgId) {
+  console.log(msgId,'msgId')
+  return request({
+    url: "/pushMsg/readMsg",
+    method: 'POST',
+    data:{
+      msgId
+    }
+  })
+}

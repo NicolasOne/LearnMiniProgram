@@ -3,7 +3,7 @@
   <block wx:for="{{tabbar.list}}" wx:key="item">
     <view bindtap='onClickTabbar' data-id="{{item.id}}" class="tabbar_nav {{item.selected ?'selected':''}}" style="color:{{item.selected ? tabbar.selectedColor : tabbar.color}}" >
       <view class="tab-item" style="padding:{{item.id==2?'0 65rpx 0 0':item.id==3?'0 0 0 65rpx':''}}"><image src="{{item.selected ? item.selectIconPath : item.iconPath}}"></image>{{item.text}}</view>
-      <view wx:if="{{item.id==4}}" class='news'></view>
+      <view wx:if="{{item.id==4&&showNews}}" class='news'></view>
     </view>
   </block>
   <view class="add-news">

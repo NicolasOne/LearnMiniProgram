@@ -37,7 +37,7 @@ page {
     border-radius: 50%;
 }
 .user_comment {
-    width: 48%;
+    width: 20%;
     /* 超出行数显示。。。 */
   display: -webkit-box;
   -webkit-box-orient: vertical;

@@ -13,7 +13,8 @@ export default function (options) {
       url: baseURL + options.url,
       method: options.method || 'get',
       header: {
-         token: wx.getStorageSync('token')
+         token: wx.getStorageSync('token'),
+         'content-type':options.url=='/pushMsg/readMsg'?'application/x-www-form-urlencoded':'application/json'
       },
       data: options.data || {},
       success: resolve,
