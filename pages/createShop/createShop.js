@@ -91,6 +91,7 @@ Page({
   },
   createCard(){
     if(this.data.content){
+      console.log(this.data.createData,'this.data.createData')
       let {adcode,locationIndex,shopName,shareId} = this.data.createData
       generate(shareId,shopName,this.data.content,locationIndex,adcode,this.data.imgList).then(res => {
         let tip = ''

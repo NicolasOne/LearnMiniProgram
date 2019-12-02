@@ -1,7 +1,11 @@
 /* pages/index/index.wxss */
 page{
   background-color: #fff;
+  height: 100%;
+  width: 100%;
 }
 .index-page {
   background-color: #fff;
+  height: 100%;
+  width: 100%;
 }

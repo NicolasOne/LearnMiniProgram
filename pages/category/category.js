@@ -207,12 +207,12 @@ Component({
           console.log(currPage, pageSize,'searchValue')
           let currPa = self.data.currPage + 1
           getCardListData(currPa, self.data.pageSize, self.data.searchValue, self.data.areaCode).then(res => {
-            let newList = [...self.data.shares, ...res.data.data.data];
-            newList && newList.map((share) => {
+            res.data.data.data && res.data.data.data.map((share) => {
               const item = share;
               item.ctime = formatTime(new Date(item.ctime));
               return item;
             });
+            let newList = [...self.data.shares, ...res.data.data.data];
             self.setData({
               shares: newList,
               totalRecord: res.data.data.totalRecord

@@ -173,7 +173,7 @@ uploadimg(data){
           console.log(res2.data.data,'res2')
           if(res2.data.data.length!=0){
             wx.navigateTo({
-              url: '../shopList/shopList?list=' + JSON.stringify(res2.data.data)+'&shareId='+res.data.data,
+              url: '../shopList/shopList?list=' + JSON.stringify(res2.data.data) + '&shareId=' + res.data.data + '&detail=' + JSON.stringify(list),
             })
           }else{
             wx.navigateTo({

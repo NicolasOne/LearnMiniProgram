@@ -37,3 +37,11 @@ export function readMsg(msgId) {
     }
   })
 }
+export function queryCoverImg() {
+  return request({
+    url: "/sys/queryCoverImg",
+    data: {
+      version: '1.0'
+    }
+  })
+}

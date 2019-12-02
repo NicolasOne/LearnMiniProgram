@@ -1,2 +1,4 @@
 <!--pages/index/index.wxml-->
-<view class="index-page"></view>
+<view class="index-page">
+  <image src="{{coverImg}}" style="width:100%;height:100%" />
+</view>

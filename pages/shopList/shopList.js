@@ -58,6 +58,11 @@ Page({
       })
     })
   },
+  toCreate(){
+    wx.navigateTo({
+      url: '../createShop/createShop?list=' + this.options.detail,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

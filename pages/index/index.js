@@ -1,12 +1,13 @@
 // pages/index/index.js
 let app = getApp()
-
+import { queryCoverImg } from '../../service/user.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    coverImg: null
   },
 
   /**
@@ -16,9 +17,18 @@ Page({
     app.login(this.handlerAfterAuthorize);
   },
   handlerAfterAuthorize() {
-    // 登录成功后跳转首页
-    wx.redirectTo({
-      url: '../main/main'
+    let that = this
+    queryCoverImg().then(res => {
+      that.setData({
+        coverImg: res.data.data
+      })
+      clearTimeout(that.timer)
+      that.timer = setTimeout(() => {
+        // 登录成功后跳转首页
+        wx.redirectTo({
+          url: '../main/main'
+        })
+      }, 5000)
     })
   }
 })

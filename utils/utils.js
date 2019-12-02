@@ -61,7 +61,7 @@ function formatDateTime(date, withMs = false) {
 }
 // 给时间个位数前加0
 function changeTime(date){
-  if(date>10){
+  if(date>=10){
     return date
   }else {
     return '0'+date
