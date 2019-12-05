@@ -3,7 +3,8 @@ import {
   getCardListData,
   collectCard,
   getMyCardByArea,
-  getCollectCard
+  getCollectCard,
+  unCollectCard
 } from '../../service/card.js'
 const utils = require('../../utils/utils.js');
 const formatTime = utils.formatDateTimes;
@@ -20,6 +21,7 @@ Page({
     currPage: 1,
     chooseType: '收藏的卡片',
     collectList: {},
+    collectListAll: {},
     awaysCards: []
   },
 
@@ -42,19 +44,23 @@ Page({
         awaysCards: newList
       }, () => {
         let newCollectList = self.data.collectList
+        let newCollectListAll = self.data.collectListAll
         console.log(self.data.cards, 's收藏')
         self.data.cards.map(item => {
           newCollectList[item.id] = item.collect
+          newCollectListAll[item.id] = true
         })
         self.setData({
-          collectList: newCollectList
+          collectList: newCollectList,
+          collectListAll: newCollectListAll,
         })
       });
     })
   },
   toCardDetail(e) {
+    console.log(e,'eeeeee')
     wx.navigateTo({
-      url: '../cardDetail/cardDetail',
+      url: '../cardDetail/cardDetail?id='+e.currentTarget.dataset.id,
     })
   },
   chooseType(e){
@@ -77,16 +83,34 @@ Page({
       cards: newCards
     })
   },
-  clickCollect(e){
+  clickCollect(e) {
     console.log(e.currentTarget.dataset.id)
-    collectCard(e.currentTarget.dataset.id).then(res => {
-      this.setData({
-        collectList: {
-          ...this.data.collectList,
-          [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id]
-        }
-      },() => console.log(this.data.collectList))
-    })
+    if (this.data.chooseType == '发布的卡片'){
+      if (this.data.collectList[e.currentTarget.dataset.id]) {
+        unCollectCard(e.currentTarget.dataset.id).then(res => {
+          this.setData({
+            collectList: {
+              ...this.data.collectList,
+              [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id]
+            }
+          }, () => console.log(this.data.collectList))
+        })
+      } else {
+        collectCard(e.currentTarget.dataset.id).then(res => {
+          this.setData({
+            collectList: {
+              ...this.data.collectList,
+              [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id]
+            }
+          }, () => console.log(this.data.collectList))
+        })
+      }
+    }else{
+      unCollectCard(e.currentTarget.dataset.id).then(res => {
+        console.log(res,'取消收藏')
+        this._getCardListDataInfo(null, true, 1, this.data.pageSize)
+      })
+    }
   },
   onPullDownRefresh() {
     let { currPage, pageSize } = this.data

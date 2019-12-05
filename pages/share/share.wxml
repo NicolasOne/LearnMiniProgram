@@ -4,12 +4,12 @@
   <textarea class="content-text" auto-focus="true" maxlength="-1" bindinput = "changeShareContent" value="{{content}}" placeholder="发布新鲜事。。。"></textarea>
   <view class="count">{{count}}/9</view>
   <view class="upload-img">
-    <block wx:for="{{imgList}}" wx:key="{{index}}">
+    <block wx:for="{{imgLists}}" wx:key="{{index}}">
       <view class="img-item">
         <image src="{{item}}" />
       </view>
     </block>
-    <view wx:if="{{imgList.length<9}}" bindtap = "chooseimage" class="add-img">
+    <view wx:if="{{imgLists.length<9}}" bindtap = "chooseimage" class="add-img">
       <image src="../../assets/other/add.png" />
     </view>
   </view>

@@ -1,7 +1,8 @@
 // pages/category/category.js
 import {
   getCardListData,
-  collectCard
+  collectCard,
+  unCollectCard
 } from '../../service/card.js'
 const App = getApp();
 const utils = require('../../utils/utils.js');
@@ -171,26 +172,25 @@ Component({
     },
     clickCollect(e){
       console.log(e.currentTarget.dataset.id)
-      wx.request({
-        url: "https://www.jikedd.com/eatStreets/card/collectCard?cardId="+e.currentTarget.dataset.id,
-        data: {},
-        method: 'POST',
-        header: {
-          token: wx.getStorageSync('token')
-       },
-       success: () => {
-        this.setData({
-          collectList: {
-            ...this.data.collectList,
-            [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id]
-          }
-        },() => console.log(this.data.collectList))
-       }
-      })
-      // console.log(e.currentTarget.dataset.id)
-      // collectCard(e.currentTarget.dataset.id).then(res => {
-        
-      // })
+      if(this.data.collectList[e.currentTarget.dataset.id]){
+        unCollectCard(e.currentTarget.dataset.id).then(res => {
+          this.setData({
+            collectList: {
+              ...this.data.collectList,
+              [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id]
+            }
+          },() => console.log(this.data.collectList))
+        })
+      }else{
+        collectCard(e.currentTarget.dataset.id).then(res => {
+          this.setData({
+            collectList: {
+              ...this.data.collectList,
+              [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id]
+            }
+          },() => console.log(this.data.collectList))
+        })
+      }
     },
     onPullDownRefresh() {
       let { currPage, pageSize, searchValue, areaCode } = this.data

@@ -37,7 +37,7 @@ Component({
             {
                 id: TabbarList.category,
                 pagePath: "/pages/category/category",
-                text: '活动',
+                text: '卡片',
                 iconPath: "/assets/tabbar/category.png",
                 selectIconPath: "/assets/tabbar/category_active.png",
                 selected: false

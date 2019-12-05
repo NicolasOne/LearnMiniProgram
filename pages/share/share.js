@@ -15,6 +15,7 @@ Page({
    */
   data: {
     imgList: [],
+    imgLists: [],
     count: 0,
     tagList: [],
     chooesTagList: [],
@@ -36,7 +37,7 @@ Page({
     this.setData({
       content: wx.getStorageSync('content')||'',
       chooesTagList: wx.getStorageSync('chooesTagList')?JSON.parse(wx.getStorageSync('chooesTagList')):[],
-      imgList: wx.getStorageSync('imgList')?JSON.parse(wx.getStorageSync('imgList')):[]
+      imgLists: wx.getStorageSync('imgLists') ? JSON.parse(wx.getStorageSync('imgLists')):[]
     })
   },
   onUnload(){
@@ -68,7 +69,6 @@ Page({
       success: function (res) {
         console.log(res,'res')
         let imgList = [...imgs,...res.tempFilePaths]
-        wx.setStorageSync('imgList',JSON.stringify(imgList))
         console.log(imgList,'imgList')
         that.setData({
           imgList,
@@ -96,7 +96,12 @@ uploadimg(data){
     formData:null,
     success: (resp) => {
     success++;
-    console.log(resp)
+    console.log(resp,'resp')
+    let imgLists = that.data.imgLists
+    imgLists.push(JSON.parse(resp.data).data)
+    that.setData({
+      imgLists
+    }, () => { wx.setStorageSync('imgLists', JSON.stringify(imgLists))})
     console.log(that.i);
     //这里可能有BUG，失败也会执行这里
     },
@@ -104,7 +109,7 @@ uploadimg(data){
     fail++;
     console.log('fail:'+that.i+"fail:"+fail);
     },
-    complete: () => {
+    complete: (res) => {
       that.i = that.i+1;
       if(that.i==data.path.length){ //当图片传完时，停止调用   
       console.log('执行完毕');
@@ -160,9 +165,9 @@ uploadimg(data){
     })
   },
   toIssue(){
-    let { adcode, locationIndex, content, chooesTagList, imgList, shopName } = this.data
+    let { adcode, locationIndex, content, chooesTagList, imgLists, shopName } = this.data
     if (content){
-      addShare(adcode, locationIndex, content, chooesTagList, imgList).then(res => {
+      addShare(adcode, locationIndex, content, chooesTagList, imgLists).then(res => {
         let list = {
           adcode,
           locationIndex,

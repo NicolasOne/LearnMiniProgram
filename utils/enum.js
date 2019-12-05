@@ -5,7 +5,7 @@ module.exports={
       square: 3,
       profile: 4,
       1: '小吃街',
-      2: '活动',
+      2: '卡片',
       3: '广场',
       4: '我的'
   }

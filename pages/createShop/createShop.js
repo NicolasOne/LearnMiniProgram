@@ -8,6 +8,7 @@ Page({
    */
   data: {
     imgList: [],
+    imgLists: [],
     count: 0,
     content: '',
     createData: {}
@@ -67,6 +68,11 @@ Page({
       success: (resp) => {
       success++;
       console.log(resp)
+      let imgLists = that.data.imgLists
+      imgLists.push(JSON.parse(resp.data).data)
+      that.setData({
+        imgLists
+      })
       console.log(that.i);
       //这里可能有BUG，失败也会执行这里
       },
@@ -93,7 +99,7 @@ Page({
     if(this.data.content){
       console.log(this.data.createData,'this.data.createData')
       let {adcode,locationIndex,shopName,shareId} = this.data.createData
-      generate(shareId,shopName,this.data.content,locationIndex,adcode,this.data.imgList).then(res => {
+      generate(shareId, shopName, this.data.content, locationIndex, adcode, this.data.imgLists).then(res => {
         let tip = ''
         if (res.data.status==1){
           tip = '发布成功'
@@ -101,7 +107,7 @@ Page({
           tip = '发布失败'
         }
         wx.removeStorageSync('chooesTagList')
-        wx.removeStorageSync('imgList')
+        wx.removeStorageSync('imgLists')
         wx.removeStorageSync('content')
         wx.showModal({
           title: '提示',

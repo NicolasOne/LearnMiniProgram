@@ -33,10 +33,17 @@ export function getCardListData(currPage, pageSize, searchValue, areaCode) {
 // 收藏卡片
 export function collectCard(cardId) {
   return request({
-    url: "/card/collectCard",
-    data: {
-      cardId
-    }
+    url: "/card/collectCard?cardId="+cardId,
+    method: 'POST',
+    data: {}
+  })
+}
+// 取消收藏卡片
+export function unCollectCard(cardId) {
+  return request({
+    url: "/card/unCollectCard?cardId=" + cardId,
+    method: 'POST',
+    data: {}
   })
 }
 // 获取发布的卡片
