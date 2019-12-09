@@ -76,7 +76,7 @@ Page({
         })
         that.uploadimg({
           url: baseURL+'/share/upload', //这里是你图片上传的接口
-          path: imgList, //这里是选取的图片的地址数组
+          path: imgList[imgList.length-1], //这里是选取的图片的地址数组
         })
       }
     })
@@ -85,24 +85,25 @@ Page({
 
 uploadimg(data){
   let that=this
-  that.i=data.i?data.i:0
   let success=data.success?data.success:0
   let fail=data.fail?data.fail:0
   wx.uploadFile({
     url: data.url, 
-    filePath: data.path[that.i],
+    filePath: data.path,
     header:{'content-type':'multipart/form-data'},
     name: 'fileData',
     formData:null,
     success: (resp) => {
     success++;
-    console.log(resp,'resp')
-    let imgLists = that.data.imgLists
-    imgLists.push(JSON.parse(resp.data).data)
-    that.setData({
-      imgLists
-    }, () => { wx.setStorageSync('imgLists', JSON.stringify(imgLists))})
-    console.log(that.i);
+    console.log(resp,'resresrseres')
+      let imgLists = that.data.imgLists                                 
+      imgLists.push(JSON.parse(resp.data).data)
+      that.setData({
+        imgLists             
+      }, () => { 
+        console.log(imgLists,'imgLists')   
+        wx.setStorageSync('imgLists', JSON.stringify(imgLists))
+      })
     //这里可能有BUG，失败也会执行这里
     },
     fail: (res) => {
@@ -110,17 +111,8 @@ uploadimg(data){
     console.log('fail:'+that.i+"fail:"+fail);
     },
     complete: (res) => {
-      that.i = that.i+1;
-      if(that.i==data.path.length){ //当图片传完时，停止调用   
       console.log('执行完毕');
       console.log('成功：'+success+" 失败："+fail);
-      }else{//若图片还没有传完，则继续调用函数
-      console.log(data,'data');
-      data.i=that.i;
-      data.success=success;
-      data.fail=fail;
-      that.uploadimg(data);
-      }
     }
   });
 },
