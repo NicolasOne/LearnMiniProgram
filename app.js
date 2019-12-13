@@ -42,6 +42,79 @@ App({
       },
     })
   },
+  onShow: function(){
+    console.log('show')
+    // 为了从后台返回小程序 token不失效，导致调取接口失败
+    let that = this
+    if (wx.getStorageSync('token')){
+      // 判断 session_key 是否已经过期
+      wx.checkSession({
+        success: function () {
+          console.log('token未过期')
+        },
+        fail: function () {
+          // 微信登录授权
+          wx.login({
+            success: res => {
+              if (res.code) {
+                // console.log(res.code)
+                // return
+                wx.request({
+                  url: baseURL + '/wx/user/login',
+                  data: {
+                      code: res.code,
+                  },
+                  success: res => {
+                    // 通过 code 换取小程序 open_id
+                    // 存储小程序 open_id
+                    wx.setStorageSync('token', res.data.data.token);
+                  }
+                })
+              } else {
+                console.log('2.个人微信登录失败！app-onShow' + res.data.data.errMsg)
+              }
+            },
+            fail: res => {
+              console.log('-- wx.login 失败 app-onShow--', res)
+            }
+          })
+        }
+      })
+    }else{
+      // 微信登录授权
+      wx.login({
+        success: res => {
+            if (res.code) {
+                console.log(res.code)
+                wx.request({
+                    url: baseURL + '/wx/user/login',
+                    data: {
+                        code: res.code,
+                    },
+                    success: res => {
+                        // 通过 code 换取小程序 open_id
+                        // 存储小程序 open_id
+                        // wx.setStorageSync('open_id', res.open_id);
+                        // 储存 token，后面调接口放到 header 里
+                        wx.setStorageSync('token', res.data.data.token||'');
+                        wx.setStorageSync('city', res.data.data.userInfo.city||'')
+                        wx.setStorageSync('province', res.data.data.userInfo.province||'')
+                        wx.setStorageSync('country', res.data.data.userInfo.country||'')
+                        wx.setStorageSync('nickName', res.data.data.userInfo.nickName||'')
+                        wx.setStorageSync('avatarUrl', res.data.data.userInfo.avatarUrl||'')
+                        wx.setStorageSync('isAuthorization', res.data.data.userInfo||'')
+                    }
+                })
+            } else {
+                console.log('2.个人微信登录失败！' + res.errMsg)
+            }
+        },
+        fail: res => {
+            console.log('-- wx.login 失败 --', res)
+        }
+    })
+    }
+  },
   login: function (cb) {
     console.log('调用app.login')
     var that = this;

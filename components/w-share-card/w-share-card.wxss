@@ -202,7 +202,7 @@
   width: 40rpx;
   height: 40rpx;
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   top: 20rpx;
   right: 20rpx;
 }
