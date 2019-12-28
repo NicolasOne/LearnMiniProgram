@@ -97,6 +97,7 @@ App({
                         wx.setStorageSync('open_id', res.open_id);
                         // 储存 token，后面调接口放到 header 里
                         wx.setStorageSync('token', res.data.data.token||'');
+<<<<<<< HEAD
                       if (res.data.data.userInfo){
                         wx.setStorageSync('city', res.data.data.userInfo.city||'')
                         wx.setStorageSync('province', res.data.data.userInfo.province||'')
@@ -106,6 +107,14 @@ App({
                         wx.setStorageSync('isAuthorization', res.data.data.userInfo||'')
                       }
                         
+=======
+                      wx.setStorageSync('city', res.data.data.userInfo&&res.data.data.userInfo.city)
+                        wx.setStorageSync('province', res.data.data.userInfo&&res.data.data.userInfo.province)
+                        wx.setStorageSync('country', res.data.data.userInfo&&res.data.data.userInfo.country)
+                        wx.setStorageSync('nickName', res.data.data.userInfo&&res.data.data.userInfo.nickName)
+                        wx.setStorageSync('avatarUrl', res.data.data.userInfo&&res.data.data.userInfo.avatarUrl)
+                        wx.setStorageSync('isAuthorization', res.data.data.userInfo&&res.data.data.userInfo)
+>>>>>>> 0d6219b779d782ed9157368c28892bfd19866da0
                     }
                 })
             } else {
