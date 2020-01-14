@@ -45,6 +45,12 @@ Component({
       wx.navigateTo({
         url: '../myNotification/myNotification',
       })
+    },
+    // 跳意见反馈页
+    toFeedback(){
+      wx.navigateTo({
+        url: '../feedbackPage/feedbackPage',
+      })
     }
   },
   ready(){

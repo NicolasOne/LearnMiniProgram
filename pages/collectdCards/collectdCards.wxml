@@ -13,15 +13,16 @@
     <input class="search_bar" type="text" placeholder="请输入搜索关键字" value="{{searchValue}}" bindblur="searchValueChange" />
     </view>
     <view class="collectdCards_page" bindtap="toCardDetail" data-id="{{trip.id}}" wx:if="{{cards&&cards.length!==0&&chooseType=='收藏的卡片'}}" wx:for="{{ cards }}" wx:for-item="trip" wx:key="trip.id">
-      <template is="m-trip" data="{{trip: trip,collectList: collectListAll, mode: 1}}" />
+      <template is="m-trip" data="{{trip: trip, mode: 1,collectList:collectListAll}}" />
     </view>
   </view>
   <view class="issue_box" wx:if="{{cards&&cards.length!==0&&chooseType=='发布的卡片'}}">
-    <view class="issue_cards_page" wx:for="{{ cards }}" bindtap="toCardDetail" data-id="{{trip.id}}" wx:for-item="trip" wx:key="trip.id">
-      <view class="issue_time">{{trip.ctime}}</view>
-      <view class="piont"></view>
-      <view class="issue_cards_item">
-        <template is="m-trip" data="{{trip: trip,collectList: collectList, mode: 1}}" />
+    <view class="collectdCards_page" bindtap="toCardByArea" data-code="{{trip.areaCode}}" wx:if="{{cards&&cards.length!==0&&chooseType=='发布的卡片'}}" wx:for="{{ cards }}" wx:for-item="trip" wx:key="trip.id">
+      <view class="m-trip">              
+        <image class="cover" src="{{trip.cardImg[0]}}" mode="aspectFill"></image>
+        <view class="info">
+          <text class="h2">{{trip.area}}</text>
+        </view>
       </view>
     </view>
   </view>

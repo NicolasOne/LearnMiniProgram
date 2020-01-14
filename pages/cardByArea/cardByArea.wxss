@@ -1,0 +1,48 @@
+/* pages/cardByArea/cardByArea.wxss */
+@import "../../components/w-share-card/w-share-card.wxss";
+.cardByArea {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30rpx;
+}
+.issue_box {
+    width: 100%;
+    height: 100%;
+    padding: 10rpx 20rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 20rpx;
+  }
+  .issue_cards_page {
+    width: 92%;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 60rpx;
+    padding-bottom: 40rpx;
+    border-left: 5rpx solid rgb(252, 113, 139);
+  }
+  .issue_cards_item {
+    width: 92%;
+  }
+  .issue_time {
+    position: absolute;
+    top: -15rpx;
+    left: 50rpx;
+  }
+  .piont {
+    position: absolute;
+    left: -10rpx;
+    top: -10rpx;
+    width: 20rpx;
+    height: 20rpx;
+    border: 6rpx solid rgb(252, 113, 139);
+    background: #fff;
+    border-radius: 50%;
+    z-index: 10;
+  }

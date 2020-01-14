@@ -61,14 +61,13 @@ Page({
   chooseimage(){
     let that = this
     let count = 9 - this.data.imgList.length;
-    let imgs = that.data.imgList
     wx.chooseImage({
       count: count, // 默认9 
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
       success: function (res) {
         console.log(res,'res')
-        let imgList = [...imgs,...res.tempFilePaths]
+        let imgList = res.tempFilePaths
         console.log(imgList,'imgList')
         that.setData({
           imgList,
@@ -76,7 +75,7 @@ Page({
         })
         that.uploadimg({
           url: baseURL+'/share/upload', //这里是你图片上传的接口
-          path: imgList[imgList.length-1], //这里是选取的图片的地址数组
+          path: imgList, //这里是选取的图片的地址数组
         })
       }
     })
@@ -85,36 +84,72 @@ Page({
 
 uploadimg(data){
   let that=this
-  let success=data.success?data.success:0
-  let fail=data.fail?data.fail:0
-  wx.uploadFile({
-    url: data.url, 
-    filePath: data.path,
-    header:{'content-type':'multipart/form-data'},
-    name: 'fileData',
-    formData:null,
-    success: (resp) => {
-    success++;
-    console.log(resp,'resresrseres')
-      let imgLists = that.data.imgLists                                 
-      imgLists.push(JSON.parse(resp.data).data)
-      that.setData({
-        imgLists             
-      }, () => { 
-        console.log(imgLists,'imgLists')   
-        wx.setStorageSync('imgLists', JSON.stringify(imgLists))
-      })
-    //这里可能有BUG，失败也会执行这里
-    },
-    fail: (res) => {
-    fail++;
-    console.log('fail:'+that.i+"fail:"+fail);
-    },
-    complete: (res) => {
-      console.log('执行完毕');
-      console.log('成功：'+success+" 失败："+fail);
-    }
-  });
+  let imgLists = that.data.imgLists   
+  if(data.path.length>0){
+    data.path.forEach(item => {
+      wx.uploadFile({
+        url: data.url, 
+        filePath: item,
+        header:{'content-type':'multipart/form-data'},
+        name: 'fileData',
+        formData:null,
+        success: (resp) => {
+        console.log(resp,'resresrseres')                              
+          imgLists.push(JSON.parse(resp.data).data)
+          that.setData({
+            imgLists             
+          }, () => {  
+            wx.setStorageSync('imgLists', JSON.stringify(imgLists))
+          })
+        //这里可能有BUG，失败也会执行这里
+        }
+      });
+    })
+  }else {
+    wx.uploadFile({
+      url: data.url, 
+      filePath: data.path,
+      header:{'content-type':'multipart/form-data'},
+      name: 'fileData',
+      formData:null,
+      success: (resp) => {
+      console.log(resp,'resresrseres')                              
+        imgLists.push(JSON.parse(resp.data).data)
+        that.setData({
+          imgLists             
+        }, () => {  
+          wx.setStorageSync('imgLists', JSON.stringify(imgLists))
+        })
+      //这里可能有BUG，失败也会执行这里
+      }
+    });
+  }
+  // wx.uploadFile({
+  //   url: data.url, 
+  //   filePath: data.path,
+  //   header:{'content-type':'multipart/form-data'},
+  //   name: 'fileData',
+  //   formData:null,
+  //   success: (resp) => {
+  //   success++;
+  //   console.log(resp,'resresrseres')                              
+  //     imgLists.push(JSON.parse(resp.data).data)
+  //     that.setData({
+  //       imgLists             
+  //     }, () => {  
+  //       wx.setStorageSync('imgLists', JSON.stringify(imgLists))
+  //     })
+  //   //这里可能有BUG，失败也会执行这里
+  //   },
+  //   fail: (res) => {
+  //   fail++;
+  //   console.log('fail:'+that.i+"fail:"+fail);
+  //   },
+  //   complete: (res) => {
+  //     console.log('执行完毕');
+  //     console.log('成功：'+success+" 失败："+fail);
+  //   }
+  // });
 },
 
   /**

@@ -1,0 +1,22 @@
+<!--pages/feedbackPage/feedbackPage.wxml-->
+<view class="feedback_page">
+   <view class="feedback_item">
+       <view class="discribe_title">问题描述</view>
+       <textarea class="discribe_content" auto-focus="true" maxlength="-1" bindinput="changeFeedback" value="{{content}}"  placeholder="想要什么样的功能？说不定就被满足了呢~"></textarea>
+   </view> 
+   <view class="feedback_item">
+       <view class="image_title">图片（选填）</view>
+       <view class="count">{{count}}/9</view>
+        <view class="upload-img">
+            <block wx:for="{{imgLists}}" wx:key="{{index}}">
+            <view class="img-item">
+                <image src="{{item}}" />
+            </view>
+            </block>
+            <view wx:if="{{imgLists.length<9}}" bindtap = "chooseimage" class="add-img">
+            <image src="../../assets/other/add.png" />
+            </view>
+        </view>
+   </view> 
+   <view class="feedback_btn" bindtap='addFeedback'>确 定</view>
+</view>

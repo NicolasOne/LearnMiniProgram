@@ -39,4 +39,5 @@
         </view>
         <view class="notification_time">{{item.pushDate}}</view>
     </view>
+    <nodata wx:if="{{!msgs||msgs.length==0}}"></nodata>
 </view>

@@ -28,6 +28,11 @@ Component({
     // 热门城市列表
     hotCityData: [
       {
+        "id": 0,
+        "name": "全部",
+        "fullname": "全部"
+      },
+      {
         "id": "110000",
         "name": "北京",
         "fullname": "北京市",
@@ -174,20 +179,36 @@ Component({
       console.log(e.currentTarget.dataset.id)
       if(this.data.collectList[e.currentTarget.dataset.id]){
         unCollectCard(e.currentTarget.dataset.id).then(res => {
+          let shares = this.data.shares.map((item,index) => {
+            if(item.id==e.currentTarget.dataset.id){
+              item.collectCount = item.collectCount==0?0:item.collectCount-1
+            }
+            return item
+          })
           this.setData({
             collectList: {
               ...this.data.collectList,
-              [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id]
-            }
+              [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id],
+
+            },
+            shares
           },() => console.log(this.data.collectList))
         })
       }else{
         collectCard(e.currentTarget.dataset.id).then(res => {
+          let shares = this.data.shares.map((item,index) => {
+            if(item.id==e.currentTarget.dataset.id){
+              item.collectCount = item.collectCount+1
+            }
+            return item
+          })
+          console.log(shares,'shares')
           this.setData({
             collectList: {
               ...this.data.collectList,
               [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id]
-            }
+            },
+            shares
           },() => console.log(this.data.collectList))
         })
       }

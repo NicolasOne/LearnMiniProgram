@@ -1,0 +1,15 @@
+<!--pages/cardByArea/cardByArea.wxml-->
+<import src="../../components/w-share-card/w-share-card.wxml"/>
+<view class="cardByArea">
+  <view class="issue_box">
+    <view class="issue_cards_page" wx:for="{{ cards }}" bindtap="toCardDetail" data-id="{{trip.id}}" wx:for-item="trip" wx:key="trip.id">
+      <view class="issue_time">{{trip.ctime}}</view>
+      <view class="piont"></view>
+      <view class="issue_cards_item">
+        <template is="m-trip" data="{{trip: trip, mode: 1, collectList:collectList}}" />
+      </view>
+    </view>
+  </view>
+  <nodata wx:if="{{!cards||cards.length==0}}"></nodata>
+</view>
+

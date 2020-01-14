@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/feedbackPage/feedbackPage",
+    "pages/cardByArea/cardByArea",
     "pages/myNotification/myNotification",
     "pages/cardDetail/cardDetail",
     "pages/navPage/navPage",

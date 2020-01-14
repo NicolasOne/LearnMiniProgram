@@ -14,7 +14,7 @@ export default function (options) {
       method: options.method || 'get',
       header: {
          token: wx.getStorageSync('token'),
-         'content-type':options.url=='/pushMsg/readMsg'?'application/x-www-form-urlencoded':'application/json'
+         'content-type':options.url=='/pushMsg/readMsg'||options.url=='/card/getMyCardDetailByArea'?'application/x-www-form-urlencoded':'application/json'
       },
       data: options.data || {},
       success: resolve,

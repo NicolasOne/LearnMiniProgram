@@ -6,7 +6,7 @@
         <image src="{{isShowCity?'../../assets/other/show.png':'../../assets/other/hidden.png'}}" />
       </view>
       <view class="search-input">
-        <input placeholder-style="font-size: 25rpx" value="{{searchValue}}" bindblur = "handleSearch" class="search-city" placeholder="请输入搜索关键字"/>
+        <input placeholder-style="font-size: 25rpx" value="{{searchValue}}" bindblur="handleSearch" class="search-city" placeholder="请输入搜索关键字"/>
       </view>
     </view>
   <view class="city-box" wx:if="{{isShowCity}}">
@@ -38,11 +38,11 @@
       </view>
     </view>
   </view>
-  <scroll-view wx:if="{{shares&&shares.length!==0}}" class="list" style="height: {{ windowHeight }}px; width: {{ windowWidth }}px;" scroll-y="true"  bindscrolltolower="_getCardListDataInfo" lower-threshold="800">
+  <view wx:if="{{shares&&shares.length!==0}}" class="list" style="min-height: 100%; width: 100%;">
     <block wx:for="{{ shares }}" wx:for-item="trip" wx:key="trip.id">
       <template is="m-trip" data="{{trip: trip,collectList:collectList, mode: 1}}" />
     </block>
-  </scroll-view>
+  </view>
   <nodata wx:else></nodata>
 </view>
 

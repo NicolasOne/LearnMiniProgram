@@ -45,3 +45,10 @@ export function queryCoverImg() {
     }
   })
 }
+export function saveFeedback(params) {
+  return request({
+    url: "/feedback/save",
+    method: 'POST',
+    data: params
+  })
+}

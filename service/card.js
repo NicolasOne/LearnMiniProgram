@@ -1,6 +1,7 @@
 import request from './network.js'
 
 export function getCardListData(currPage, pageSize, searchValue, areaCode) {
+  console.log(searchValue,'searchValuesearchValue')
   let data = {
     currPage,
     pageSize,
@@ -16,7 +17,7 @@ export function getCardListData(currPage, pageSize, searchValue, areaCode) {
     data = {
       currPage,
       pageSize,
-      areaCode
+      name: searchValue
     }
   }
   if(!areaCode&&!searchValue){
@@ -36,6 +37,16 @@ export function collectCard(cardId) {
     url: "/card/collectCard?cardId="+cardId,
     method: 'POST',
     data: {}
+  })
+}
+// 已发布的卡片列表by地区
+export function getMyCardDetailByArea(areaCode) {
+  return request({
+    url: "/card/getMyCardDetailByArea",
+    method: 'POST',
+    data: {
+      areaCode
+    },
   })
 }
 // 取消收藏卡片

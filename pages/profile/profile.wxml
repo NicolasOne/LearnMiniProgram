@@ -32,5 +32,9 @@
       <view class="item_text">我的消息</view>
       <view class='news' wx:if="{{showNews}}"></view>
     </view>
+    <view class="list_item" bindtap = "toFeedback">
+      <image src="../../assets/other/feedback.png"/>
+      <view class="item_text">意见反馈</view>
+    </view>
   </view>
 </view>

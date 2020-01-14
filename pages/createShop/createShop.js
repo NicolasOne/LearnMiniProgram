@@ -28,72 +28,73 @@ Page({
       content: e.detail.value
     })
   },
-  // 添加图片
-  chooseimage(){
-    let that = this
-    let count = 9 - this.data.imgList.length;
-    let imgs = that.data.imgList
-    wx.chooseImage({
-      count: count, // 默认9 
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
-      success: function (res) {
-        console.log(res,'res')
-        let imgList = [...imgs,...res.tempFilePaths]
-        console.log(imgList,'imgList')
-        that.setData({
-          imgList,
-          count: imgList.length       
-        })
-        that.uploadimg({
-          url: baseURL+'/share/upload', //这里是你图片上传的接口
-          path: imgList, //这里是选取的图片的地址数组
-        })
-      }
-    })
-  },
-  //多张图片上传
-
+    // 添加图片
+    chooseimage(){
+      let that = this
+      let count = 9 - this.data.imgList.length;
+      wx.chooseImage({
+        count: count, // 默认9 
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
+        success: function (res) {
+          console.log(res,'res')
+          let imgList = res.tempFilePaths
+          console.log(imgList,'imgList')
+          that.setData({
+            imgList,
+            count: imgList.length       
+          })
+          that.uploadimg({
+            url: baseURL+'/share/upload', //这里是你图片上传的接口
+            path: imgList, //这里是选取的图片的地址数组
+          })
+        }
+      })
+    },
+    //多张图片上传
+  
   uploadimg(data){
     let that=this
-    that.i=data.i?data.i:0
-    let success=data.success?data.success:0
-    let fail=data.fail?data.fail:0
-    wx.uploadFile({
-      url: data.url, 
-      filePath: data.path[that.i],
-      header:{'content-type':'multipart/form-data'},
-      name: 'fileData',
-      formData:null,
-      success: (resp) => {
-      success++;
-      console.log(resp)
-      let imgLists = that.data.imgLists
-      imgLists.push(JSON.parse(resp.data).data)
-      that.setData({
-        imgLists
+    let imgLists = that.data.imgLists   
+    if(data.path.length>0){
+      data.path.forEach(item => {
+        wx.uploadFile({
+          url: data.url, 
+          filePath: item,
+          header:{'content-type':'multipart/form-data'},
+          name: 'fileData',
+          formData:null,
+          success: (resp) => {
+          console.log(resp,'resresrseres')                              
+            imgLists.push(JSON.parse(resp.data).data)
+            that.setData({
+              imgLists             
+            }, () => {  
+              wx.setStorageSync('imgLists', JSON.stringify(imgLists))
+            })
+          //这里可能有BUG，失败也会执行这里
+          }
+        });
       })
-      console.log(that.i);
-      //这里可能有BUG，失败也会执行这里
-      },
-      fail: (res) => {
-      fail++;
-      console.log('fail:'+that.i+"fail:"+fail);
-      },
-      complete: () => {
-        that.i = that.i+1;
-        if(that.i==data.path.length){ //当图片传完时，停止调用   
-        console.log('执行完毕');
-        console.log('成功：'+success+" 失败："+fail);
-        }else{//若图片还没有传完，则继续调用函数
-        console.log(data,'data');
-        data.i=that.i;
-        data.success=success;
-        data.fail=fail;
-        that.uploadimg(data);
+    }else {
+      wx.uploadFile({
+        url: data.url, 
+        filePath: data.path,
+        header:{'content-type':'multipart/form-data'},
+        name: 'fileData',
+        formData:null,
+        success: (resp) => {
+        console.log(resp,'resresrseres')                              
+          imgLists.push(JSON.parse(resp.data).data)
+          that.setData({
+            imgLists             
+          }, () => {  
+            wx.setStorageSync('imgLists', JSON.stringify(imgLists))
+          })
+        //这里可能有BUG，失败也会执行这里
         }
-      }
-    });
+      });
+    }
   },
   createCard(){
     if(this.data.content){

@@ -1,7 +1,9 @@
 // pages/cardDetail/cardDetail.js
 import {
   getCardDetail,
-  getShare
+  getShare,
+  collectCard,
+  unCollectCard
 } from '../../service/card.js'
 Page({
 
@@ -17,8 +19,7 @@ Page({
     chooseType: 'share',
     currPage: 1,
     cardId: null,
-    totalRecord: null,
-    collectList: {}
+    totalRecord: null
   },
 
   /**
@@ -79,14 +80,6 @@ Page({
         this.setData({
           totalRecord: res.data.data.totalRecord,
           shareList
-        }, () => {
-          let newCollectList = this.data.collectList
-          this.data.shareList.map(item => {
-            newCollectList[item.id] = item.collect
-          })
-          this.setData({
-            collectList: newCollectList
-          })
         })
       }else{
         wx.showModal({
@@ -134,26 +127,51 @@ Page({
   },
   clickCollect(e) {
     console.log(e.currentTarget.dataset.id)
-    wx.request({
-      url: "https://www.jikedd.com/eatStreets/card/collectCard?cardId=" + e.currentTarget.dataset.id,
-      data: {},
-      method: 'POST',
-      header: {
-        token: wx.getStorageSync('token')
-      },
-      success: () => {
-        this.setData({
-          collectList: {
-            ...this.data.collectList,
-            [e.currentTarget.dataset.id]: !this.data.collectList[e.currentTarget.dataset.id]
-          }
-        }, () => console.log(this.data.collectList))
-      }
-    })
-    // console.log(e.currentTarget.dataset.id)
-    // collectCard(e.currentTarget.dataset.id).then(res => {
-
-    // })
+    if(e.currentTarget.dataset.collect){
+      unCollectCard(e.currentTarget.dataset.id).then(res1 => {
+        getCardDetail(e.currentTarget.dataset.id).then(res => {
+          let detail = res.data.data
+          var time = new Date(detail.ctime);
+          var y = time.getFullYear();
+          var m = (time.getMonth() + 1).length < 2 ? '0' + (time.getMonth() + 1) : (time.getMonth() + 1);
+          var d = time.getDate().length < 2 ? '0' + time.getDate() : time.getDate();
+          var h = time.getHours().length < 2 ? '0' + time.getHours() : time.getHours();
+          var mm = time.getMinutes().length < 2 ? '0' + time.getMinutes() : time.getMinutes();
+          var s = time.getSeconds().length < 2 ? '0' + time.getSeconds() : time.getSeconds();
+          detail.ctime = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+          console.log(res.data.data, 'res.data.data')
+          let latitude = res.data.data.center.split(',')[1]
+          let longitude = res.data.data.center.split(',')[0]
+          this.setData({
+            cardDetail: detail,
+            latitude,
+            longitude
+          })
+        })
+      })
+    }else{
+      collectCard(e.currentTarget.dataset.id).then(res1 => {
+        getCardDetail(e.currentTarget.dataset.id).then(res => {
+          let detail = res.data.data
+          var time = new Date(detail.ctime);
+          var y = time.getFullYear();
+          var m = (time.getMonth() + 1).length < 2 ? '0' + (time.getMonth() + 1) : (time.getMonth() + 1);
+          var d = time.getDate().length < 2 ? '0' + time.getDate() : time.getDate();
+          var h = time.getHours().length < 2 ? '0' + time.getHours() : time.getHours();
+          var mm = time.getMinutes().length < 2 ? '0' + time.getMinutes() : time.getMinutes();
+          var s = time.getSeconds().length < 2 ? '0' + time.getSeconds() : time.getSeconds();
+          detail.ctime = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+          console.log(res.data.data, 'res.data.data')
+          let latitude = res.data.data.center.split(',')[1]
+          let longitude = res.data.data.center.split(',')[0]
+          this.setData({
+            cardDetail: detail,
+            latitude,
+            longitude
+          })
+        })
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

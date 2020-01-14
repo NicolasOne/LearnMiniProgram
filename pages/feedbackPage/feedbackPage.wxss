@@ -1,0 +1,92 @@
+/* pages/feedbackPage/feedbackPage.wxss */
+.feedback_page {
+    min-height: 100%;
+    width: 100%;
+    background: #f1f1f1;
+    padding: 20rpx 20rpx 120rpx 20rpx;
+    display: flex;
+    flex-direction: column;
+}
+.feedback_item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.discribe_title {
+    margin-top: 20rpx;
+    margin-bottom: 30rpx;
+}
+.image_title {
+    margin-top: 40rpx;
+    margin-bottom: 30rpx;
+}
+.discribe_content {
+    width: 100%;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    padding: 20rpx;
+    background: #fff;
+}
+.upload-img {
+    width: 100%;
+    min-height: 220rpx;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .img-item {
+    width: 220rpx;
+    height: 220rpx;
+    margin-right: 20rpx;
+    margin-top: 20rpx;
+  }
+  .img-item:nth-child(3){
+    
+    margin-right: 0rpx;
+  }
+  .img-item:nth-child(6){
+    
+    margin-right: 0rpx;
+  }
+  .img-item:nth-child(9){
+    
+    margin-right: 0rpx;
+  }
+  .img-item image {
+    width: 100%;
+    height: 100%;
+  }
+  .add-img {
+    width: 220rpx;
+    height: 220rpx;
+    /* border: 5rpx dashed #ccc; */
+    background: #fff;
+    border-radius: 10rpx;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20rpx;
+  }
+  .add-img image {
+    width: 100rpx;
+    height: 100rpx;
+  }
+  .count {
+    color: #ccc;
+    margin-top: 10rpx;
+    font-size: 25rpx;
+  }
+  .feedback_btn {
+      width: 100%;
+      height: 100rpx;
+      background: #FE4F70;
+      color: #fff;
+      font-size: 35rpx;
+      font-weight: 500;
+      line-height: 100rpx;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+  }

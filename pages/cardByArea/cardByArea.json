@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "nodata": "/components/nodata/nodata"
+  },
+  "navigationBarTitleText": "我发布的卡片"
+}

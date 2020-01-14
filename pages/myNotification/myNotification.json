@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "nodata": "/components/nodata/nodata"
+  },
   "navigationBarTitleText": "我的消息",
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black"

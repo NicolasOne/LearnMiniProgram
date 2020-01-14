@@ -23,21 +23,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onShow: function (options) {
-    let msgs = JSON.parse(wx.getStorageSync('news'))
-    let msg = []
-    msgs = msgs.sort((a,b) => {
-      return b.pushDate - a.pushDate
-    })
-    msgs.forEach(item => {
-      item.pushDate = formatTime(new Date(item.pushDate))
-      if(item.cardDetail){
-        item.cardDetail.ctime = formatTime(new Date(item.cardDetail.ctime))
-      }
-      msg.push(item)
-    })
-    this.setData({
-      msgs:msg
-    })
+    if(wx.getStorageSync('news')){
+      let msgs = JSON.parse(wx.getStorageSync('news'))
+      let msg = []
+      msgs = msgs.sort((a,b) => {
+        return b.pushDate - a.pushDate
+      })
+      msgs.forEach(item => {
+        item.pushDate = formatTime(new Date(item.pushDate))
+        if(item.cardDetail){
+          item.cardDetail.ctime = formatTime(new Date(item.cardDetail.ctime))
+        }
+        msg.push(item)
+      })
+      this.setData({
+        msgs:msg
+      })
+    }
   },
   toDetail(e){
     console.log(e,'e')
@@ -62,7 +64,7 @@ Page({
         })
       }else{
         wx.navigateTo({
-          url: '../cardDetail/cardDetail?id='+JSON.stringify(carddetail).id,
+          url: '../cardDetail/cardDetail?id='+carddetail.id,
         })
       }
     })
