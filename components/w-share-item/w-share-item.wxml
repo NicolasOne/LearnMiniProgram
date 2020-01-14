@@ -46,7 +46,7 @@
       <button open-type="{{isShare}}" bindtap="toShare" data-item="{{item}}" data-type="share">
           <view class="img_length">
             <image class="zan" src="/assets/other/zf.png" />
-            <text class="zantext"> 1</text>
+            <!--<text class="zantext"> 1</text>-->
           </view>
       </button>
     </view>

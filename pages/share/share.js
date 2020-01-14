@@ -194,27 +194,34 @@ uploadimg(data){
   toIssue(){
     let { adcode, locationIndex, content, chooesTagList, imgLists, shopName } = this.data
     if (content){
-      addShare(adcode, locationIndex, content, chooesTagList, imgLists).then(res => {
-        let list = {
-          adcode,
-          locationIndex,
-          shopName,
-          shareId: res.data.data
-        }
-        getSameCard(shopName, adcode, locationIndex).then(res2 => {
-          console.log(res2.data.data,'res2')
-          if(res2.data.data.length!=0){
-            wx.navigateTo({
-              url: '../shopList/shopList?list=' + JSON.stringify(res2.data.data) + '&shareId=' + res.data.data + '&detail=' + JSON.stringify(list),
-            })
-          }else{
-            wx.navigateTo({
-              url: '../createShop/createShop?list=' + JSON.stringify(list),
-            })
-            console.log('createCard')
+      if(shopName){
+        addShare(adcode, locationIndex, content, chooesTagList, imgLists).then(res => {
+          let list = {
+            adcode,
+            locationIndex,
+            shopName,
+            shareId: res.data.data
           }
+          getSameCard(shopName, adcode, locationIndex).then(res2 => {
+            console.log(res2.data.data,'res2')
+            if(res2.data.data.length!=0){
+              wx.navigateTo({
+                url: '../shopList/shopList?list=' + JSON.stringify(res2.data.data) + '&shareId=' + res.data.data + '&detail=' + JSON.stringify(list),
+              })
+            }else{
+              wx.navigateTo({
+                url: '../createShop/createShop?list=' + JSON.stringify(list),
+              })
+              console.log('createCard')
+            }
+          })
         })
-      })
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '请选择商家位置',
+        })
+      }
     }else{
       wx.showModal({
         title: '提示',
