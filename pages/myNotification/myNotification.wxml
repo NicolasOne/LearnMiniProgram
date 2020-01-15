@@ -23,7 +23,8 @@
             <view wx:if="{{item.type==4||item.type==5}}" class="comment_detail">
                 {{item.commentDetail.comment}}
             </view>
-            <view wx:if="{{item.type==6}}" style="background-image: url({{item.cardDetail.cardImg[0]}})" class="card_detail">
+            <view wx:if="{{item.type==6}}" class="card_detail">
+                <image class="cover" src="{{item.cardDetail.cardImg[0]}}" mode="aspectFill"></image>
                 <view class="card_name">
                     {{item.cardDetail.eatStreetName}}
                 </view>
@@ -33,11 +34,14 @@
                 </view>
                 <view class="card_content">
                     <text>商家介绍： </text>
-                    {{item.cardDetail.center}}
+                    {{item.cardDetail.eatDetail}}
                 </view>
             </view>
         </view>
         <view class="notification_time">{{item.pushDate}}</view>
+        <view class="delete_btn" catchtap="clearAll">
+            <image style="width: 50rpx;height: 50rpx" src="../../assets/other/delete.png" mode="aspectFill"></image>
+        </view>
     </view>
     <nodata wx:if="{{!msgs||msgs.length==0}}"></nodata>
 </view>

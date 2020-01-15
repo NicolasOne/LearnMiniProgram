@@ -18,7 +18,7 @@
       autoplay="true" interval="3000" class="swiper">
       <block wx:for="{{cardDetail.cardImg}}" wx:key="item">
         <swiper-item>
-          <image src="{{item}}" style="width:100%;height:100%"/>
+          <image catchtap="topic_preview" data-url='{{item}}' data-item='{{cardDetail.cardImg}}' src="{{item}}" mode="aspectFill" style="width:100%;height:100%" />
         </swiper-item>
       </block>
     </swiper>

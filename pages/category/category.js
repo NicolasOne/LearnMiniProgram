@@ -23,8 +23,8 @@ Component({
     loading: false,
     windowWidth: App.globalData.windowWidth,
     windowHeight: App.globalData.windowHeight,
-    nowCity: wx.getStorageSync('nowCity'),
-    locationCity: wx.getStorageSync('nowCity'),
+    nowCity: '',
+    locationCity:'',
     // 热门城市列表
     hotCityData: [
       {
@@ -143,11 +143,13 @@ Component({
     isShowCity:false,
     searchValue: null,
     // 城市code
-    areaCode: wx.getStorageSync('adcode'),
+    areaCode: '',
     pageSize: 10,
     currPage: 1,
     collectList: {},
-    totalRecord: 0
+    totalRecord: 0,
+    nowCity: '',
+    locationCity: ''
   },
 
   /**
@@ -230,7 +232,7 @@ Component({
           getCardListData(currPa, self.data.pageSize, self.data.searchValue, self.data.areaCode).then(res => {
             res.data.data.data && res.data.data.data.map((share) => {
               const item = share;
-              item.ctime = formatTime(new Date(item.ctime));
+              item.ctime = formatTime(item.ctime.replace(/-/g, '/'));
               return item;
             });
             let newList = [...self.data.shares, ...res.data.data.data];
@@ -260,7 +262,7 @@ Component({
           let newList = res.data.data.data;
           newList && newList.map((share) => {
             const item = share;
-            item.ctime = formatTime(new Date(item.ctime));
+            item.ctime = formatTime(item.ctime.replace(/-/g, '/'));
             return item;
           });
           self.setData({
@@ -343,19 +345,29 @@ Component({
   },
   
   ready(){
+    this.setData({
+      nowCity: wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+      locationCity:wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+    },() => {
+
+    })
     let { searchValue, currPage, pageSize, areaCode } = this.data
+    let cityCode = wx.getStorageSync('adcode')?(wx.getStorageSync('adcode').slice(0,3))+'000':null
     let that = this
-    getCardListData(currPage, pageSize, searchValue || null, areaCode || null).then(res => {
+    getCardListData(currPage, pageSize, searchValue || null, cityCode|| null).then(res => {
       let totalRecord = res.data.data.totalRecord
       let newList = res.data.data.data
       newList && newList.map((share) => {
         const item = share;
-        item.ctime = formatTime(new Date(item.ctime));
+        item.ctime = formatTime(item.ctime.replace(/-/g, '/'));
         return item;
       });
       that.setData({
         shares: newList,
-        totalRecord
+        totalRecord,
+        nowCity: wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+        locationCity:wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+        areaCode: wx.getStorageSync('adcode')
       }, () => {
         let newCollectList = that.data.collectList
         that.data.shares.map(item => {
@@ -404,9 +416,7 @@ Component({
           rightList.push({id:sortKeyArrLow[index],name: [item]})
         })
         console.log(rightList,'rightList')
-        let nowCity = wx.getStorageSync('nowCity')
         that.setData({
-          nowCity,
           cityData: obj,
           keyArr,
           sortKeyArrLow,

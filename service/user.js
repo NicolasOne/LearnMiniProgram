@@ -37,6 +37,12 @@ export function readMsg(msgId) {
     }
   })
 }
+export function markRead() {
+  return request({
+    url: "/pushMsg/markRead",
+    method: 'POST',
+  })
+}
 export function queryCoverImg() {
   return request({
     url: "/sys/queryCoverImg",

@@ -1,7 +1,7 @@
 // pages/myNotification/myNotification.js
 const utils = require('../../utils/utils.js');
 const formatTime = utils.formatDateTimes;
-import { readMsg } from '../../service/user'
+import { readMsg, markRead } from '../../service/user'
 Page({
 
   /**
@@ -25,14 +25,15 @@ Page({
   onShow: function (options) {
     if(wx.getStorageSync('news')){
       let msgs = JSON.parse(wx.getStorageSync('news'))
+      console.log(msgs,'msgs')
       let msg = []
       msgs = msgs.sort((a,b) => {
         return b.pushDate - a.pushDate
       })
       msgs.forEach(item => {
-        item.pushDate = formatTime(new Date(item.pushDate))
+        item.pushDate = formatTime(item.pushDate.replace(/-/g, '/'))
         if(item.cardDetail){
-          item.cardDetail.ctime = formatTime(new Date(item.cardDetail.ctime))
+          item.cardDetail.ctime = formatTime((item.cardDetail.ctime).replace(/-/g, '/'))
         }
         msg.push(item)
       })
@@ -40,6 +41,38 @@ Page({
         msgs:msg
       })
     }
+  },
+  clearAll(){
+    wx.showModal({
+      title: '提示',
+      content: '确定要清空全部消息吗？',
+      success: (res) => {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          markRead().then(res => {
+            if(res.data.status==1){
+              this.setData({
+                msgs: []
+              })
+              wx.setStorageSync('news',JSON.stringify([]))
+              wx.showToast({
+                title: '清除成功',
+                icon: 'none',
+                duration: 2000
+              })
+            }else{
+              wx.showToast({
+                title: '清除失败',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
   toDetail(e){
     console.log(e,'e')

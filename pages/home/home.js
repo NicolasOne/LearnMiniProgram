@@ -177,6 +177,7 @@ Component({
             },
             success:(res) => {
               wx.setStorageSync('adcode',res.result.ad_info.adcode)
+              console.log(res.result.ad_info.adcode,'res.result.ad_info.adcoderes.result.ad_info.adcoderes.result.ad_info.adcode')
               // 获取的城市
               wx.setStorageSync('nowCity',res.result.address_component.city)
               wx.setStorageSync('location',JSON.stringify(res.result.ad_info.location))

@@ -5,6 +5,8 @@ import {
   collectCard,
   unCollectCard
 } from '../../service/card.js'
+const utils = require('../../utils/utils.js');
+const formatTime = utils.formatDateTimes;
 Page({
 
   /**
@@ -48,14 +50,7 @@ Page({
         })
       }else{
         let detail = res.data.data
-        var time = new Date(detail.ctime);
-        var y = time.getFullYear();
-        var m = (time.getMonth() + 1).length < 2 ? '0' + (time.getMonth() + 1) : (time.getMonth() + 1);
-        var d = time.getDate().length < 2 ? '0' + time.getDate() : time.getDate();
-        var h = time.getHours().length < 2 ? '0' + time.getHours() : time.getHours();
-        var mm = time.getMinutes().length < 2 ? '0' + time.getMinutes() : time.getMinutes();
-        var s = time.getSeconds().length < 2 ? '0' + time.getSeconds() : time.getSeconds();
-        detail.ctime = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+        detail.ctime = formatTime(detail.ctime.replace(/-/g, '/'))
         console.log(res.data.data, 'res.data.data')
         let latitude = res.data.data.center.split(',')[1]
         let longitude = res.data.data.center.split(',')[0]
@@ -65,6 +60,17 @@ Page({
           longitude
         })
       }
+    })
+  },
+  //预览图片
+  topic_preview(e) {
+    console.log('topic_preview',e)
+    var url = e.currentTarget.dataset.url;
+    var item = e.currentTarget.dataset.item;
+    //通过循环在数据链里面找到和这个id相同的这一组数据，然后再取出这一组数据当中的图片
+    wx.previewImage({
+      current: url, // 当前显示图片的http链接
+      urls: item // 需要预览的图片http链接列表
     })
   },
   getShareList(cardId, currPage,isTrue){

@@ -39,7 +39,7 @@ Page({
       let cards = res.data.data;
       cards && cards.map((share) => {
         const item = share;
-        item.ctime = formatTime(new Date(item.ctime));
+        item.ctime = formatTime(item.ctime.replace(/-/g, '/'));
         return item;
       });
       this.setData({

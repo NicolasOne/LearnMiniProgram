@@ -70,10 +70,35 @@ page {
 .swiper image {
   border-radius: 20rpx;
 }
+.swiper image::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 560rpx;
+  height: 100%;
+  border-top-left-radius: 8rpx;
+  border-bottom-left-radius: 8rpx;
+  background: linear-gradient(to right,rgba(0,0,0,.6) 0,rgba(0,0,0,0) 100%);
+}
 .shop_word {
   position: absolute;
   top: 30rpx;
   left: 30rpx;
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: 600;
+  line-height: 1.22;
+  text-shadow: 2rpx 2rpx rgba(0,0,0,.4);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  margin-left:20rpx;
+  margin-top:20rpx;
+
 }
 .collect-btn {
   position: absolute;
@@ -81,6 +106,8 @@ page {
   right: 30rpx;
   width: 40rpx;
   height: 40rpx;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
 }
 .history {
   width: 100%;

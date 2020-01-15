@@ -35,7 +35,7 @@ Page({
       let newList = res.data.data;
       newList && newList.map((share) => {
         const item = share;
-        item.ctime = formatTime(new Date(item.ctime));
+        item.ctime = formatTime(item.ctime.replace(/-/g, '/'));
         return item;
       });
       self.setData({
@@ -106,7 +106,7 @@ Page({
         let newList = res.data.data;
         newList && newList.map((share) => {
           const item = share;
-          item.ctime = formatTime(new Date(item.ctime));
+          item.ctime = formatTime(item.ctime.replace(/-/g, '/'));
           return item;
         })
         self.setData({
