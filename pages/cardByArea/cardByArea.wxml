@@ -6,7 +6,7 @@
       <view class="issue_time">{{trip.ctime}}</view>
       <view class="piont"></view>
       <view class="issue_cards_item">
-        <template is="m-trip" data="{{trip: trip, mode: 1, collectList:collectList}}" />
+        <template is="m-trip" data="{{trip: trip, mode: 1, collectList:collectList,user}}" />
       </view>
     </view>
   </view>

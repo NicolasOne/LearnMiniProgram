@@ -8,7 +8,7 @@
     </view>
     <block wx:if="{{isAuthorization}}">
       <view class="info_name">{{nickName||' '}}</view>
-      <view class="info_content">
+      <view class="info_content" wx:if="{{user}}">
         <view class="content_item">被点赞次数：<text>{{likeCount}}</text></view>
         <view class="content_item">被浏览次数：<text>{{browseCount}}</text></view>
       </view>
@@ -19,15 +19,15 @@
     </block>
   </view>
   <view wx:if="{{isAuthorization}}" class="profile_page_list">
-    <view class="list_item" bindtap = "toMyShare">
+    <view class="list_item" wx:if="{{user}}" bindtap = "toMyShare">
       <image src="../../assets/other/list.png"/>
       <view class="item_text">我的分享</view>
     </view>
-    <view class="list_item" bindtap = "toCollectdCards">
+    <view class="list_item" wx:if="{{user}}" bindtap = "toCollectdCards">
       <image src="../../assets/other/like.png"/>
       <view class="item_text">我的卡片</view>
     </view>
-    <view class="list_item" bindtap = "toMyNotification">
+    <view class="list_item" wx:if="{{user}}" bindtap = "toMyNotification">
       <image src="../../assets/other/talk.png"/>
       <view class="item_text">我的消息</view>
       <view class='news' wx:if="{{showNews}}"></view>

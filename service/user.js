@@ -43,6 +43,12 @@ export function markRead() {
     method: 'POST',
   })
 }
+export function user() {
+  return request({
+    url: "/wx/user/judge",
+    method: 'GET',
+  })
+}
 export function queryCoverImg() {
   return request({
     url: "/sys/queryCoverImg",

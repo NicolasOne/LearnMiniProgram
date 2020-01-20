@@ -1,6 +1,7 @@
 // pages/profile/profile.js
 import {
-  getBrowseCountAndLikeCount
+  getBrowseCountAndLikeCount,
+  user
 } from '../../service/user.js'
 Component({
  /**
@@ -66,7 +67,11 @@ Component({
         browseCount
       })
     })
-    
+    user().then(res => {
+      this.setData({
+        user: res.data.data
+      })
+    })
   }
   
 })

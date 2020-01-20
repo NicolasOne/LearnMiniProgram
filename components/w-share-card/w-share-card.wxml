@@ -4,7 +4,7 @@
     <view class="info">
       <text class="h2">{{trip.eatStreetName}}</text>
       <view class="detail">
-        <view><text>{{trip.ctime}}发布</text><text>{{trip.collectCount}}收藏</text></view>
+        <view wx:if="{{user}}"><text>{{trip.ctime}}发布</text><text>{{trip.collectCount}}收藏</text></view>
         <view class="place">商家介绍：{{trip.eatDetail||''}}</view>
       </view>
       <!-- <view class="bottom-display">

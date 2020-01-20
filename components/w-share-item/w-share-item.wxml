@@ -28,7 +28,7 @@
       </view>
     <!-- 评论点赞部分 -->
     <view class="detailBottom" wx:if="{{item.shareId}}">
-      <view class="img_length" bindtap="thumbsup" data-id="{{item.shareId}}" data-liked="{{item.liked}}" data-num="{{item.thumbsUp}}">
+      <view class="{{user?'img_length':'img_length1'}}" bindtap="thumbsup" data-id="{{item.shareId}}" data-liked="{{item.liked}}" data-num="{{item.thumbsUp}}">
         <view class="like_btn" wx:if="{{changeLike[item.shareId]}}">
           <image class="zan" src="{{likeList[item.shareId]?like:unlike}}"></image>
           <view class="zantext">{{num}}</view>
@@ -39,11 +39,11 @@
         </view>
       </view>
 
-      <view class="img_length" bindtap= "toNewsDetail" data-id="{{item.shareId}}">
+      <view class="{{user?'img_length':'img_length1'}}" wx:if="{{user}}" bindtap= "toNewsDetail" data-id="{{item.shareId}}">
         <image class="zan" src="/assets/other/pl.png" />
         <text class="zantext"> {{item.commentCount}}</text>
       </view>
-      <button open-type="{{isShare}}" bindtap="toShare" data-item="{{item}}" data-type="share">
+      <button class="{{user?'':'button'}}" open-type="{{isShare}}" bindtap="toShare" data-item="{{item}}" data-type="share">
           <view class="img_length">
             <image class="zan" src="/assets/other/zf.png" />
             <!--<text class="zantext"> 1</text>-->

@@ -1,5 +1,8 @@
 
 import { TabbarList } from '../../utils/enum.js';
+import {
+  user
+} from '../../service/user.js'
 let app = getApp()
 Component({
   /**
@@ -124,6 +127,13 @@ Component({
       }
     }   
     this.setData({ tabbar: tabbar });
+    user().then(res => {
+      console.log(res.data.data,'rrrrrrrr')
+      wx.setStorageSync('user',res.data.data)
+      this.setData({
+        user: res.data.data
+      })
+    })
   },
   detached: function () {},
 })

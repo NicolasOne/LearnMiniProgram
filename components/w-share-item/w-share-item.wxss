@@ -94,6 +94,30 @@ button {
 button:hover {
   background-color:transparent;
 }
+
+.img_length1 {
+  width: 47%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.button .img_length{
+  width: 100%;
+}
+.button::after {
+  border: none;
+}
+.button {
+  background: transparent;
+  padding: 0;
+  display: inline-block;
+  width: 47%;
+
+}
+.button:hover {
+  background-color:transparent;
+}
   
 .icon {
   width: 80rpx;

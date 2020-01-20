@@ -52,6 +52,9 @@ Page({
         })
       });
     })
+    this.setData({
+      user: wx.getStorageSync('user')
+    })
   },
   toCardDetail(e) {
     console.log(e,'eeeeee')

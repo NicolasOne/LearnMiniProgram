@@ -40,7 +40,7 @@
   </view>
   <view wx:if="{{shares&&shares.length!==0}}" class="list" style="min-height: 100%; width: 100%;">
     <block wx:for="{{ shares }}" wx:for-item="trip" wx:key="trip.id">
-      <template is="m-trip" data="{{trip: trip,collectList:collectList, mode: 1}}" />
+      <template is="m-trip" data="{{trip: trip,collectList:collectList, mode: 1,user}}" />
     </block>
   </view>
   <nodata wx:else></nodata>

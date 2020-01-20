@@ -41,6 +41,9 @@ Component({
         isShare: 'share'
       })
     }
+    this.setData({
+      user: wx.getStorageSync('user')
+    })
   },
   /**
    * 组件的方法列表

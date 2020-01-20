@@ -377,6 +377,9 @@ Component({
           collectList: newCollectList
         },() => console.log(that.data.collectList,'collectList'))
       });
+      this.setData({
+        user: wx.getStorageSync('user')
+      })
     })
     qqmapsdk.getCityList({
       success: function(res) {

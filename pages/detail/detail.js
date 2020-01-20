@@ -34,6 +34,9 @@ Page({
   onLoad: function (options) {
     var shareId = options.shareId;
     this._getDetailData(shareId)
+    this.setData({
+      user: wx.getStorageSync('user')
+    })
   },
   // 评论点赞
   likeComment(e){
