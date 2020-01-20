@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "nonePage": "../nonePage/nonepage"
+    "nodata": "/components/nodata/nodata"
   },
   "navigationBarTitleText": "广场"
 }

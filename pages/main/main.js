@@ -218,24 +218,6 @@ Page({
             showNews
           })
         }
-        // if (tabbarID == tabbarList.home) {
-        //     let homePage = this.selectComponent('#home-page');
-        //     homePage.onshow();
-        //     homePage.updateBg();
-        // } else if (tabbarID == tabbarList.category) {
-        //     let categoryPage = this.selectComponent('#category-page');
-        //     categoryPage.onshow();
-        //     categoryPage.updateBg();
-        // } else if (tabbarID == tabbarList.square) {
-        //     let squarePage = this.selectComponent('#square-page');
-        //     squarePage.onshow();
-        //     squarePage.updateBg();
-        // } else if (tabbarID == tabbarList.profile) {
-        //     let profilePage = this.selectComponent('#profile-page');
-        //     profilePage.onshow();
-        //     profilePage.updateBg();
-            
-        // }
         wx.setNavigationBarTitle({
             title: this.data.tabbarList[this.data.tabbarID],
         })

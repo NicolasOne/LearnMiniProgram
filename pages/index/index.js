@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    coverImg: null
+    coverImg: null,
+    time: 5
   },
 
   /**
@@ -19,6 +20,13 @@ Page({
   handlerAfterAuthorize() {
     let that = this
     queryCoverImg().then(res => {
+      clearInterval(that.clock)
+      that.clock = setInterval(() => {
+        let time = that.data.time - 1
+        that.setData({
+          time
+        })
+      }, 1000)
       that.setData({
         coverImg: res.data.data
       })
@@ -30,6 +38,13 @@ Page({
         })
       }, 5000)
     })
+  },
+  toHomePage(){
+    wx.redirectTo({
+      url: '../main/main'
+    })
+    clearTimeout(this.timer)
+    clearInterval(this.clock)
   }
 })
  

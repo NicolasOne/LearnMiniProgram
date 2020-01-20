@@ -60,7 +60,7 @@
   align-items: center;
   justify-content: space-between;
   height: 80rpx;
-  border-top: 2px solid #f1f1f1;
+  border-top: 1px solid #f1f1f1;
   margin-top: 20rpx;
   font-size: 30rpx;
 }

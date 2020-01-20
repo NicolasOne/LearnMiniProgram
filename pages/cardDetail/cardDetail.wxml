@@ -23,7 +23,7 @@
       </block>
     </swiper>
     <view class="shop_word">
-      {{cardDetail.eatDetail}}
+      {{cardDetail.eatDetail||''}}
     </view>
     <view class="collect-btn" catchtap="clickCollect" data-id="{{ cardDetail.id }}" data-collect="{{ cardDetail.collect }}">
       <image src="{{cardDetail.collect?'../../assets/other/collect.png':'../../assets/other/uncollect.png'}}" style="width:100%;height:100%;"></image>
