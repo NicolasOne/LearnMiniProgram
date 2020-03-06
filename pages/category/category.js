@@ -229,6 +229,7 @@ Component({
         if (self.data.totalRecord > self.data.shares.length || 0) {
           console.log(currPage, pageSize,'searchValue')
           let currPa = self.data.currPage + 1
+          console.log(currPa,'currPacurrPa')
           getCardListData(currPa, self.data.pageSize, self.data.searchValue, self.data.areaCode).then(res => {
             res.data.data.data && res.data.data.data.map((share) => {
               const item = share;
@@ -238,7 +239,8 @@ Component({
             let newList = [...self.data.shares, ...res.data.data.data];
             self.setData({
               shares: newList,
-              totalRecord: res.data.data.totalRecord
+              totalRecord: res.data.data.totalRecord,
+              currPage: currPa
             }, () => {
               let newCollectList = self.data.collectList
               self.data.shares.map(item => {
@@ -345,14 +347,15 @@ Component({
   },
   
   ready(){
-    this.setData({
-      nowCity: wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
-      locationCity:wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
-    },() => {
+    // this.setData({
+    //   nowCity: wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+    //   locationCity:wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+    // },() => {
 
-    })
+    // })
     let { searchValue, currPage, pageSize, areaCode } = this.data
-    let cityCode = wx.getStorageSync('adcode')?(wx.getStorageSync('adcode').slice(0,3))+'000':null
+    // let cityCode = wx.getStorageSync('adcode') ? (wx.getStorageSync('adcode').slice(0, 3)) + '000' : null
+    let cityCode = ''
     let that = this
     getCardListData(currPage, pageSize, searchValue || null, cityCode|| null).then(res => {
       let totalRecord = res.data.data.totalRecord
@@ -365,9 +368,12 @@ Component({
       that.setData({
         shares: newList,
         totalRecord,
-        nowCity: wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
-        locationCity:wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
-        areaCode: wx.getStorageSync('adcode')
+        // nowCity: wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+        // locationCity:wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+        // areaCode: wx.getStorageSync('adcode')
+        nowCity:'全部',
+        locationCity:'全部',
+        areaCode: ''
       }, () => {
         let newCollectList = that.data.collectList
         that.data.shares.map(item => {
