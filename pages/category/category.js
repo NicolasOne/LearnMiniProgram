@@ -353,86 +353,118 @@ Component({
     // },() => {
 
     // })
+    this.setData({
+      user: wx.getStorageSync('user')
+    })
     let { searchValue, currPage, pageSize, areaCode } = this.data
     // let cityCode = wx.getStorageSync('adcode') ? (wx.getStorageSync('adcode').slice(0, 3)) + '000' : null
     let cityCode = ''
     let that = this
-    getCardListData(currPage, pageSize, searchValue || null, cityCode|| null).then(res => {
-      let totalRecord = res.data.data.totalRecord
-      let newList = res.data.data.data
-      newList && newList.map((share) => {
-        const item = share;
-        item.ctime = formatTime(item.ctime.replace(/-/g, '/'));
-        return item;
-      });
+    if(wx.getStorageSync('category_card_list')){
+      let cardList = JSON.parse(wx.getStorageSync('category_card_list'))
       that.setData({
-        shares: newList,
-        totalRecord,
-        // nowCity: wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
-        // locationCity:wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
-        // areaCode: wx.getStorageSync('adcode')
-        nowCity:'全部',
-        locationCity:'全部',
-        areaCode: ''
-      }, () => {
-        let newCollectList = that.data.collectList
-        that.data.shares.map(item => {
-          newCollectList[item.id] = item.collect
-        })
-        that.setData({
-          collectList: newCollectList
-        },() => console.log(that.data.collectList,'collectList'))
-      });
-      this.setData({
-        user: wx.getStorageSync('user')
+        ...that.data,
+        ...cardList
       })
-    })
-    qqmapsdk.getCityList({
-      success: function(res) {
-        console.log(res,'resres')
-        // 处理地图数据
-        let cityData = [...res.result[1]]
-        console.log(cityData,'cityData')
-        cityData.map(item => {
-          item.letter = item.pinyin[0].substr(0, 1)
-          return item
-        })
-        let obj = {}
-        cityData.forEach(item => {
-            if (obj[item.letter.substring(0, 1)]) {
-                obj[item.letter.substring(0, 1)].push(item)
-            } else {
-                obj[item.letter.substring(0, 1)] = [item]
-            }
+    }else{
+      getCardListData(currPage, pageSize, searchValue || null, cityCode|| null).then(res => {
+        let totalRecord = res.data.data.totalRecord
+        let newList = res.data.data.data
+        newList && newList.map((share) => {
+          const item = share;
+          item.ctime = formatTime(item.ctime.replace(/-/g, '/'));
+          return item;
         });
-        let keyArr = Object.keys(obj)
-        let numArr = []
-        keyArr.forEach(item => {
-            numArr.push(item.charCodeAt())
-        })
-        numArr = numArr.sort((a,b) => a-b)
-        let sortKeyArr = []
-        let sortKeyArrLow = []
-        numArr.forEach(item => {
-            sortKeyArr.push(String.fromCharCode(item).toUpperCase())
-            sortKeyArrLow.push(String.fromCharCode(item))
-        })
-        keyArr = sortKeyArr
-        console.log(keyArr,'keyArr')
-        console.log(obj,'obj')
-        let rightList = []
-        keyArr.forEach((item,index) => {
-          rightList.push({id:sortKeyArrLow[index],name: [item]})
-        })
-        console.log(rightList,'rightList')
         that.setData({
-          cityData: obj,
-          keyArr,
-          sortKeyArrLow,
-          rightList
-        })
-      }
-    })
+          shares: newList,
+          totalRecord,
+          // nowCity: wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+          // locationCity:wx.getStorageSync('adcode')?wx.getStorageSync('nowCity'):'全部',
+          // areaCode: wx.getStorageSync('adcode')
+          nowCity:'全部',
+          locationCity:'全部',
+          areaCode: ''
+        }, () => {
+          let newCollectList = that.data.collectList
+          that.data.shares.map(item => {
+            newCollectList[item.id] = item.collect
+          })
+          that.setData({
+            collectList: newCollectList
+          },() => {
+            let cardList = {
+              shares: newList,
+              totalRecord,
+              nowCity:'全部',
+              locationCity:'全部',
+              areaCode: '',
+              collectList: newCollectList
+            }
+            wx.setStorageSync('category_card_list', JSON.stringify(cardList))
+          })
+        });
+      })
+    }
+    if(wx.getStorageSync('category_map_data')){
+      let mapData = JSON.parse(wx.getStorageSync('category_map_data'))
+      that.setData({
+        ...that.data,
+        ...mapData
+      })
+    }else{
+      qqmapsdk.getCityList({
+        success: function(res) {
+          console.log(res,'resres')
+          // 处理地图数据
+          let cityData = [...res.result[1]]
+          console.log(cityData,'cityData')
+          cityData.map(item => {
+            item.letter = item.pinyin[0].substr(0, 1)
+            return item
+          })
+          let obj = {}
+          cityData.forEach(item => {
+              if (obj[item.letter.substring(0, 1)]) {
+                  obj[item.letter.substring(0, 1)].push(item)
+              } else {
+                  obj[item.letter.substring(0, 1)] = [item]
+              }
+          });
+          let keyArr = Object.keys(obj)
+          let numArr = []
+          keyArr.forEach(item => {
+              numArr.push(item.charCodeAt())
+          })
+          numArr = numArr.sort((a,b) => a-b)
+          let sortKeyArr = []
+          let sortKeyArrLow = []
+          numArr.forEach(item => {
+              sortKeyArr.push(String.fromCharCode(item).toUpperCase())
+              sortKeyArrLow.push(String.fromCharCode(item))
+          })
+          keyArr = sortKeyArr
+          console.log(keyArr,'keyArr')
+          console.log(obj,'obj')
+          let rightList = []
+          keyArr.forEach((item,index) => {
+            rightList.push({id:sortKeyArrLow[index],name: [item]})
+          })
+          let mapData = {
+            cityData: obj,
+            keyArr,
+            sortKeyArrLow,
+            rightList
+          }
+          wx.setStorageSync('category_map_data', JSON.stringify(mapData))
+          that.setData({
+            cityData: obj,
+            keyArr,
+            sortKeyArrLow,
+            rightList
+          })
+        }
+      })
+    }
     that.setData({
       scrollTopId: 'now'
     })

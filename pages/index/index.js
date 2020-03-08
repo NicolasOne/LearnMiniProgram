@@ -18,6 +18,14 @@ Page({
     app.login(this.handlerAfterAuthorize);
   },
   handlerAfterAuthorize() {
+    wx.setStorageSync('home_banner',false)
+    wx.setStorageSync('home_share_list1',false)
+    wx.setStorageSync('home_share_list2',false)
+    wx.setStorageSync('adcode',false)
+    wx.setStorageSync('category_card_list',false)
+    wx.setStorageSync('category_map_data',false)
+    wx.setStorageSync('profile_user_info',false)
+    wx.setStorageSync('profile_user_flag',false)
     let that = this
     queryCoverImg().then(res => {
       clearInterval(that.clock)

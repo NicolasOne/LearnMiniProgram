@@ -45,12 +45,20 @@ Component({
       this.triggerEvent("onPageScroll", checkeddata )
     },
     _getBannerData() {
-      getBannerData().then(res => {
-        const banner = res.data.data;
+      // 缓存
+      if(wx.getStorageSync('home_banner')){
         this.setData({
-          banner
+          banner: JSON.parse(wx.getStorageSync('home_banner'))
         })
-      })
+      }else{
+        getBannerData().then(res => {
+          const banner = res.data.data;
+          wx.setStorageSync('home_banner',JSON.stringify(banner))
+          this.setData({
+            banner
+          })
+        })
+      }
     },
     _getShareListData(type,flag){
       console.log(this.data.totalRecord,'this.data.totalRecord')
@@ -192,87 +200,120 @@ Component({
     // 获取轮播图
     this._getBannerData()
     // 获取分类详情
-    getShareListData(0, this.data.share[0].currPage).then(res => {
-
-      // 将数据设置到templist中,更改时间显示状态
-      let list = res.data.data.data.map(item => {
-        item.shareTime = formatDateTimes(item.shareTime.replace(/-/g, '/'))
-        return item
-      })
-      // 将数据设置到data中
-      const typeKey = `share.0.list`;
+    // 缓存数据
+    if(wx.getStorageSync('home_share_list1')){
+      let shareList1 = JSON.parse(wx.getStorageSync('home_share_list1'))
       this.setData({
-        [typeKey]: list,
-        isBottom: true,
-        totalRecord: res.data.data.totalRecord
+        ...this.data,
+        ...shareList1
       })
-    })
-    getShareListData(1, this.data.share[0].currPage).then(res => {
+    }else{
+      getShareListData(0, this.data.share[0].currPage).then(res => {
 
-      // 将数据设置到templist中,更改时间显示状态
-      let list = res.data.data.data.map(item => {
-        item.shareTime = formatDateTimes(item.shareTime.replace(/-/g, '/'))
-        return item
+        // 将数据设置到templist中,更改时间显示状态
+        let list = res.data.data.data.map(item => {
+          item.shareTime = formatDateTimes(item.shareTime.replace(/-/g, '/'))
+          return item
+        })
+        // 将数据设置到data中
+        const typeKey = `share.0.list`;
+        let shareList1 = {
+          [typeKey]: list,
+          isBottom: true,
+          totalRecord: res.data.data.totalRecord
+        }
+        wx.setStorageSync('home_share_list1',JSON.stringify(shareList1))
+        this.setData({
+          [typeKey]: list,
+          isBottom: true,
+          totalRecord: res.data.data.totalRecord
+        })
       })
-      // 将数据设置到data中
-      const typeKey = `share.1.list`;
+    }
+    if(wx.getStorageSync('home_share_list2')){
+      let shareList2 = JSON.parse(wx.getStorageSync('home_share_list2'))
       this.setData({
-        [typeKey]: list,
-        isBottom: true,
-        totalRecord: res.data.data.totalRecord
+        ...this.data,
+        ...shareList2
       })
-    })
+    }else{
+      getShareListData(1, this.data.share[0].currPage).then(res => {
+
+        // 将数据设置到templist中,更改时间显示状态
+        let list = res.data.data.data.map(item => {
+          item.shareTime = formatDateTimes(item.shareTime.replace(/-/g, '/'))
+          return item
+        })
+        // 将数据设置到data中
+        const typeKey = `share.1.list`;
+        let shareList2 = {
+          [typeKey]: list,
+          isBottom: true,
+          totalRecord: res.data.data.totalRecord
+        }
+        wx.setStorageSync('home_share_list2',JSON.stringify(shareList2))
+        this.setData({
+          [typeKey]: list,
+          isBottom: true,
+          totalRecord: res.data.data.totalRecord
+        })
+      })
+    }
+    
     let that = this
-    wx.getSetting({
-      success: (res) => {
-        console.log(JSON.stringify(res))
-        // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
-        // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
-        // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
-        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
-          wx.showModal({
-            title: '请求授权当前位置',
-            content: '需要获取您的地理位置，请确认授权',
-            success: function (res) {
-              if (res.cancel) {
-                wx.showToast({
-                  title: '拒绝授权',
-                  icon: 'none',
-                  duration: 1000
-                })
-              } else if (res.confirm) {
-                wx.openSetting({
-                  success: function (dataAu) {
-                    console.log(dataAu,'dataAu')
-                    if (dataAu.authSetting["scope.userLocation"] == true) {
-                      wx.showToast({
-                        title: '授权成功',
-                        icon: 'success',
-                        duration: 1000
-                      })
-                      //再次授权，调用wx.getLocation的API
-                      that.getLoaction()
-                    } else {
-                      wx.showToast({
-                        title: '授权失败',
-                        icon: 'none',
-                        duration: 1000
-                      })
+    if(!wx.getStorageSync('adcode')){
+      wx.getSetting({
+        success: (res) => {
+          console.log(JSON.stringify(res))
+          // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
+          // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
+          // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
+          if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
+            wx.showModal({
+              title: '请求授权当前位置',
+              content: '需要获取您的地理位置，请确认授权',
+              success: function (res) {
+                if (res.cancel) {
+                  wx.showToast({
+                    title: '拒绝授权',
+                    icon: 'none',
+                    duration: 1000
+                  })
+                } else if (res.confirm) {
+                  wx.openSetting({
+                    success: function (dataAu) {
+                      console.log(dataAu,'dataAu')
+                      if (dataAu.authSetting["scope.userLocation"] == true) {
+                        wx.showToast({
+                          title: '授权成功',
+                          icon: 'success',
+                          duration: 1000
+                        })
+                        //再次授权，调用wx.getLocation的API
+                        that.getLoaction()
+                      } else {
+                        wx.showToast({
+                          title: '授权失败',
+                          icon: 'none',
+                          duration: 1000
+                        })
+                      }
                     }
-                  }
-                })
+                  })
+                }
               }
-            }
-          })
-        } else if (res.authSetting['scope.userLocation'] == undefined) {
-          //调用wx.getLocation的API
-          that.getLoaction()
+            })
+          } else if (res.authSetting['scope.userLocation'] == undefined) {
+            //调用wx.getLocation的API
+            that.getLoaction()
+          }
+          else {
+            //调用wx.getLocation的API
+            that.getLoaction()
+          }
         }
-        else {
-          //调用wx.getLocation的API
-          that.getLoaction()
-        }
-      }
-    })
+      })
+    }
+    
   }
 })

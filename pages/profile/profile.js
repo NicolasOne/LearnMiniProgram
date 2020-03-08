@@ -56,22 +56,45 @@ Component({
   },
   ready(){
     let that = this
-    getBrowseCountAndLikeCount().then(res => {
-      let likeCount = res.data.data.likeCount
-      let browseCount = res.data.data.browseCount
+    if(wx.getStorageSync('profile_user_info')){
+      let userInfo = JSON.parse(wx.getStorageSync('profile_user_info'))
       that.setData({
-        avatarUrl: wx.getStorageSync('avatarUrl'),
-        nickName: wx.getStorageSync('nickName'),
-        isAuthorization: wx.getStorageSync('isAuthorization'),
-        likeCount,
-        browseCount
+        ...that.data,
+        ...userInfo
       })
-    })
-    user().then(res => {
-      this.setData({
-        user: res.data.data
+    }else{
+      getBrowseCountAndLikeCount().then(res => {
+        let likeCount = res.data.data.likeCount
+        let browseCount = res.data.data.browseCount
+        let userInfo = {
+          avatarUrl: wx.getStorageSync('avatarUrl'),
+          nickName: wx.getStorageSync('nickName'),
+          isAuthorization: wx.getStorageSync('isAuthorization'),
+          likeCount,
+          browseCount
+        }
+        wx.setStorageSync('profile_user_info',JSON.stringify(userInfo))
+        that.setData({
+          avatarUrl: wx.getStorageSync('avatarUrl'),
+          nickName: wx.getStorageSync('nickName'),
+          isAuthorization: wx.getStorageSync('isAuthorization'),
+          likeCount,
+          browseCount
+        })
       })
-    })
+    }
+    if(wx.getStorageSync('profile_user_flag')){
+      let user = wx.getStorageSync('profile_user_flag')
+      that.setData({
+        user
+      })
+    }else{
+      user().then(res => {
+        wx.setStorageSync('profile_user_flag',res.data.data)
+        that.setData({
+          user: res.data.data
+        })
+      })
+    }
   }
-  
 })

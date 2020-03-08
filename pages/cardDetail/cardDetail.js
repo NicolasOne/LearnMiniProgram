@@ -117,8 +117,8 @@ Page({
         var latitude = that.data.latitude*1
         var longitude = that.data.longitude*1
         wx.openLocation({
-          latitude: latitude,
-          longitude: longitude,
+          latitude: longitude,
+          longitude: latitude,
           name: that.data.cardDetail.eatStreetName,
           scale: 28
         })
