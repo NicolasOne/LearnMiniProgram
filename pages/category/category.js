@@ -248,6 +248,14 @@ Component({
               })
               self.setData({
                 collectList: newCollectList
+              },() => {
+                let cardList = {
+                  shares: newList,
+                  totalRecord: res.data.data.totalRecord,
+                  currPage: currPa,
+                  collectList: newCollectList
+                }
+                wx.setStorageSync('category_card_list', JSON.stringify(cardList))
               })
             });
           })
@@ -365,7 +373,17 @@ Component({
       that.setData({
         ...that.data,
         ...cardList
+      },() => {
+        if(wx.getStorageSync('cardPageScroll')){
+          console.log(wx.getStorageSync('cardPageScroll'),'cardPage')
+          wx.pageScrollTo({
+            scrollTop:wx.getStorageSync('cardPageScroll'),
+              success:function(){
+              }
+          })
+        }
       })
+      
     }else{
       getCardListData(currPage, pageSize, searchValue || null, cityCode|| null).then(res => {
         let totalRecord = res.data.data.totalRecord

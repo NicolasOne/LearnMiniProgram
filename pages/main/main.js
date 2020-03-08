@@ -49,15 +49,20 @@ Page({
         showNews: false
     },
     onPageScroll: function (ev) {    
-        if(ev.scrollTop>300){
-            this.setData({
-              handleHomePage: true
-            })
-        }else {
-            this.setData({
-              handleHomePage: false
-            })
-        }
+      if (this.data.tabbarID==2){
+        wx.setStorageSync('cardPageScroll', ev.scrollTop)
+      }else if(this.data.tabbarID==1){
+        wx.setStorageSync('homePageScroll', ev.scrollTop)
+      }
+      if(ev.scrollTop>300){
+          this.setData({
+            handleHomePage: true
+          })
+      }else {
+          this.setData({
+            handleHomePage: false
+          })
+      }
       },
     // 点击tabbar
     onClickTabbar: function (e) {

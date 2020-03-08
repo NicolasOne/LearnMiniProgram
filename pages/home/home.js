@@ -39,11 +39,6 @@ Component({
   },  
   methods: {
     //-------------------------------网络请求-------------------------------------
-    handleScroll(e){
-      console.log(e,'eee')
-      var checkeddata = { num: e.detail.scrollTop}
-      this.triggerEvent("onPageScroll", checkeddata )
-    },
     _getBannerData() {
       // 缓存
       if(wx.getStorageSync('home_banner')){
@@ -76,6 +71,21 @@ Component({
             // 将数据设置到data中
             const typeKey = `share.${type}.list`;
             const pagekey = `share.${type}.currPage`;
+            if(type==1){
+              let shareList2 = {
+                [typeKey]: list,
+                [pagekey]: currPage,
+                isBottom: true
+              }
+              wx.setStorageSync('home_share_list2',JSON.stringify(shareList2))
+            }else {
+              let shareList1 = {
+                [typeKey]: list,
+                [pagekey]: currPage,
+                isBottom: true
+              }
+              wx.setStorageSync('home_share_list1',JSON.stringify(shareList1))
+            }
             this.setData({
               [typeKey]: list,
               [pagekey]: currPage,
@@ -206,6 +216,14 @@ Component({
       this.setData({
         ...this.data,
         ...shareList1
+      },() => {
+        if(wx.getStorageSync('homePageScroll')){
+          wx.pageScrollTo({
+            scrollTop:wx.getStorageSync('homePageScroll'),
+              success:function(){
+              }
+          })
+        }
       })
     }else{
       getShareListData(0, this.data.share[0].currPage).then(res => {
@@ -235,6 +253,14 @@ Component({
       this.setData({
         ...this.data,
         ...shareList2
+      },() => {
+        if(wx.getStorageSync('homePageScroll')){
+          wx.pageScrollTo({
+            scrollTop:wx.getStorageSync('homePageScroll'),
+              success:function(){
+              }
+          })
+        }
       })
     }else{
       getShareListData(1, this.data.share[0].currPage).then(res => {

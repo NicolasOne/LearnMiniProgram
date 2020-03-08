@@ -25,12 +25,15 @@ Page({
     wx.setStorageSync('category_card_list',false)
     wx.setStorageSync('category_map_data',false)
     wx.setStorageSync('profile_user_info',false)
-    wx.setStorageSync('profile_user_flag',false)
+    wx.setStorageSync('profile_user_flag', false)
+    wx.setStorageSync('cardPageScroll', false)
+    wx.setStorageSync('homePageScroll', false)
+    wx.setStorageSync('homePageFlag',false)
     let that = this
     queryCoverImg().then(res => {
       clearInterval(that.clock)
       that.clock = setInterval(() => {
-        let time = that.data.time - 1
+        let time = that.data.time>0?that.data.time - 1:0
         that.setData({
           time
         })

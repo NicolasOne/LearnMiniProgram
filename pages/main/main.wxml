@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<homePage id="home-page" wx:if="{{tabbarID == tabbarList.home}}"  handleHomePage="{{handleHomePage}}" bind:onPageScroll="onPageScroll"></homePage>
+<homePage id="home-page" wx:if="{{tabbarID == tabbarList.home}}"  handleHomePage="{{handleHomePage}}"></homePage>
 <categoryPage id="category-page" wx:if="{{tabbarID == tabbarList.category}}"></categoryPage>
 <squarePage id="square-page" wx:if="{{tabbarID == tabbarList.square}}"></squarePage>
 <profilePage id="profile-page" wx:if="{{tabbarID == tabbarList.profile}}" showNews="{{showNews}}"></profilePage>

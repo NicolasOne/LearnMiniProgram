@@ -12,13 +12,13 @@
 
 
 <!-- 5展示分享数据 -->
-<scroll-view bindscroll="handleScroll" wx:if="{{share&&share[currentType].list.length!==0}}">
+<view wx:if="{{share&&share[currentType].list.length!==0}}">
 <view class="share">
   <block wx:for="{{share[currentType].list}}" wx:key="index">
     <w-share-item item="{{item}}" showDetailBtn="true"/>
   </block>
 </view>
-</scroll-view>
+</view>
 <nodata wx:else></nodata>
 
 <view class="page-add-data" wx:if="{{isBottom==true}}">
