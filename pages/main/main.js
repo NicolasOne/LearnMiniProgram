@@ -48,11 +48,13 @@ Page({
         limit:1,
         showNews: false
     },
-    onPageScroll: function (ev) {    
-      if (this.data.tabbarID==2){
-        wx.setStorageSync('cardPageScroll', ev.scrollTop)
-      }else if(this.data.tabbarID==1){
-        wx.setStorageSync('homePageScroll', ev.scrollTop)
+    onPageScroll: function (ev) {   
+      if (ev.scrollTop) {
+        if (this.data.tabbarID == 2) {
+          wx.setStorageSync('cardPageScroll', ev.scrollTop)
+        } else if (this.data.tabbarID == 1) {
+          wx.setStorageSync('homePageScroll', ev.scrollTop)
+        }
       }
       if(ev.scrollTop>300){
           this.setData({
