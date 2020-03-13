@@ -27,7 +27,8 @@ Page({
     wx.setStorageSync('profile_user_info',false)
     wx.setStorageSync('profile_user_flag', false)
     wx.setStorageSync('cardPageScroll', false)
-    wx.setStorageSync('homePageScroll', false)
+    wx.setStorageSync('homePageScroll1', false)
+    wx.setStorageSync('homePageScroll2', false)
     wx.setStorageSync('homePageFlag',false)
     let that = this
     queryCoverImg().then(res => {

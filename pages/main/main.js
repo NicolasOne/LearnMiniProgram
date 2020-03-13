@@ -53,7 +53,11 @@ Page({
         if (this.data.tabbarID == 2) {
           wx.setStorageSync('cardPageScroll', ev.scrollTop)
         } else if (this.data.tabbarID == 1) {
-          wx.setStorageSync('homePageScroll', ev.scrollTop)
+          if(wx.getStorageSync('homePageFlag')){
+            wx.setStorageSync('homePageScroll2', ev.scrollTop)
+          }else {
+            wx.setStorageSync('homePageScroll1', ev.scrollTop)
+          }
         }
       }
       if(ev.scrollTop>300){

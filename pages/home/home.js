@@ -152,6 +152,19 @@ Component({
       this.setData({
         currentType: types[index]
       })
+      if(wx.getStorageSync('homePageFlag')){
+        wx.pageScrollTo({
+          scrollTop:wx.getStorageSync('homePageScroll2')||0,
+            success:function(){
+            }
+        })
+      }else{
+        wx.pageScrollTo({
+          scrollTop:wx.getStorageSync('homePageScroll1')||0,
+            success:function(){
+            }
+        })
+      }
     },
     // -----------------------------下拉刷新事件---------------------------------------
     onShareAppMessage() {
@@ -223,9 +236,15 @@ Component({
         ...shareList1
       },() => {
         console.log(this.data,'this.data')
-        if(wx.getStorageSync('homePageScroll')){
+        if(wx.getStorageSync('homePageFlag')){
           wx.pageScrollTo({
-            scrollTop:wx.getStorageSync('homePageScroll'),
+            scrollTop:wx.getStorageSync('homePageScroll2')||0,
+              success:function(){
+              }
+          })
+        }else{
+          wx.pageScrollTo({
+            scrollTop:wx.getStorageSync('homePageScroll1')||0,
               success:function(){
               }
           })
@@ -261,9 +280,15 @@ Component({
         ...this.data,
         ...shareList2
       },() => {
-        if(wx.getStorageSync('homePageScroll')){
+        if(wx.getStorageSync('homePageFlag')){
           wx.pageScrollTo({
-            scrollTop:wx.getStorageSync('homePageScroll'),
+            scrollTop:wx.getStorageSync('homePageScroll2')||0,
+              success:function(){
+              }
+          })
+        }else{
+          wx.pageScrollTo({
+            scrollTop:wx.getStorageSync('homePageScroll1')||0,
               success:function(){
               }
           })

@@ -117,7 +117,8 @@ Page({
         wx.setStorageSync('category_card_list',false)
         wx.setStorageSync('category_map_data',false)
         wx.setStorageSync('cardPageScroll', false)
-        wx.setStorageSync('homePageScroll', false)
+        wx.setStorageSync('homePageScroll1', false)
+        wx.setStorageSync('homePageScroll2', false)
         wx.setStorageSync('homePageFlag',false)
         wx.showModal({
           title: '提示',
