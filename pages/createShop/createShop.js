@@ -110,6 +110,15 @@ Page({
         wx.removeStorageSync('chooesTagList')
         wx.removeStorageSync('imgLists')
         wx.removeStorageSync('content')
+        wx.setStorageSync('home_banner',false)
+        wx.setStorageSync('home_share_list1',false)
+        wx.setStorageSync('home_share_list2',false)
+        wx.setStorageSync('adcode',false)
+        wx.setStorageSync('category_card_list',false)
+        wx.setStorageSync('category_map_data',false)
+        wx.setStorageSync('cardPageScroll', false)
+        wx.setStorageSync('homePageScroll', false)
+        wx.setStorageSync('homePageFlag',false)
         wx.showModal({
           title: '提示',
           content: tip,

@@ -25,15 +25,16 @@ Page({
   onShow: function (options) {
     if(wx.getStorageSync('news')){
       let msgs = JSON.parse(wx.getStorageSync('news'))
-      console.log(msgs,'msgs')
+      // console.log(msgs,'msgs')
       let msg = []
       msgs = msgs.sort((a,b) => {
-        return b.pushDate - a.pushDate
+        return new Date(b.pushDate).getTime() - new Date(a.pushDate).getTime()
       })
       msgs.forEach(item => {
+        // console.log(item,'item')
         item.pushDate = formatTime(item.pushDate.replace(/-/g, '/'))
         if(item.cardDetail){
-          item.cardDetail.ctime = formatTime((item.cardDetail.ctime).replace(/-/g, '/'))
+          item.cardDetail.ctime = item.cardDetail.ctime?formatTime((item.cardDetail.ctime).replace(/-/g, '/')):''
         }
         msg.push(item)
       })

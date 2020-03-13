@@ -27,14 +27,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
+  onLoad(options){},
+  onShow() {
     let that = this
     this.setData({
-      cardId: options.id
+      cardId: this.options.id
     },() => {
       that.getShareList(that.data.cardId,1)
     })
-    getCardDetail(options.id).then(res => {
+    getCardDetail(this.options.id).then(res => {
       console.log(res.data.data)
       if (!res.data.data){
         wx.showModal({
@@ -189,9 +190,6 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -243,7 +241,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (options) {
+    console.log(options,'options')
+    return {
+      title: options.target.dataset.item.shareContent,        // 默认是小程序的名称(可以写slogan等)
+      path: '/pages/detail/detail?shareId='+options.target.dataset.item.shareId,        // 默认是当前页面，必须是以‘/’开头的完整路径
+      imageUrl: options.target.dataset.item.shareImg[0]?options.target.dataset.item.shareImg[0]:'../../assets/other/logo.jpg', 
+    }
   }
 })

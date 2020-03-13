@@ -275,12 +275,10 @@ Page({
      */
     onShareAppMessage: function (e) {
         console.log(e,'eee')
-        if(e.target.dataset.type=='share'){
-            return {
-                title: '美食联盟',
-                path: '/pages/detail/detail?shareId='+e.target.dataset.item.shareId,
-                imageUrl: e.target.dataset.item.shareImg[0]?e.target.dataset.item.shareImg[0]:'../../assets/other/logo.jpg'
-            }
+        return {
+            title: e.target.dataset.item.shareContent,
+            path: '/pages/detail/detail?shareId='+e.target.dataset.item.shareId,
+            imageUrl: e.target.dataset.item.shareImg[0]?e.target.dataset.item.shareImg[0]:'../../assets/other/logo.jpg'
         }
     }
 })

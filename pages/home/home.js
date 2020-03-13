@@ -19,9 +19,9 @@ Component({
       type: Boolean,
       value: '',
       observer: (newVal, oldVal, changedPath) => {
-        console.log('wwwww')
+        // console.log('wwwww')
         if(newVal!==oldVal){
-          console.log(newVal)
+          // console.log(newVal)
         }
      }
     }
@@ -56,12 +56,12 @@ Component({
       }
     },
     _getShareListData(type,flag){
-      console.log(this.data.totalRecord,'this.data.totalRecord')
+      // console.log(this.data,'this.data.totalRecord')
       if (flag) {
         if (this.data.totalRecord > this.data.share[type].list.length) {
           let currPage = this.data.share[type].currPage + 1
           getShareListData(type, currPage).then(res => {
-
+            // console.log(res,'rsers')
             // 将数据设置到templist中,更改时间显示状态
             let list = res.data.data.data.map(item => {
               item.shareTime = formatDateTimes(item.shareTime.replace(/-/g, '/'))
@@ -72,14 +72,18 @@ Component({
             const typeKey = `share.${type}.list`;
             const pagekey = `share.${type}.currPage`;
             if(type==1){
+              let storageList2 = JSON.parse(wx.getStorageSync('home_share_list2'))
               let shareList2 = {
+                ...storageList2,
                 [typeKey]: list,
                 [pagekey]: currPage,
                 isBottom: true
               }
               wx.setStorageSync('home_share_list2',JSON.stringify(shareList2))
             }else {
+              let storageList1 = JSON.parse(wx.getStorageSync('home_share_list1'))
               let shareList1 = {
+                ...storageList1,
                 [typeKey]: list,
                 [pagekey]: currPage,
                 isBottom: true
@@ -168,12 +172,13 @@ Component({
       wx.stopPullDownRefresh({
         complete(res) {
           wx.hideToast()
-          console.log(res, new Date())
+          // console.log(res, new Date())
         }
       })
     },
     // 上拉加载
     onReachBottom: function (type) {
+      // console.log(this.data,'onReachBottom')
       this._getShareListData(0,true)
       this._getShareListData(1,true)
     },
@@ -195,7 +200,7 @@ Component({
             },
             success:(res) => {
               wx.setStorageSync('adcode',res.result.ad_info.adcode)
-              console.log(res.result.ad_info.adcode,'res.result.ad_info.adcoderes.result.ad_info.adcoderes.result.ad_info.adcode')
+              // console.log(res.result.ad_info.adcode,'res.result.ad_info.adcoderes.result.ad_info.adcoderes.result.ad_info.adcode')
               // 获取的城市
               wx.setStorageSync('nowCity',res.result.address_component.city)
               wx.setStorageSync('location',JSON.stringify(res.result.ad_info.location))
@@ -206,17 +211,18 @@ Component({
     },
   },
   ready(){
-    console.log(this.properties)
     // 获取轮播图
     this._getBannerData()
     // 获取分类详情
     // 缓存数据
     if(wx.getStorageSync('home_share_list1')){
       let shareList1 = JSON.parse(wx.getStorageSync('home_share_list1'))
+      // console.log(shareList1,'shareList1')
       this.setData({
         ...this.data,
         ...shareList1
       },() => {
+        console.log(this.data,'this.data')
         if(wx.getStorageSync('homePageScroll')){
           wx.pageScrollTo({
             scrollTop:wx.getStorageSync('homePageScroll'),
@@ -240,6 +246,7 @@ Component({
           isBottom: true,
           totalRecord: res.data.data.totalRecord
         }
+        // console.log(shareList1,'shareList1')
         wx.setStorageSync('home_share_list1',JSON.stringify(shareList1))
         this.setData({
           [typeKey]: list,
@@ -290,7 +297,7 @@ Component({
     if(!wx.getStorageSync('adcode')){
       wx.getSetting({
         success: (res) => {
-          console.log(JSON.stringify(res))
+          // console.log(JSON.stringify(res))
           // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
           // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
           // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
@@ -308,7 +315,7 @@ Component({
                 } else if (res.confirm) {
                   wx.openSetting({
                     success: function (dataAu) {
-                      console.log(dataAu,'dataAu')
+                      // console.log(dataAu,'dataAu')
                       if (dataAu.authSetting["scope.userLocation"] == true) {
                         wx.showToast({
                           title: '授权成功',

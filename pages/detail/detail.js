@@ -165,12 +165,43 @@ Page({
             title: '糟糕，评论是空的！',
           })
         } else {
+          let shareId = this.options.shareId
+          var pages = getCurrentPages();
+          if(this.options.from=='homePage'){
+            var prevPage = pages[pages.length - 2].selectComponent('#home-page');  
+            let share = prevPage.data.share
+            if(wx.getStorageSync('homePageFlag')){
+              let shareList2 = share[1].list.map(item => {
+                if(item.shareId==shareId){
+                  item.commentCount += 1
+                }
+                return item
+              })
+              console.log(shareList2,'shareList2')
+              share[1].list = shareList2
+              prevPage.setData({                                      //修改上一个页面的变量
+                share
+              })
+            }else{
+              let shareList1 = share[0].list.map(item => {
+                if(item.shareId==shareId){
+                  item.commentCount += 1
+                }
+                return item
+              })
+              console.log(shareList1,'shareList1')
+              share[0].list = shareList1
+              prevPage.setData({                                      //修改上一个页面的变量
+                share
+              })
+            }
+          }
           that._addCommentData(shareId,comment)
-          that._getDetailData(shareId)
-          that.setData({
-            inputVal:''
+              that._getDetailData(shareId)
+              that.setData({
+                inputVal:''
           })
-        }
+      }
     }else {
       App.globalData.toAuthorization()
     }

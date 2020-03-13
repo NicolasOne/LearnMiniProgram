@@ -43,7 +43,7 @@
         <image class="zan" src="/assets/other/pl.png" />
         <text class="zantext"> {{item.commentCount}}</text>
       </view>
-      <button class="{{user?'':'button'}}" open-type="{{isShare}}" bindtap="toShare" data-item="{{item}}" data-type="share">
+      <button class="{{user?'':'button'}}" open-type="{{isShare}}" bindtap="toShare" data-item="{{item}}">
           <view class="img_length">
             <image class="zan" src="/assets/other/zf.png" />
             <!--<text class="zantext"> 1</text>-->

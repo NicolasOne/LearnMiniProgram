@@ -15,7 +15,7 @@
 <view wx:if="{{share&&share[currentType].list.length!==0}}">
 <view class="share">
   <block wx:for="{{share[currentType].list}}" wx:key="index">
-    <w-share-item item="{{item}}" showDetailBtn="true"/>
+    <w-share-item item="{{item}}" from="homePage" showDetailBtn="true"/>
   </block>
 </view>
 </view>

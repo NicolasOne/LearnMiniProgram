@@ -18,6 +18,10 @@ Component({
     showDetailBtn: {
       type: Boolean,
       value: '',
+    },
+    from: {
+      type: String,
+      value: '',
     }
   },
 
@@ -137,11 +141,11 @@ Component({
       })
     },
     // 跳转内容详情页
-    toNewsDetail:(e) => {
+    toNewsDetail(e){
       if(wx.getStorageSync('isAuthorization')){
         console.log(e)
         wx.navigateTo({
-          url: '/pages/detail/detail?shareId='+e.currentTarget.dataset.id,
+          url: '/pages/detail/detail?shareId='+e.currentTarget.dataset.id+'&from='+this.properties.from,
         })
       }else {
         App.globalData.toAuthorization()
