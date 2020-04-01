@@ -4,9 +4,10 @@
   <textarea class="content-text" auto-focus="true" maxlength="-1" bindinput = "changeShareContent" value="{{content}}" placeholder="发布新鲜事。。。"></textarea>
   <view class="count">{{count}}/9</view>
   <view class="upload-img">
-    <block wx:for="{{imgLists}}" wx:key="{{index}}">
+    <block wx:for="{{imgLists}}" wx:key="index">
       <view class="img-item">
         <image src="{{item}}" />
+        <image bindtap="delImg" data-index="{{index}}" class="img-item-del-btn" src="../../assets/other/delImg2.png" />
       </view>
     </block>
     <view wx:if="{{imgLists.length<9}}" bindtap = "chooseimage" class="add-img">

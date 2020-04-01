@@ -28,10 +28,20 @@ Page({
       content: e.detail.value
     })
   },
+  // 删除图片
+  delImg(e){
+    console.log(e.currentTarget.dataset.index,'indexindex')
+    let imgLists = this.data.imgLists
+    imgLists.splice(e.currentTarget.dataset.index,1)
+    this.setData({
+      imgLists,
+      count: imgLists.length
+    })
+  },
     // 添加图片
     chooseimage(){
       let that = this
-      let count = 9 - this.data.imgList.length;
+      let count = 9 - this.data.imgLists.length;
       wx.chooseImage({
         count: count, // 默认9 
         sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
@@ -41,8 +51,7 @@ Page({
           let imgList = res.tempFilePaths
           console.log(imgList,'imgList')
           that.setData({
-            imgList,
-            count: imgList.length       
+            imgList  
           })
           that.uploadimg({
             url: baseURL+'/share/upload', //这里是你图片上传的接口
@@ -68,9 +77,8 @@ Page({
           console.log(resp,'resresrseres')                              
             imgLists.push(JSON.parse(resp.data).data)
             that.setData({
-              imgLists             
-            }, () => {  
-              wx.setStorageSync('imgLists', JSON.stringify(imgLists))
+              imgLists,
+              count: imgLists.length             
             })
           //这里可能有BUG，失败也会执行这里
           }
@@ -87,9 +95,8 @@ Page({
         console.log(resp,'resresrseres')                              
           imgLists.push(JSON.parse(resp.data).data)
           that.setData({
-            imgLists             
-          }, () => {  
-            wx.setStorageSync('imgLists', JSON.stringify(imgLists))
+            imgLists,
+            count: imgLists.length               
           })
         //这里可能有BUG，失败也会执行这里
         }

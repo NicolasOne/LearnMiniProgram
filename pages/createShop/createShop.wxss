@@ -46,6 +46,14 @@
   height: 220rpx;
   margin-right: 20rpx;
   margin-top: 20rpx;
+  position: relative;
+}
+.img-item-del-btn {
+  width: 30rpx !important;
+  height: 30rpx !important;
+  position: absolute;
+  right: 10rpx;
+  top: 10rpx;
 }
 .img-item:nth-child(3){
   

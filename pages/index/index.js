@@ -30,6 +30,9 @@ Page({
     wx.setStorageSync('homePageScroll1', false)
     wx.setStorageSync('homePageScroll2', false)
     wx.setStorageSync('homePageFlag',false)
+    wx.setStorageSync('imgLists',false)
+    wx.setStorageSync('chooesTagList',false)
+    wx.setStorageSync('content',false)
     let that = this
     queryCoverImg().then(res => {
       clearInterval(that.clock)
