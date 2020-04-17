@@ -3,9 +3,9 @@
   "navigationBarBackgroundColor": "#FE4F70",
   "navigationBarTextStyle": "white",
   "usingComponents": {
-      "homePage": "../home/home",
-      "categoryPage": "../category/category",
-      "squarePage": "../square/square",
+      "homePage": "../category/category",
+      "categoryPage": "../home/home",
+      "rankPage": "../rank/rank",
       "profilePage": "../profile/profile",
       "tabbar": "/components/tabbar/tabbar"
   },

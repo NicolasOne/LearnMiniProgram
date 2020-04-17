@@ -89,34 +89,34 @@ Component({
         list = [
           {
             id: TabbarList.home,
-            pagePath: "/pages/home/home",
+            pagePath: "/pages/category/category",
             text: '首页',
-            iconPath: "/assets/tabbar/index.png",
-            selectIconPath: "/assets/tabbar/index_active.png",
+            iconPath: "/assets/tabbar/home.png",
+            selectIconPath: "/assets/tabbar/home_select.png",
             selected: true
           },
           {
             id: TabbarList.category,
-            pagePath: "/pages/category/category",
-            text: '卡片',
-            iconPath: "/assets/tabbar/category.png",
-            selectIconPath: "/assets/tabbar/category_active.png",
+            pagePath: "/pages/home/home",
+            text: '社区',
+            iconPath: "/assets/tabbar/community.png",
+            selectIconPath: "/assets/tabbar/community_select.png",
             selected: false
           },
           {
-            id: TabbarList.square,
-            pagePath: "/pages/square/square",
-            text: '广场',
-            iconPath: "/assets/tabbar/search.png",
-            selectIconPath: "/assets/tabbar/search_active.png",
+            id: TabbarList.rank,
+            pagePath: "/pages/rank/rank",
+            text: '排行榜',
+            iconPath: "/assets/tabbar/rank.png",
+            selectIconPath: "/assets/tabbar/rank_select.png",
             selected: false,
           },
           {
             id: TabbarList.profile,
             pagePath: "/pages/profile/profile",
             text: '我的',
-            iconPath: "/assets/tabbar/home.png",
-            selectIconPath: "/assets/tabbar/home_active.png",
+            iconPath: "/assets/tabbar/mine.png",
+            selectIconPath: "/assets/tabbar/mine_select.png",
             selected: false
           }
         ]
@@ -124,26 +124,26 @@ Component({
         list = [
           {
             id: TabbarList.home,
-            pagePath: "/pages/home/home",
+            pagePath: "/pages/category/category",
             text: '首页',
-            iconPath: "/assets/tabbar/index.png",
-            selectIconPath: "/assets/tabbar/index_active.png",
+            iconPath: "/assets/tabbar/home.png",
+            selectIconPath: "/assets/tabbar/home_select.png",
             selected: true
           },
           {
             id: TabbarList.category,
-            pagePath: "/pages/category/category",
-            text: '卡片',
-            iconPath: "/assets/tabbar/category.png",
-            selectIconPath: "/assets/tabbar/category_active.png",
+            pagePath: "/pages/home/home",
+            text: '社区',
+            iconPath: "/assets/tabbar/community.png",
+            selectIconPath: "/assets/tabbar/community_select.png",
             selected: false
           },
           {
             id: TabbarList.profile,
             pagePath: "/pages/profile/profile",
             text: '我的',
-            iconPath: "/assets/tabbar/home.png",
-            selectIconPath: "/assets/tabbar/home_active.png",
+            iconPath: "/assets/tabbar/mine.png",
+            selectIconPath: "/assets/tabbar/mine_select.png",
             selected: false
           }
         ]

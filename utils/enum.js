@@ -2,11 +2,11 @@ module.exports={
   TabbarList: {
       home: 1,
       category: 2,
-      square: 3,
+      rank: 3,
       profile: 4,
-      1: '小吃街',
-      2: '卡片',
-      3: '广场',
+      1: '首页',
+      2: '社区',
+      3: '排行榜',
       4: '我的'
   }
 }
